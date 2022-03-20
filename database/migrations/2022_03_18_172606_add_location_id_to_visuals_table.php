@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddLocationIdToVisualTable extends Migration
+class AddLocationIdToVisualsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class AddLocationIdToVisualTable extends Migration
      */
     public function up()
     {
-        Schema::table('visual', function (Blueprint $table) {
+        Schema::table('visuals', function (Blueprint $table) {
             $table->unsignedBigInteger('location_id')->nullable()->after('date');
 
             $table->foreign('location_id')
@@ -30,8 +30,8 @@ class AddLocationIdToVisualTable extends Migration
      */
     public function down()
     {
-        Schema::table('visual', function (Blueprint $table) {
-            $table->dropForeign('visual_location_id_foreign');
+        Schema::table('visuals', function (Blueprint $table) {
+            $table->dropForeign('visuals_location_id_foreign');
             $table->dropColumn('location_id');
         });
     }

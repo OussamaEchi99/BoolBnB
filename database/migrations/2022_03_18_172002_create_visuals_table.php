@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateVisualTable extends Migration
+class CreateVisualsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateVisualTable extends Migration
      */
     public function up()
     {
-        Schema::create('visual', function (Blueprint $table) {
+        Schema::create('visuals', function (Blueprint $table) {
             $table->id();
             $table->string('ip', 30);
             $table->date('date');
@@ -28,6 +28,6 @@ class CreateVisualTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('visual');
+        Schema::dropIfExists('visuals');
     }
 }
