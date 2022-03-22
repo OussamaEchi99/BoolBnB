@@ -58,11 +58,12 @@
                 </select>
             </div>
 
-            {{-- <div class="mb-3">
+            <div class="mb-3">
                 <h4>Servizi</h4>
 
                 @foreach ($features as $feature)
                     <div class="form-check">
+                        {{dd($location->features)}}
                         @if ($errors->any())
                             <input {{ in_array($feature->id, old('features', [])) ? 'checked' : '' }} class="form-check-input" type="checkbox" name="features[]" value="{{ $feature->id }}" id="feature-{{ $feature->id }}">
                         @else
@@ -74,7 +75,7 @@
                         </label>
                     </div>
                 @endforeach
-            </div> --}}
+            </div>
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
