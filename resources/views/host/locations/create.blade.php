@@ -22,32 +22,32 @@
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nome</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $location->name) }}">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}">
                 </div>
         
-                {{-- <div class="mb-3">
+                <div class="mb-3">
                     <label for="rooms" class="form-label">Stanze</label>
-                    <input type="number" class="form-control" id="rooms" name="rooms" value="{{ old('rooms', $location->rooms) }}">
+                    <input type="number" class="form-control" id="rooms" name="rooms" value="{{ old('rooms') }}">
                 </div>
         
                 <div class="mb-3">
                     <label for="beds" class="form-label">Letti</label>
-                    <input type="number" class="form-control" id="beds" name="beds" value="{{ old('beds', $location->beds) }}">
+                    <input type="number" class="form-control" id="beds" name="beds" value="{{ old('beds') }}">
                 </div>
         
                 <div class="mb-3">
                     <label for="bathrooms" class="form-label">Bagni</label>
-                    <input type="number" class="form-control" id="bathrooms" name="bathrooms" value="{{ old('bathrooms', $location->bathrooms) }}">
+                    <input type="number" class="form-control" id="bathrooms" name="bathrooms" value="{{ old('bathrooms') }}">
                 </div>
         
                 <div class="mb-3">
                     <label for="price" class="form-label">Metri Quadrati</label>
-                    <input type="number" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters', $location->square_meters) }}">
+                    <input type="number" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
                 </div>
         
                 <div class="mb-3">
                     <label for="price" class="form-label">Prezzo</label>
-                    <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $location->price) }}">
+                    <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}">
                 </div>
         
                 <div class="mb-3">
@@ -55,23 +55,23 @@
                     <select class="form-select" name="category_id" id="category_id">
                         <option value="">Nessuna</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id', $location->category_id) == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ old('category_id')}}>{{ $category->name }}</option>
                         @endforeach
                     </select>
-                </div> --}}
+                </div>
 
-                {{-- <div class="mb-3">
+                <div class="mb-3">
                     <h4>Tags</h4>
 
-                    @foreach ($tags as $tag)
+                    @foreach ($features as $feature)
                         <div class="form-check">
-                            <input {{ in_array($tag->id, old('tags', [])) ? 'checked' : '' }} class="form-check-input" name="tags[]" type="checkbox" value="{{ $tag->id }}" id="tag-{{ $tag->id }}">
-                            <label class="form-check-label" for="tag-{{ $tag->id }}">
-                                {{ $tag->name }}
+                            <input {{ in_array($feature->id, old('features',[]))}} class="form-check-input" name="features[]" type="checkbox" value="{{ $feature->id }}" id="feature-{{ $feature->id }}">
+                            <label class="form-check-label" for="feature-{{ $feature->id }}">
+                                {{ $feature->name }}
                             </label>
                         </div>
                     @endforeach
-                </div> --}}
+                </div>
 
                 <div class="mb-3">
                     <label for="content" class="form-label">Content</label>

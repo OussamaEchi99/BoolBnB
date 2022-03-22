@@ -34,11 +34,11 @@ class LocationController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $feateres = Feature::all();
+        $features = Feature::all();
 
         $data = [
             'categories' => $categories,
-            'feateres' => $feateres
+            'features' => $features
         ];
 
         return view('host.locations.create', $data);

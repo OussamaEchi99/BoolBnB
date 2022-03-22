@@ -58,7 +58,7 @@
                 </select>
             </div>
 
-            {{-- <div class="mb-3">
+            <div class="mb-3">
                 <h4>Servizi</h4>
 
                 @foreach ($features as $feature)
@@ -74,7 +74,7 @@
                         </label>
                     </div>
                 @endforeach
-            </div> --}}
+            </div>
 
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
