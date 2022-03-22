@@ -52,7 +52,21 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $form_data = $request->all();
+
+        $request->validate($this->getValidationRules());
+        $new_location = new Location();
+        $new_location->fill($form_data);
+        
+        $new_location->slug = $this->getUniqueSlugFromTitle($form_data['name']);
+
+        $new_location->save();
+
+        if(isset($form_data['features'])) {
+            $new_location->features()->sync($form_data['features']);
+        }
+
+        return redirect()->route('host.locations.show', ['location' => $new_location->id]);
     }
 
     /**
@@ -117,5 +131,33 @@ class LocationController extends Controller
         $location->delete();
 
         return redirect()->route('host.locations.index');
+    }
+
+    protected function getValidationRules() {
+        return [
+            'name' => 'required|max:50',
+            'photo' => 'image|max:1024',
+            'rooms' => 'required|min:1',
+            'beds' => 'required|min:1',
+            'bathrooms' => 'required|min:1',
+            'square_meters' => 'required|min:1',
+            'price' => 'nullable',
+            'description' => 'nullable|max:60000'
+        ];
+    }
+
+    protected function getUniqueSlugFromName($name) {
+        $slug = Str::slug($name);
+        $slug_base = $slug;
+        
+        $location_found = Location::where('slug', '=', $slug)->first();
+        $counter = 1;
+        while($location_found) {
+            $slug = $slug_base . '-' . $counter;
+            $location_found = Location::where('slug', '=', $slug)->first();
+            $counter++;
+        }
+
+        return $slug;
     }
 }
