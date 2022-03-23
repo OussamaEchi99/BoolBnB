@@ -15,6 +15,12 @@
                 @endforelse
             </div>
 
+            @if ($location->photo)
+            <div>
+                <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}">
+            </div>
+            @endif
+
             <p>{{ $location->description }}</p>
 
             <div>
