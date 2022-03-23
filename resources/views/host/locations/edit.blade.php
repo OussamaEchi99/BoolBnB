@@ -78,7 +78,6 @@
 
                 @foreach ($features as $feature)
                     <div class="form-check">
-                        {{dd($location->features)}}
                         @if ($errors->any())
                             <input {{ in_array($feature->id, old('features', [])) ? 'checked' : '' }} class="form-check-input" type="checkbox" name="features[]" value="{{ $feature->id }}" id="feature-{{ $feature->id }}">
                         @else
