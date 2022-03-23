@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLocationFeatureTable extends Migration
+class CreateFeatureLocationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateLocationFeatureTable extends Migration
      */
     public function up()
     {
-        Schema::create('location_feature', function (Blueprint $table) {
+        Schema::create('feature_location', function (Blueprint $table) {
             $table->unsignedBigInteger('location_id');
             $table->foreign('location_id')
                 ->references('id')
