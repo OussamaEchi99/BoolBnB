@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="container">
-            Sezione Create
+            
             <h2>Crea un nuovo post</h2>
 
             {{-- Validation Errors Message  --}}
@@ -78,17 +78,19 @@
                 {{-- Category --}}
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Categoria</label>
-                    <select class="form-select" name="category_id" id="category_id">
-                        <option value="">Nessuna</option>
-                        @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
-                        @endforeach
-                    </select>
+                    <div>
+                        <select class="form-select" name="category_id" id="category_id">
+                            <option value="">Nessuna</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
 
                 {{-- Services --}}
                 <div class="mb-3">
-                    <h4>Servizi</h4>
+                    <span>Servizi</span>
                     @foreach ($features as $feature)
                         <div class="form-check">
                             <input class="form-check-input" name="features[]" type="checkbox" value="{{ $feature->id }}" id="feature-{{ $feature->id }}">
@@ -102,7 +104,9 @@
                 {{-- Location Photo --}}
                 <div class="mb-3">
                     <label for="photo" class="form-label">Cover</label>
-                    <input class="form-control" type="file" id="photo" name="photo">
+                    <div>
+                        <input type="file" id="photo" name="photo">
+                    </div>
                 </div>
 
                 {{-- Description --}}
