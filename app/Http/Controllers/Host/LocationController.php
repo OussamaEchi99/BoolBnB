@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\Category;
 use App\Feature;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class LocationController extends Controller
 {
@@ -34,11 +36,11 @@ class LocationController extends Controller
     public function create()
     {
         $categories = Category::all();
-        $feateres = Feature::all();
+        $features = Feature::all();
 
         $data = [
             'categories' => $categories,
-            'feateres' => $feateres
+            'features' => $features
         ];
 
         return view('host.locations.create', $data);
@@ -56,12 +58,24 @@ class LocationController extends Controller
 
         $request->validate($this->getValidationRules());
         $new_location = new Location();
+
         $new_location->fill($form_data);
         
-        $new_location->slug = $this->getUniqueSlugFromTitle($form_data['name']);
+        $new_location->slug = $this->getUniqueSlugFromName($form_data['name']);
+
+        // Save Cover Img
+        if (isset($form_data['photo'])) {
+
+            // 1- Salvo l'immagine caricata nella cartella di Storage
+            $img_path = Storage::put('location_photos', $form_data['photo']);
+
+            // 2- Salvo il path dell'immagine nella colonna cover del database
+            $new_location->photo = $img_path;
+        }
 
         $new_location->save();
 
+        // Se sono presenti servizi, li salvo nel database
         if(isset($form_data['features'])) {
             $new_location->features()->sync($form_data['features']);
         }

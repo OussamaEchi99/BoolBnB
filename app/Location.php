@@ -18,6 +18,7 @@ class Location extends Model
         'square_meters',
         'price',
         'visible',
+        'category_id',
         'description'
     ];
 
