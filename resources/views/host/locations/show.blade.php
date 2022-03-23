@@ -14,7 +14,6 @@
                     nessuna
                 @endforelse
             </div>
-
             <p>{{ $location->description }}</p>
 
             <div>
