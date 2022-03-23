@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\Category;
 use App\Feature;
+use Illuminate\Support\Str;
 
 class LocationController extends Controller
 {
@@ -58,7 +59,7 @@ class LocationController extends Controller
         $new_location = new Location();
         $new_location->fill($form_data);
         
-        $new_location->slug = $this->getUniqueSlugFromTitle($form_data['name']);
+        $new_location->slug = $this->getUniqueSlugFromName($form_data['name']);
 
         $new_location->save();
 
