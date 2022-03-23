@@ -35,6 +35,6 @@ class CreateFeatureLocationTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('location_feature');
+        Schema::dropIfExists('feature_location');
     }
 }
