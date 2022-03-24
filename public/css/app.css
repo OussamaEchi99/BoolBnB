@@ -10962,11 +10962,3 @@ a.text-dark:focus {
   }
 }
 
-img {
-  max-width: 100%;
-}
-
-.previous-image img {
-  width: 180px;
-}
-

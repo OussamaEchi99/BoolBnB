@@ -1,11 +1,11 @@
 <template>
     <section>
-        <h1>ciao culo</h1>
+        <h1>culo search</h1>
     </section>
 </template>
 
 <script>
 export default {
-    name: 'Index'
+    name: 'Search'
 }
 </script>
