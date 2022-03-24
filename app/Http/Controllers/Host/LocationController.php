@@ -176,10 +176,6 @@ class LocationController extends Controller
     public function destroy($id)
     {
         $location = Location::findOrFail($id);
-        $location->feature()->sync([]);
-        if($location->photo){
-            Storage::delete($location->photo);
-        }
         $location->delete();
 
         return redirect()->route('host.locations.index');

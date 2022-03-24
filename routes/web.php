@@ -20,10 +20,15 @@ Route::middleware('auth')
     ->name('host.')
     ->prefix('host')
     ->group(function() {
-        // Route::get('/', 'HomeController@index')->name('home');
+        Route::get('/', 'HomeController@index')->name('home');
         Route::resource('locations', 'LocationController');
-        // Route::get('/categories', 'CategoryController@index')->name('categories');
-        // Route::get('/categories/{slug}', 'CategoryController@show')->name('category_info');
+        Route::get('/statistics', 'StatisticController@index')->name('statistics');
+        Route::get('/statistics/{location}', 'StatisticController@show')->name('apartment_statistics');
+
     });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('{any?}',function(){
+    return view('guests.home');
+})->where('any','.*');
