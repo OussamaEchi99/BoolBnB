@@ -1928,6 +1928,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Header',
   data: function data() {
@@ -2602,6 +2603,8 @@ var render = function () {
         ]),
       ]
     ),
+    _vm._v(" "),
+    _c("a", { attrs: { href: "/login" } }, [_vm._v("login")]),
   ])
 }
 var staticRenderFns = [

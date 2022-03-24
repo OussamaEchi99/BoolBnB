@@ -15,6 +15,7 @@
                 </div>
             </div>
         </nav>
+        <a href="/login">login</a>
     </header>
 </template>
 
