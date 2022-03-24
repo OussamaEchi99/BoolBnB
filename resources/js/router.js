@@ -4,20 +4,26 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Index from './pages/Index.vue';
-import Search from './pages/Search.vue'
+import Search from './pages/Search.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = new VueRouter({
     mode: "history",
     routes: [
         {
-            path: "/index",
-            name: "Index",
+            path: "/",
+            name: "index",
             component: Index
         },
         {
             path: "/search",
-            name: "Search",
+            name: "search",
             component: Search
+        },
+        {
+            path: "/*",
+            name: "not-found",
+            component: NotFound
         }
     ]
 });

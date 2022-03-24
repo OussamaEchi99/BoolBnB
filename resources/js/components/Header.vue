@@ -26,7 +26,7 @@ export default {
             menuLinks: [
                 {
                     name: 'index',
-                    label: 'Index'
+                    label: 'Homepage'
                 },
                 {
                     name: 'search',
