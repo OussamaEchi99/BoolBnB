@@ -19,6 +19,12 @@
                 @endforelse
             </div>
 
+            @if ($location->photo)
+            <div>
+                <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}">
+            </div>
+            @endif
+
             <div class="mb-2">
                 <strong>Camere:</strong> {{$location->rooms}}
             </div>
@@ -34,7 +40,7 @@
             <div class="mb-2">
                 <strong>Prezzo a notte:</strong> {{$location->price}} €
             </div>         
-                
+               
             <p>{{ $location->description }}</p>
 
             <div>
