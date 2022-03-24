@@ -22,6 +22,7 @@ Route::middleware('auth')
     ->group(function() {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('locations', 'LocationController');
+        Route::get('/sponsor', 'SponsorController@index')->name('sponsors');
     });
 
 Route::get('/home', 'HomeController@index')->name('home');
