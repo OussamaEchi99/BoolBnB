@@ -1960,8 +1960,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Index'
+  name: 'Index',
+  data: function data() {
+    return {
+      locations: [],
+      currentPage: 1,
+      lastPage: false
+    };
+  },
+  methods: {
+    getLocations: function getLocations(pageNumber) {
+      var _this = this;
+
+      axios.get('/api/locations', {
+        params: {
+          page: pageNumber
+        }
+      }).then(function (response) {
+        _this.locations = response.data.results.data;
+        _this.currentPage = response.data.results.current_page;
+        _this.lastPage = response.data.results.last_page;
+      });
+    },
+    truncateText: function truncateText(text, maxCharsNumber) {
+      if (text.length > maxCharsNumber) {
+        return text.substr(0, maxCharsNumber) + '...';
+      }
+
+      return text;
+    }
+  },
+  created: function created() {
+    this.getLocations(1);
+  }
 });
 
 /***/ }),
@@ -2611,16 +2647,23 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "section",
+    _vm._l(_vm.locations, function (location) {
+      return _c("div", { key: location.id }, [
+        location.photo
+          ? _c("img", { attrs: { src: location.photo, alt: "" } })
+          : _vm._e(),
+        _vm._v(" "),
+        _c("img", { attrs: { src: "", alt: "" } }),
+        _vm._v(" "),
+        _c("span", [_vm._v(_vm._s(location.name))]),
+      ])
+    }),
+    0
+  )
 }
-var staticRenderFns = [
-  function () {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("section", [_c("h1", [_vm._v("ciao culo")])])
-  },
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
