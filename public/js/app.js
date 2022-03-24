@@ -49932,6 +49932,10 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+__webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+<<<<<<< HEAD
 <<<<<<< HEAD
 =======
 __webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\js\app.js */"./resources/js/app.js");
@@ -49958,6 +49962,7 @@ module.exports = __webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources
 =======
 >>>>>>> origin/HEAD
 >>>>>>> origin/new-dashboard
+>>>>>>> bee48572d34bf68e57deaeacb28675a6ec65539c
 
 
 /***/ })

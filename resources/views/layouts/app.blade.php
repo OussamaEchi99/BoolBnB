@@ -113,21 +113,21 @@
                                         </a>
 
                                         {{-- link menu utente loggato --}}
-                                        {{-- <a class="dropdown-item" href="{{ route('host.home') }}">
+                                        <a class="dropdown-item" href="{{ route('host.home') }}">
                                             Dashboard
-                                        </a> --}}
+                                        </a>
                                         {{-- link menu utente loggato --}}
-                                        {{-- <a class="dropdown-item" href="{{ route('host.locations.index') }}">
-                                            Tutte le locations
-                                        </a> --}}
+                                        <a class="dropdown-item" href="{{ route('host.sponsors') }}">
+                                            Sponsor
+                                        </a>
                                         {{-- link menu utente loggato --}}
-                                        {{-- <a class="dropdown-item" href="{{ route('host.statistics') }}">
+                                        <a class="dropdown-item" href="{{ route('host.statistics') }}">
                                             Statistiche
-                                        </a> --}}
+                                        </a>
                                         {{-- link menu utente loggato --}}
-                                        {{-- <a class="dropdown-item" href="{{ route('host.locations.create') }}">
+                                        <a class="dropdown-item" href="{{ route('host.locations.create') }}">
                                             Aggiungi annuncio
-                                        </a> --}}
+                                        </a>
                                         
     
                                         {{-- logout --}}
