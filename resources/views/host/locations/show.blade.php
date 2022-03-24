@@ -6,7 +6,11 @@
             <h1>{{ $location->name }}</h1>
             
             <div class="img-fluid">
-                <img class="big_picture rounded mb-3" src="{{$location->photo}}" alt="{{$location->name}}">
+                @if (str_contains($location->photo, 'location_photos'))
+                    <img src="{{ asset('storage/' . $location->photo) }}" class="big_picture rounded mb-3" alt="{{ $location->name }}">
+                @else
+                    <img src="{{ $location->photo }}" class="big_picture rounded mb-3" alt="{{ $location->name }}">
+                @endif
             </div>
 
             <div class="mb-2"><strong>Categoria:</strong> {{ $location->category ? $location->category->name : 'nessuna' }}</div>
@@ -19,11 +23,7 @@
                 @endforelse
             </div>
 
-            @if ($location->photo)
-            <div>
-                <img src="{{ asset('storage/' . $location->photo) }}" alt="{{ $location->name }}">
-            </div>
-            @endif
+            
 
             <div class="mb-2">
                 <strong>Camere:</strong> {{$location->rooms}}
