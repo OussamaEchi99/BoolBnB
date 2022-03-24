@@ -7,9 +7,13 @@
             {{-- Single location --}}
             <div class="col">
                 <div class="card mt-2">
-                    @if ($location->photo)
-                    <img src="{{ asset('storage/' . $location->photo) }}" class="card-img-top" alt="{{ $location->name }}">
+                    
+                    @if (str_contains($location->photo, 'location_photos'))
+                        <img src="{{ asset('storage/' . $location->photo) }}" class="card-img-top" alt="{{ $location->name }}">
+                    @else
+                        <img src="{{ $location->photo }}" class="card-img-top" alt="{{ $location->name }}">
                     @endif
+                    
 
                     <div class="card-body">
                     <h5 class="card-title">{{ $location->name }}</h5>
