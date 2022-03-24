@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.app')
 
 @section('content')
     <section>
@@ -15,7 +15,7 @@
             </div>
         @endif
 
-        <form action="{{ route('host.locations.update', ['location' => $location->id] ) }}" method="post">
+        <form action="{{ route('host.locations.update', ['location' => $location->id] ) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method('PUT')
 
@@ -102,9 +102,12 @@
                     <input type="file" id="photo" name="photo">
                 </div>
 
-                <div>
-                    immagine precedente:
+                @if ($location->photo)
+                <div class="previous-image">
+                    Immagine precedente:
+                    <img src="{{ asset('storage/' . $location->photo) }}" alt="">
                 </div>
+                @endif
             </div>
 
             {{-- Description --}}
