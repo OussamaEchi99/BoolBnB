@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Location extends Model
 {
@@ -40,5 +41,20 @@ class Location extends Model
 
     public function user() {
         return $this->belongsTo('App\User');
+    }
+
+    public static function getUniqueSlugFromName($name) {
+        $slug = Str::slug($name);
+        $slug_base = $slug;
+
+        $location_found = Location::where('slug', '=', $slug)->first();
+        $counter = 1;
+        while($location_found) {
+            $slug = $slug_base . '-' . $counter;
+            $location_found = Location::where('slug', '=', $slug)->first();
+            $counter++;
+        }
+
+        return $slug;
     }
 }

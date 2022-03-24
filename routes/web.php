@@ -22,9 +22,9 @@ Route::middleware('auth')
     ->group(function() {
         Route::get('/', 'HomeController@index')->name('home');
         Route::resource('locations', 'LocationController');
+        Route::get('/sponsor', 'SponsorController@index')->name('sponsors');
         Route::get('/statistics', 'StatisticController@index')->name('statistics');
         Route::get('/statistics/{location}', 'StatisticController@show')->name('apartment_statistics');
-
     });
 
 // Route::get('/home', 'HomeController@index')->name('home');
