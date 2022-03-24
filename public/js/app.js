@@ -37340,8 +37340,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
 __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
+__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> Stashed changes
+=======
+__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> Stashed changes
 
 
 /***/ })
