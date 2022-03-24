@@ -71,10 +71,5 @@
         height: 50vh;
         margin: auto;
         display: flex;
-
     }
 </style>
-
-<script>
-    
-</script>
