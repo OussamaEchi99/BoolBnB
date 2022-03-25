@@ -3351,15 +3351,17 @@ var render = function () {
                     location.photo
                       ? _c("img", {
                           staticClass: "main_img",
-                          attrs: { src: location.photo, alt: "" },
+                          attrs: { src: location.photo, alt: "location.name" },
                         })
                       : _vm._e(),
                     _vm._v(" "),
-                    _c("p", { staticClass: "description" }, [
-                      _vm._v(
-                        _vm._s(_vm.truncateText(location.description, 150))
-                      ),
-                    ]),
+                    location.description
+                      ? _c("p", { staticClass: "description" }, [
+                          _vm._v(
+                            _vm._s(_vm.truncateText(location.description, 150))
+                          ),
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("span", { staticClass: "price" }, [
                       _vm._v(_vm._s(location.price) + "€ a notte"),
