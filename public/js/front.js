@@ -2083,16 +2083,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    // getLocation() {
-    //     axios.get('/api/locations/' + this.$route.params.slug)
-    //     .then((response) => {
-    //         console.log(response);
-    //         if(response.data.success) {
-    //             this.location = response.data.results;
-    //         } else {
-    //             this.$router.push({ name: 'not-found' });
-    //         }
-    //     });
     getLocation: function getLocation(locationSlug) {
       var _this = this;
 
