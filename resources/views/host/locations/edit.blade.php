@@ -46,7 +46,7 @@
              {{-- number --}}
              <div class="mb-3">
                 <label for="number" class="form-label">Numero civico</label>
-                <input type="text" class="form-control" id="number" name="number" value="{{ old('number',$location->number) }}">
+                <input type="number" class="form-control" id="number" name="number" value="{{ old('number',$location->number) }}">
             </div>
 
             {{-- Visible --}}
