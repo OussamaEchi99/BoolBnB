@@ -59,9 +59,6 @@
                 </form>
             </div>
 
-            <div>
-                <div class="map" id="map" ref="mapRef"></div>
-            </div>
         </div>
     </section>
 @endsection
