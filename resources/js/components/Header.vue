@@ -11,11 +11,14 @@
                         <li v-for="(link, index) in menuLinks" :key="index" class="nav-item">
                             <router-link class="nav-link" :to="{ name: link.name }">{{ link.label }}</router-link>
                         </li>
+                        <li class="nav-item">
+                            <a href="/login" class="nav-link">Login</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
-        <a href="/login">login</a>
+        
     </header>
 </template>
 
