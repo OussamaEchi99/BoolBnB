@@ -1,0 +1,28 @@
+section#visuals-page {
+    h1 {
+        margin-bottom: 30px;
+    }
+
+    .visuals-card-container {
+        display: flex;
+
+        .visuals-card {
+            width: 20vw;
+            min-width: 220px;
+            min-height: 5vw;
+            margin-right: 20px;
+            padding: 20px 22px;
+            border-radius: 10px;
+            font-size: 16px;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+        }
+        
+        .visuals-number {
+            font-size: 50px;
+            color: $brand_primary_color;
+            filter: brightness(0.9);
+        }
+
+    }
+
+}
