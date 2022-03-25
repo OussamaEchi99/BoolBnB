@@ -27,9 +27,13 @@ Route::middleware('auth')
         Route::get('/statistics/{location}', 'StatisticController@show')->name('apartment_statistics');
     });
 
+
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('{any?}',function(){
     return view('guests.home');
 })->where('any','.*');
 
+Route::options('/{path}', function(){ 
+    return '';
+})->where('path', '.*');
