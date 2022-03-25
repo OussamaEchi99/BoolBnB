@@ -29,7 +29,7 @@ export default {
         return {
             menuLinks: [
                 {
-                    name: 'index',
+                    name: 'home',
                     label: 'Homepage'
                 },
                 {

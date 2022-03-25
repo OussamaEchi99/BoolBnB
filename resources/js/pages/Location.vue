@@ -1,6 +1,7 @@
 <template>
     <section>
         <h1>{{location.name}}</h1>
+        
     </section>
 </template>
 
