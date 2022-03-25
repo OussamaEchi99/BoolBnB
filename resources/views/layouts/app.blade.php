@@ -160,7 +160,7 @@
         </header>
         
         <main class="py-4 my-container m-auto">
-            <Header></Header>
+            {{-- <App></App> --}}
             @yield('content')
         </main>
 
