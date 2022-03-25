@@ -25,7 +25,11 @@
 
             
             <div class="mb-2">
-                <strong>Indirizzo:</strong> {{($location->country) $location->city $location->address, $location->number}}
+                <strong>Indirizzo:</strong> 
+                ({{$location->country}})
+                {{$location->city}}, 
+                {{$location->address}}
+                n°{{$location->number}}
             </div>
 
             <div class="mb-2">
@@ -51,7 +55,7 @@
             </div>
 
             <div class="mt-3">
-                <form action="{{ route('host.locations.destroy', ['location' => $location->id]) }}" method="location">
+                <form action="{{ route('host.locations.destroy', ['location' => $location->id]) }}" method="post">
                     @csrf
                     @method('DELETE')
 
@@ -59,9 +63,6 @@
                 </form>
             </div>
 
-            <div>
-                <div class="map" id="map" ref="mapRef"></div>
-            </div>
         </div>
     </section>
 @endsection
