@@ -2054,12 +2054,28 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getLocation: function getLocation() {
+    // getLocation() {
+    //     axios.get('/api/locations/' + this.$route.params.slug)
+    //     .then((response) => {
+    //         console.log(response);
+    //         if(response.data.success) {
+    //             this.location = response.data.results;
+    //         } else {
+    //             this.$router.push({ name: 'not-found' });
+    //         }
+    //     });
+    getLocation: function getLocation(locationSlug) {
       var _this = this;
 
-      axios.get('/api/locations/' + this.$route.params.slug).then(function (response) {
+      axios.get('/api/locations/', {
+        params: {
+          slug: locationSlug
+        }
+      }).then(function (response) {
+        console.log(response.data.results.data);
+
         if (response.data.success) {
-          _this.location = response.data.results;
+          _this.location = response.data.results.data[0];
         } else {
           _this.$router.push({
             name: 'not-found'
@@ -2069,7 +2085,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.getLocation();
+    this.getLocation('barberini-maison');
   }
 });
 
@@ -19384,8 +19400,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-router */ "./node_modules/vue-router/dist/vue-router.esm.js");
 /* harmony import */ var _pages_Index_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./pages/Index.vue */ "./resources/js/pages/Index.vue");
 /* harmony import */ var _pages_Search_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./pages/Search.vue */ "./resources/js/pages/Search.vue");
-/* harmony import */ var _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/NotFound.vue */ "./resources/js/pages/NotFound.vue");
-/* harmony import */ var _pages_Location_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/Location.vue */ "./resources/js/pages/Location.vue");
+/* harmony import */ var _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Location.vue */ "./resources/js/pages/Location.vue");
+/* harmony import */ var _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./pages/NotFound.vue */ "./resources/js/pages/NotFound.vue");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -19406,11 +19422,11 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
   }, {
     path: "/location/:slug",
     name: "location-details",
-    component: _pages_Location_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    component: _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
     path: "/*",
     name: "not-found",
-    component: _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
+    component: _pages_NotFound_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   }]
 });
 /* harmony default export */ __webpack_exports__["default"] = (router);
