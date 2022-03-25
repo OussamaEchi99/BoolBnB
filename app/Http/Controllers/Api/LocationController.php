@@ -19,20 +19,24 @@ class LocationController extends Controller
             }
         }
         
-        return response()->json([
-            'success' => true,
-            'results' => $locations
-        ]);
+        if($location->visible){
+            return response()->json([
+                'success' => true,
+                'results' => $locations
+            ]);
+        }
     }
 
     public function show($slug) {
         $location = Location::where('slug', '=', $slug)->with(['category', 'Features'])->first();
 
-        if($location->photo){
+        if(str_contains($location->photo, 'location_photos')){
             $location->photo = url('storage/' . $location->photo);
+        }else{
+            $location->photo;
         }
         
-        if($location) {
+        if($location && $location->visible) {
             return response()->json([
                 'success' => true,
                 'results' => $location

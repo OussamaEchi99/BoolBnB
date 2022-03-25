@@ -6,6 +6,7 @@ Vue.use(VueRouter)
 import Index from './pages/Index.vue';
 import Search from './pages/Search.vue';
 import NotFound from './pages/NotFound.vue';
+import Location from './pages/Location.vue';
 
 const router = new VueRouter({
     mode: "history",
@@ -19,6 +20,11 @@ const router = new VueRouter({
             path: "/search",
             name: "search",
             component: Search
+        },
+        {
+            path: "/location/:slug",
+            name: "location-details",
+            component: Location
         },
         {
             path: "/*",

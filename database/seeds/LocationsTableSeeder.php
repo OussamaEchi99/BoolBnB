@@ -17,6 +17,10 @@ class LocationsTableSeeder extends Seeder
         $new_location->name = 'Barberini Maison';
         $new_location->slug = Str::slug($new_location->name);
         $new_location->photo = 'https://a0.muscache.com/im/pictures/ed6f2251-3140-4896-8559-10f6bf997c01.jpg?im_w=1200';
+        $new_location->country = 'Italy';
+        $new_location->city = 'Roma';
+        $new_location->address = 'Via Flaminia';
+        $new_location->number = 23;
         $new_location->lat = 41.9109;
         $new_location->long = 12.4818;
         $new_location->rooms = 1;
