@@ -18,6 +18,10 @@ class CreateLocationsTable extends Migration
             $table->string('name', 50);
             $table->string('slug', 255)->unique();
             $table->string('photo', 255);
+            $table->string('country',100);
+            $table->string('city', 100);
+            $table->string('address', 255);
+            $table->integer('number');
             $table->decimal('lat', 7, 4);
             $table->decimal('long', 7, 4);
             $table->tinyInteger('rooms')->unsigned();

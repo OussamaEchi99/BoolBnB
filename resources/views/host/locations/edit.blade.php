@@ -25,6 +25,30 @@
               <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $location->name) }}">
             </div>
 
+            {{-- Country --}}
+            <div class="mb-3">
+                <label for="country" class="form-label">Nazione</label>
+                <input type="text" class="form-control" id="contry" name="country" value="{{ old('country',$location->country) }}">
+            </div>
+
+            {{-- city --}}
+            <div class="mb-3">
+                <label for="city" class="form-label">Città</label>
+                <input type="text" class="form-control" id="city" name="city" value="{{ old('city',$location->city) }}">
+            </div>
+
+            {{-- address --}}
+            <div class="mb-3">
+                <label for="address" class="form-label">Indirizzo</label>
+                <input type="text" class="form-control" id="address" name="address" value="{{ old('address',$location->address) }}">
+            </div>
+
+             {{-- number --}}
+             <div class="mb-3">
+                <label for="number" class="form-label">Numero civico</label>
+                <input type="text" class="form-control" id="number" name="number" value="{{ old('number',$location->number) }}">
+            </div>
+
             {{-- Visible --}}
             <div class="mb-3">
                 <label for="visible" class="form-label">Visible</label>
