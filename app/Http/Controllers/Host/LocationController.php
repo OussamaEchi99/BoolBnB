@@ -185,6 +185,9 @@ class LocationController extends Controller
         return [
             'name' => 'required|max:50',
             'photo' => 'image|max:1024',
+            'city' => 'required|max:100',
+            'address' => 'required|max:255',
+            'number' => 'required|min:1',
             'rooms' => 'required|min:1',
             'beds' => 'required|min:1',
             'bathrooms' => 'required|min:1',

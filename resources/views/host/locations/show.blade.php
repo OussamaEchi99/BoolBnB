@@ -24,6 +24,9 @@
             </div>
 
             
+            <div class="mb-2">
+                <strong>Indirizzo:</strong> {{($location->country) $location->city $location->address, $location->number}}
+            </div>
 
             <div class="mb-2">
                 <strong>Camere:</strong> {{$location->rooms}}
