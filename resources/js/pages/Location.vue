@@ -14,17 +14,6 @@ export default {
         };
     },
     methods: {
-        // getLocation() {
-        //     axios.get('/api/locations/' + this.$route.params.slug)
-        //     .then((response) => {
-        //         console.log(response);
-
-        //         if(response.data.success) {
-        //             this.location = response.data.results;
-        //         } else {
-        //             this.$router.push({ name: 'not-found' });
-        //         }
-        //     });
 
         getLocation(locationSlug) {
             axios.get('/api/locations/', {

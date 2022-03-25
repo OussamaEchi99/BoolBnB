@@ -16,11 +16,10 @@
                     </ul>
                 </div>
             @endif
-
-            <div>
-                <Coordinates/>
-            </div>
             
+
+            <button onclick="getApi()">Calcola coordinate</button>
+
             <form action="{{ route('host.locations.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -30,6 +29,7 @@
                     <label for="name" class="form-label">Nome</label>
                     <input type="text" required minlength="3" maxlength="50" class="form-control" id="name" name="name" value="{{ old('name') }}">
                 </div>
+
 
                 {{-- Country --}}
                 <div class="mb-3">
@@ -58,13 +58,13 @@
                 {{-- LAT --}}
                 <div class="mb-3">
                     <label for="lat" class="form-label">--Latitude--</label>
-                    <input type="number" class="form-control" id="lat" name="lat" value="{{ old('lat') }}">
+                    <input readonly type="number" class="form-control" id="lat" name="lat" value="{{ old('number') }}">
                 </div>
 
                 {{-- LONG --}}
                 <div class="mb-3">
                     <label for="long" class="form-label">--Longitude--</label>
-                    <input type="number" class="form-control" id="long" name="long" value="{{ old('long') }}">
+                    <input readonly type="number" class="form-control" id="long" name="long" value="{{ old('long') }}">
                 </div>
 
                 {{-- Visible --}}
@@ -155,4 +155,36 @@
         </div>
     </section>
 @endsection
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    let latitudine = 0;
+    let longitudine = 0;
+    let Ukey = 'ntfD0l0bgaKvPwNCnKD4YNOomMQbE61N';
+    let UcountryCode = 'IT';
 
+    function getApi() {
+        let city = document.getElementById("city").value;
+        console.log(city);
+        let address = document.getElementById("address").value;
+        console.log(address);
+        let number = document.getElementById("number").value;
+        console.log(number);
+   
+       
+            axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
+                params: {
+                    key: Ukey,
+                    countryCode: UcountryCode,
+                    municipality: city,
+                    streetName: address,
+                    streetNumber: number
+                }
+            })
+            .then((response) => {
+                latitudine = response.data.results[0].position.lat;
+                longitudine = response.data.results[0].position.lon;
+                document.getElementById("lat").value = latitudine;
+                document.getElementById("long").value = longitudine;
+            });
+        };
+</script>
