@@ -17,6 +17,10 @@
                 </div>
             @endif
 
+            <div>
+                <Coordinates/>
+            </div>
+            
             <form action="{{ route('host.locations.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -151,3 +155,4 @@
         </div>
     </section>
 @endsection
+
