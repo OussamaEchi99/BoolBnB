@@ -5,8 +5,11 @@
  */
 
 require('./bootstrap');
+window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 window.Vue = require('vue');
+import Vue from  'vue';
+import Coordinates from './components/Coordinates.vue'
 
 // import Navbar from './components/Navbar.vue';
 /**
@@ -21,6 +24,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('Coordinates', Coordinates);
 // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 
