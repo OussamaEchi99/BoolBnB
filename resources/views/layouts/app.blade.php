@@ -20,13 +20,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <script>
-        $(document).ready(function() {
-            $('.icon-one').click(function() {
-            $('.icon-one').toggleClass('active-one');
-            });
-        })
-    </script>
 </head>
 <body>
     <div id="app">
@@ -165,8 +158,9 @@
                 </div>
             </nav>
         </header>
-
+        
         <main class="py-4 my-container m-auto">
+            <Header></Header>
             @yield('content')
         </main>
 
