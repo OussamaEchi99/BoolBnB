@@ -123,14 +123,20 @@
             <div class="mb-3">
                 <label for="photo" class="form-label">Cover</label>
                 <div>
-                    <input type="file" id="photo" name="photo">
+                    <input
+                        type="file" 
+                        id="photo" 
+                        name="photo"                     
+                    >
                 </div>
+                
 
                 @if ($location->photo)
                 <div class="previous-image">
                     Immagine precedente:
                     <img src="{{ asset('storage/' . $location->photo) }}" alt="">
                 </div>
+                
                 @endif
             </div>
 

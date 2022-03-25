@@ -13,6 +13,7 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -38,14 +39,15 @@
                         BoolBnB
                     </a>
     
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
+                    {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
-                    </button>
+                    </button> --}}
     
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <div id="navbarSupportedContent">
+                        {{-- class="collapse navbar-collapse" --}}
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav m-auto ">
-                            <li>
+                            {{-- <li>
                                 <a href="#">
                                     prova
                                 </a>
@@ -59,7 +61,7 @@
                                 <a href="#">
                                     prova
                                 </a>
-                            </li>
+                            </li> --}}
                         </ul>
     
                         <!-- Right Side Of Navbar -->
@@ -72,7 +74,13 @@
                                             {{-- <div class="icon-one">
                                                 <div class="hamburger hamburger-one"></div>
                                             </div> --}}
-                                            menu
+                                            <div class="burger-icon">
+                                                <i class="fas fa-bars"></i>
+                                            </div>
+                                            <div class="circle">
+                                                
+                                            </div>
+                                            
                                         </button>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right"  aria-labelledby="navbarDropdown">
@@ -102,8 +110,14 @@
                                             {{-- <div class="icon-one">
                                                 <div class="hamburger hamburger-one"></div>
                                             </div> --}}
-                                            menu
+                                            <div class="burger-icon">
+                                                <i class="fas fa-bars"></i>
+                                            </div>
+                                            <div class="circle">
+                                                {{ strtoupper(Auth::user()->name[0]) }}
+                                            </div>
                                         </button>
+                                        
                                     </a>
     
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
@@ -152,7 +166,7 @@
             </nav>
         </header>
 
-        <main class="py-4">
+        <main class="py-4 my-container m-auto">
             @yield('content')
         </main>
 
