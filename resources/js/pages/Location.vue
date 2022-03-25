@@ -14,19 +14,38 @@ export default {
         };
     },
     methods: {
-        getLocation() {
-            axios.get('/api/locations/' + this.$route.params.slug)
+        // getLocation() {
+        //     axios.get('/api/locations/' + this.$route.params.slug)
+        //     .then((response) => {
+        //         console.log(response);
+
+        //         if(response.data.success) {
+        //             this.location = response.data.results;
+        //         } else {
+        //             this.$router.push({ name: 'not-found' });
+        //         }
+        //     });
+
+        getLocation(locationSlug) {
+            axios.get('/api/locations/', {
+                params: {
+                    slug: locationSlug
+                }
+            })
             .then((response) => {
+                console.log(response.data.results.data);
+
                 if(response.data.success) {
-                    this.location = response.data.results;
+                    this.location = response.data.results.data[0];
                 } else {
                     this.$router.push({ name: 'not-found' });
                 }
             });
         }
+        
     },
     created: function() {
-        this.getLocation();
+        this.getLocation('barberini-maison');
     }
 }
 </script>

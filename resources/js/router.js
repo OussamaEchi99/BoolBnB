@@ -6,8 +6,8 @@ Vue.use(VueRouter)
 // import Index from './pages/Index.vue';
 import Home from './pages/Home.vue';
 import Search from './pages/Search.vue';
-import NotFound from './pages/NotFound.vue';
 import Location from './pages/Location.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = new VueRouter({
     mode: "history",

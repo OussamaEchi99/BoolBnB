@@ -28,7 +28,7 @@ class LocationController extends Controller
     }
 
     public function show($slug) {
-        $location = Location::where('slug', '=', $slug)->with(['category', 'Features'])->first();
+        $location = Location::where('slug', '=', $slug)->with(['category', 'features'])->first();
 
         if(str_contains($location->photo, 'location_photos')){
             $location->photo = url('storage/' . $location->photo);

@@ -131,6 +131,8 @@ class LocationController extends Controller
     public function update(Request $request, $id)
     {
         $form_data = $request->all();
+
+        // dd($form_data);
         $request->validate($this->getValidationRules());
 
         $location = Location::findOrFail($id);
@@ -140,7 +142,7 @@ class LocationController extends Controller
             $form_data['slug'] = Location::getUniqueSlugFromName($form_data['name']);
         }
 
-        if($form_data['photo']) {
+        if(in_array('photo', $form_data)) {
             // Cancella il file precedente
             if($location->photo) {
                 Storage::delete($location->photo);
@@ -176,6 +178,14 @@ class LocationController extends Controller
     public function destroy($id)
     {
         $location = Location::findOrFail($id);
+        $location->features()->sync([]);
+        $location->sponsors()->sync([]);
+
+        // Se ha un'immagine la cancello
+        if ($location->photo) {
+            Storage::delete($location->photo);
+        }
+
         $location->delete();
 
         return redirect()->route('host.locations.index');
