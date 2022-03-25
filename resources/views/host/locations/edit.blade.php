@@ -22,67 +22,72 @@
             {{-- Location Name --}}
             <div class="mb-3">
               <label for="name" class="form-label">Nome</label>
-              <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $location->name) }}">
+              <input type="text" required minlength="3" maxlength="50" class="form-control" id="name" name="name" value="{{ old('name', $location->name) }}">
             </div>
 
             {{-- Country --}}
             <div class="mb-3">
                 <label for="country" class="form-label">Nazione</label>
-                <input type="text" class="form-control" id="contry" name="country" value="{{ old('country',$location->country) }}">
+                <input type="text" required minlength="3" maxlength="100" class="form-control" id="country" name="country" value="{{ old('country',$location->country) }}">
             </div>
 
             {{-- city --}}
             <div class="mb-3">
                 <label for="city" class="form-label">Città</label>
-                <input type="text" class="form-control" id="city" name="city" value="{{ old('city',$location->city) }}">
+                <input type="text" required minlength="2" maxlength="100" class="form-control" id="city" name="city" value="{{ old('city',$location->city) }}">
             </div>
 
             {{-- address --}}
             <div class="mb-3">
                 <label for="address" class="form-label">Indirizzo</label>
-                <input type="text" class="form-control" id="address" name="address" value="{{ old('address',$location->address) }}">
+                <input type="text" required minlength="2" maxlength="255" class="form-control" id="address" name="address" value="{{ old('address',$location->address) }}">
             </div>
 
              {{-- number --}}
              <div class="mb-3">
                 <label for="number" class="form-label">Numero civico</label>
-                <input type="number" class="form-control" id="number" name="number" value="{{ old('number',$location->number) }}">
+                <input type="number" required min="1" max="15000" class="form-control" id="number" name="number" value="{{ old('number',$location->number) }}">
             </div>
 
             {{-- Visible --}}
             <div class="mb-3">
                 <label for="visible" class="form-label">Visible</label>
-                <input type="number" class="form-control" id="visible" name="visible" value="{{ old('visible', $location->visible) }}">
+                <input type="number" required class="form-control" id="visible" name="visible" value="{{ old('visible', $location->visible) }}">
             </div>
+
+            {{-- <div class="custom-control custom-switch">
+                <input type="checkbox" class="custom-control-input" id="visible">
+                <label class="custom-control-label" for="visible" name="visible" value="1">Toggle this switch element</label>
+            </div> --}}
 
             {{-- Rooms Number --}}
             <div class="mb-3">
                 <label for="rooms" class="form-label">Stanze</label>
-                <input type="number" class="form-control" id="rooms" name="rooms" value="{{ old('rooms', $location->rooms) }}">
+                <input type="number" required min="1" class="form-control" id="rooms" name="rooms" value="{{ old('rooms', $location->rooms) }}">
             </div>
 
             {{-- Beds Number --}}
             <div class="mb-3">
                 <label for="beds" class="form-label">Letti</label>
-                <input type="number" class="form-control" id="beds" name="beds" value="{{ old('beds', $location->beds) }}">
+                <input type="number" required min="1" class="form-control" id="beds" name="beds" value="{{ old('beds', $location->beds) }}">
             </div>
 
             {{-- Bathrooms Number --}}
             <div class="mb-3">
                 <label for="bathrooms" class="form-label">Bagni</label>
-                <input type="number" class="form-control" id="bathrooms" name="bathrooms" value="{{ old('bathrooms', $location->bathrooms) }}">
+                <input type="number" required min="1" class="form-control" id="bathrooms" name="bathrooms" value="{{ old('bathrooms', $location->bathrooms) }}">
             </div>
 
             {{-- Square Meters --}}
             <div class="mb-3">
                 <label for="square_meters" class="form-label">Metri Quadrati</label>
-                <input type="number" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters', $location->square_meters) }}">
+                <input type="number" required min="1" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters', $location->square_meters) }}">
             </div>
 
             {{-- Price --}}
             <div class="mb-3">
                 <label for="price" class="form-label">Prezzo</label>
-                <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $location->price) }}">
+                <input type="number"  required min="0" class="form-control" id="price" name="price" value="{{ old('price', $location->price) }}">
             </div>
 
             {{-- Category --}}
@@ -124,7 +129,7 @@
                 <label for="photo" class="form-label">Cover</label>
                 <div>
                     <input
-                        type="file" 
+                        type="file"
                         id="photo" 
                         name="photo"                     
                     >
@@ -143,7 +148,7 @@
             {{-- Description --}}
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione</label>
-                <textarea class="form-control" name="description" id="description" cols="30" rows="10">{{ old('description', $location->description) }}</textarea>
+                <textarea class="form-control" maxlength="60000" name="description" id="description" cols="30" rows="10">{{ old('description', $location->description) }}</textarea>
             </div>
 
             {{-- Edit Button --}}
