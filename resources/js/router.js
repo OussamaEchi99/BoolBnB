@@ -3,18 +3,19 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Index from './pages/Index.vue';
+// import Index from './pages/Index.vue';
+import Home from './pages/Home.vue';
 import Search from './pages/Search.vue';
-import NotFound from './pages/NotFound.vue';
 import Location from './pages/Location.vue';
+import NotFound from './pages/NotFound.vue';
 
 const router = new VueRouter({
     mode: "history",
     routes: [
         {
             path: "/",
-            name: "index",
-            component: Index
+            name: "home",
+            component: Home
         },
         {
             path: "/search",
