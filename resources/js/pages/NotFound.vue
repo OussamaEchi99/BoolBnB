@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h1>CERCA BENE, PIRLA</h1>
+        <h1>CERCA BENE, LA PAGINA SEGUENTE NON ESISTE</h1>
     </section>
 </template>
 

@@ -1929,6 +1929,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Header',
   data: function data() {
@@ -3293,32 +3296,34 @@ var render = function () {
               _c(
                 "ul",
                 { staticClass: "navbar-nav" },
-                _vm._l(_vm.menuLinks, function (link, index) {
-                  return _c(
-                    "li",
-                    { key: index, staticClass: "nav-item" },
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          staticClass: "nav-link",
-                          attrs: { to: { name: link.name } },
-                        },
-                        [_vm._v(_vm._s(link.label))]
-                      ),
-                    ],
-                    1
-                  )
-                }),
-                0
+                [
+                  _vm._l(_vm.menuLinks, function (link, index) {
+                    return _c(
+                      "li",
+                      { key: index, staticClass: "nav-item" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            staticClass: "nav-link",
+                            attrs: { to: { name: link.name } },
+                          },
+                          [_vm._v(_vm._s(link.label))]
+                        ),
+                      ],
+                      1
+                    )
+                  }),
+                  _vm._v(" "),
+                  _vm._m(1),
+                ],
+                2
               ),
             ]
           ),
         ]),
       ]
     ),
-    _vm._v(" "),
-    _c("a", { attrs: { href: "/login" } }, [_vm._v("login")]),
   ])
 }
 var staticRenderFns = [
@@ -3341,6 +3346,16 @@ var staticRenderFns = [
       },
       [_c("span", { staticClass: "navbar-toggler-icon" })]
     )
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("li", { staticClass: "nav-item" }, [
+      _c("a", { staticClass: "nav-link", attrs: { href: "/login" } }, [
+        _vm._v("Login"),
+      ]),
+    ])
   },
 ]
 render._withStripped = true
@@ -3553,7 +3568,9 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", [_c("h1", [_vm._v("CERCA BENE, PIRLA")])])
+    return _c("section", [
+      _c("h1", [_vm._v("CERCA BENE, LA PAGINA SEGUENTE NON ESISTE")]),
+    ])
   },
 ]
 render._withStripped = true
@@ -3584,7 +3601,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", [_c("h1", [_vm._v("culo search")])])
+    return _c("section", [_c("h1", [_vm._v("Search page")])])
   },
 ]
 render._withStripped = true
@@ -19476,7 +19493,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
