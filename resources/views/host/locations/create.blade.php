@@ -158,7 +158,7 @@
 <script>
     let latitudine = 0;
     let longitudine = 0;
-    let Ukey = 'ntfD0l0bgaKvPwNCnKD4YNOomMQbE61N';
+    let Ukey = 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2';
     let UcountryCode = 'IT';
 
     function getApi() {

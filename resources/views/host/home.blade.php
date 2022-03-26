@@ -2,6 +2,7 @@
 
 @section('content')
     <div>
-        <Index/>
+        {{-- <Index/> --}}
+        <Hostapp/>
     </div>
 @endsection
