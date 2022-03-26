@@ -27,7 +27,7 @@ class CreateLocationsTable extends Migration
             $table->tinyInteger('rooms')->unsigned();
             $table->tinyInteger('beds')->unsigned();
             $table->tinyInteger('bathrooms')->unsigned();
-            $table->tinyInteger('square_meters')->unsigned();
+            $table->smallInteger('square_meters')->unsigned();
             $table->decimal('price', 7, 2);
             $table->tinyInteger('visible');
             $table->text('description')->nullable();

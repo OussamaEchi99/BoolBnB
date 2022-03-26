@@ -54,13 +54,13 @@
             {{-- LAT --}}
             <div class="mb-3">
                 <label for="lat" class="form-label">--Latitude--</label>
-                <input readonly type="number" class="form-control" id="lat" name="lat" value="{{ old('number') }}">
+                <input readonly type="number" class="form-control" id="lat" name="lat" value="{{ old('number',$location->lat) }}">
             </div>
 
             {{-- LONG --}}
             <div class="mb-3">
                 <label for="long" class="form-label">--Longitude--</label>
-                <input readonly type="number" class="form-control" id="long" name="long" value="{{ old('long') }}">
+                <input readonly type="number" class="form-control" id="long" name="long" value="{{ old('long',$location->long) }}">
             </div>
 
             {{-- Visible --}}
