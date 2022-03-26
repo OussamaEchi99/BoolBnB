@@ -2083,16 +2083,6 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    // getLocation() {
-    //     axios.get('/api/locations/' + this.$route.params.slug)
-    //     .then((response) => {
-    //         console.log(response);
-    //         if(response.data.success) {
-    //             this.location = response.data.results;
-    //         } else {
-    //             this.$router.push({ name: 'not-found' });
-    //         }
-    //     });
     getLocation: function getLocation(locationSlug) {
       var _this = this;
 
@@ -3351,15 +3341,17 @@ var render = function () {
                     location.photo
                       ? _c("img", {
                           staticClass: "main_img",
-                          attrs: { src: location.photo, alt: "" },
+                          attrs: { src: location.photo, alt: "location.name" },
                         })
                       : _vm._e(),
                     _vm._v(" "),
-                    _c("p", { staticClass: "description" }, [
-                      _vm._v(
-                        _vm._s(_vm.truncateText(location.description, 150))
-                      ),
-                    ]),
+                    location.description
+                      ? _c("p", { staticClass: "description" }, [
+                          _vm._v(
+                            _vm._s(_vm.truncateText(location.description, 150))
+                          ),
+                        ])
+                      : _vm._e(),
                     _vm._v(" "),
                     _c("span", { staticClass: "price" }, [
                       _vm._v(_vm._s(location.price) + "€ a notte"),
@@ -19636,7 +19628,11 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+=======
+module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+>>>>>>> ec5315b073fbe3c966dd32257bf9ab2fc2d25618
 
 
 /***/ })

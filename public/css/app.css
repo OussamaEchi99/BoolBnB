@@ -38,6 +38,31 @@ a {
   font-weight: 600;
 }
 
+section#visuals-page h1 {
+  margin-bottom: 30px;
+}
+
+section#visuals-page .visuals-card-container {
+  display: flex;
+}
+
+section#visuals-page .visuals-card-container .visuals-card {
+  width: 20vw;
+  min-width: 220px;
+  min-height: 5vw;
+  margin-right: 20px;
+  padding: 20px 22px;
+  border-radius: 10px;
+  font-size: 16px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+section#visuals-page .visuals-card-container .visuals-number {
+  font-size: 50px;
+  color: #add8e6;
+  filter: brightness(0.9);
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors

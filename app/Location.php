@@ -10,6 +10,7 @@ class Location extends Model
     protected $fillable = [
         'name',
         'slug',
+        'user_id',
         'country',
         'city',
         'address',

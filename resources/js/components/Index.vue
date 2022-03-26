@@ -6,8 +6,8 @@
                     <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
                         <div class="single_element">
                             <strong class="title">{{location.name}}</strong>
-                            <img class="main_img" v-if="location.photo" :src="location.photo" alt="">
-                            <p class="description">{{truncateText(location.description, 150)}}</p>
+                            <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
+                            <p v-if="location.description" class="description">{{truncateText(location.description, 150)}}</p>
                             <span class="price">{{location.price}}€ a notte</span>
                         </div>
                     </router-link>
