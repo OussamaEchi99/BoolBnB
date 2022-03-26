@@ -26,7 +26,7 @@ class LocationController extends Controller
             'locations' => $locations
         ];
 
-        return view('host.locations.index', $data);
+        return view('host.home', $data);
     }
 
     /**
