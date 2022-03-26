@@ -16,25 +16,23 @@ export default {
     methods: {
 
         getLocation(locationSlug) {
-            axios.get('/api/locations/', {
-                params: {
-                    slug: locationSlug
-                }
-            })
+            axios.get('/api/locations/' + this.$route.params.slug 
+            )
             .then((response) => {
-                console.log(response.data.results.data);
+                console.log(response);
 
                 if(response.data.success) {
                     this.location = response.data.results.data[0];
-                } else {
-                    this.$router.push({ name: 'not-found' });
-                }
+                } 
+                // else {
+                //     this.$router.push({ name: 'not-found' });
+                // }
             });
         }
         
     },
     created: function() {
-        this.getLocation('barberini-maison');
+        this.getLocation();
     }
 }
 </script>
