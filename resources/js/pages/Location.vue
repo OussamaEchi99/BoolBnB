@@ -6,6 +6,9 @@
             <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
         </div>        
         
+        <div id="map">
+
+        </div>
     </section>
 </template>
 
@@ -36,6 +39,12 @@ export default {
         this.getLocation();
     }
 }
+
+let center = [this.long,this.lat]
+
+map.on('load',() =>{
+    new tt.Marker().setLngLat(center).addTo(map)
+})
 </script>
 
 <style lang="scss" scoped>

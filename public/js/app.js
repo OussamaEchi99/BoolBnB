@@ -2138,6 +2138,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
   data: function data() {
@@ -2163,6 +2166,10 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     this.getLocation();
   }
+});
+var center = [undefined["long"], undefined.lat];
+map.on('load', function () {
+  new tt.Marker().setLngLat(center).addTo(map);
 });
 
 /***/ }),
@@ -38877,6 +38884,8 @@ var render = function () {
           })
         : _vm._e(),
     ]),
+    _vm._v(" "),
+    _c("div", { attrs: { id: "map" } }),
   ])
 }
 var staticRenderFns = []
@@ -55189,8 +55198,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
