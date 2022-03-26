@@ -1,6 +1,10 @@
 <template>
     <section>
         <h1>{{location.name}}</h1>
+
+        <div class="img-fluid">
+            <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
+        </div>        
         
     </section>
 </template>
@@ -15,18 +19,15 @@ export default {
     },
     methods: {
 
-        getLocation(locationSlug) {
-            axios.get('/api/locations/' + this.$route.params.slug 
-            )
+        getLocation() {
+            axios.get('/api/locations/' + this.$route.params.slug)
             .then((response) => {
-                console.log(response);
-
                 if(response.data.success) {
-                    this.location = response.data.results.data[0];
+                    this.location = response.data.results;
                 } 
-                // else {
-                //     this.$router.push({ name: 'not-found' });
-                // }
+                else {
+                    this.$router.push({ name: 'not-found' });
+                }
             });
         }
         

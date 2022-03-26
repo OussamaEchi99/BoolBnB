@@ -2134,6 +2134,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
   data: function data() {
@@ -2142,18 +2146,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getLocation: function getLocation(locationSlug) {
+    getLocation: function getLocation() {
       var _this = this;
 
       axios.get('/api/locations/' + this.$route.params.slug).then(function (response) {
-        console.log(response);
-
         if (response.data.success) {
-          _this.location = response.data.results.data[0];
-        } // else {
-        //     this.$router.push({ name: 'not-found' });
-        // }
-
+          _this.location = response.data.results;
+        } else {
+          _this.$router.push({
+            name: 'not-found'
+          });
+        }
       });
     }
   },
@@ -38863,7 +38866,18 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_c("h1", [_vm._v(_vm._s(_vm.location.name))])])
+  return _c("section", [
+    _c("h1", [_vm._v(_vm._s(_vm.location.name))]),
+    _vm._v(" "),
+    _c("div", { staticClass: "img-fluid" }, [
+      _vm.location.photo
+        ? _c("img", {
+            staticClass: "main_img",
+            attrs: { src: _vm.location.photo, alt: "location.name" },
+          })
+        : _vm._e(),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
