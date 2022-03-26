@@ -34,7 +34,6 @@ export default {
     },
     created: function() {
         this.getLocation();
-        console.log(this.$route.params.slug);
     }
 }
 </script>
