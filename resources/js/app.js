@@ -13,6 +13,8 @@ import Navbar from './components/Navbar.vue';
 import router from './router.js';
 import Index from './components/Index.vue';
 import Location from './pages/Location.vue';
+import Hostapp from './views/Hostapp.vue';
+
 
 
 // import Navbar from './components/Navbar.vue';
@@ -31,6 +33,7 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 Vue.component('Navbar', Navbar);
 Vue.component('Index', Index);
 Vue.component('Location', Location);
+Vue.component('Hostapp', Hostapp);
 // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 
@@ -42,6 +45,7 @@ Vue.component('Location', Location);
 
 const app = new Vue({
     el: '#app',
+    // render: h => h(Hostapp),
     router
     // components: {
     //     'Navbar' : require('./components/Navbar.vue'),
