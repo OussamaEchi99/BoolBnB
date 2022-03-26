@@ -3,7 +3,7 @@
 @section('content')
     <section>
         <div class="container">
-            
+
             <h2>Crea un nuovo post</h2>
 
             {{-- Validation Errors Message  --}}
@@ -16,7 +16,7 @@
                     </ul>
                 </div>
             @endif
-            
+
             <button onclick="getApi()">Calcola coordinate</button>
 
             <form action="{{ route('host.locations.store') }}" method="post" enctype="multipart/form-data">
@@ -82,31 +82,31 @@
                     <label for="rooms" class="form-label">Stanze</label>
                     <input type="number" required min="1" max="127" class="form-control" id="rooms" name="rooms" value="{{ old('rooms') }}">
                 </div>
-        
+
                 {{-- Beds Number --}}
                 <div class="mb-3">
                     <label for="beds" class="form-label">Letti</label>
                     <input type="number" required min="1" max="127" class="form-control" id="beds" name="beds" value="{{ old('beds') }}">
                 </div>
-        
+
                 {{-- Bathrooms Number --}}
                 <div class="mb-3">
                     <label for="bathrooms" class="form-label">Bagni</label>
                     <input type="number" required min="1" max="127" class="form-control" id="bathrooms" name="bathrooms" value="{{ old('bathrooms') }}">
                 </div>
-        
+
                 {{-- Square Meters --}}
                 <div class="mb-3">
                     <label for="price" class="form-label">Metri Quadrati</label>
                     <input type="number" required min="1" max="30000" class="form-control" id="square_meters" name="square_meters" value="{{ old('square_meters') }}">
                 </div>
-        
+
                 {{-- Price --}}
                 <div class="mb-3">
                     <label for="price" class="form-label">Prezzo</label>
                     <input type="number" required min="0" class="form-control" id="price" name="price" value="{{ old('price') }}">
                 </div>
-        
+
                 {{-- Category --}}
                 <div class="mb-3">
                     <label for="category_id" class="form-label">Categoria</label>
@@ -158,7 +158,7 @@
 <script>
     let latitudine = 0;
     let longitudine = 0;
-    let Ukey = 'ntfD0l0bgaKvPwNCnKD4YNOomMQbE61N';
+    let Ukey = '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau';
     let UcountryCode = 'IT';
 
     function getApi() {
@@ -168,8 +168,8 @@
         console.log(address);
         let number = document.getElementById("number").value;
         console.log(number);
-   
-       
+
+
             axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
                 params: {
                     key: Ukey,
