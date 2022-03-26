@@ -163,11 +163,8 @@
 
     function getApi() {
         let city = document.getElementById("city").value;
-        console.log(city);
         let address = document.getElementById("address").value;
-        console.log(address);
         let number = document.getElementById("number").value;
-        console.log(number);
    
        
             axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
