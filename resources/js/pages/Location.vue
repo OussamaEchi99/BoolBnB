@@ -1,6 +1,10 @@
 <template>
     <section>
         <h1>{{location.name}}</h1>
+
+        <div class="img-fluid">
+            <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
+        </div>        
         
     </section>
 </template>
@@ -15,18 +19,13 @@ export default {
     },
     methods: {
 
-        getLocation(locationSlug) {
-            axios.get('/api/locations/', {
-                params: {
-                    slug: locationSlug
-                }
-            })
+        getLocation() {
+            axios.get('/api/locations/' + this.$route.params.slug)
             .then((response) => {
-                console.log(response.data.results.data);
-
                 if(response.data.success) {
-                    this.location = response.data.results.data[0];
-                } else {
+                    this.location = response.data.results;
+                } 
+                else {
                     this.$router.push({ name: 'not-found' });
                 }
             });
@@ -34,7 +33,7 @@ export default {
         
     },
     created: function() {
-        this.getLocation('barberini-maison');
+        this.getLocation();
     }
 }
 </script>

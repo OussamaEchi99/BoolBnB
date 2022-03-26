@@ -36,7 +36,7 @@ class LocationController extends Controller
             $location->photo;
         }
         
-        if($location && $location->visible) {
+        if($location) {
             return response()->json([
                 'success' => true,
                 'results' => $location

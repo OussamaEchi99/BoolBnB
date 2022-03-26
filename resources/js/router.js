@@ -8,6 +8,7 @@ import Home from './pages/Home.vue';
 import Search from './pages/Search.vue';
 import Location from './pages/Location.vue';
 import NotFound from './pages/NotFound.vue';
+import Homehost from './pages/Homehost.vue';
 
 const router = new VueRouter({
     mode: "history",
@@ -15,7 +16,7 @@ const router = new VueRouter({
         {
             path: "/",
             name: "homepage",
-            component: Home
+            component: Home,
         },
         {
             path: "/search",
@@ -23,9 +24,14 @@ const router = new VueRouter({
             component: Search
         },
         {
-            path: "/host/location/:slug",
+            path: "/location/:slug",
             name: "location-details",
             component: Location
+        },
+        {
+            path: "/host/locations",
+            name: "home",
+            component: Homehost
         },
         {
             path: "/*",
