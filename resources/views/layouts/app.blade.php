@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -20,13 +21,6 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
-    <script>
-        $(document).ready(function() {
-            $('.icon-one').click(function() {
-            $('.icon-one').toggleClass('active-one');
-            });
-        })
-    </script>
 </head>
 <body>
     <div id="app">
@@ -165,8 +159,9 @@
                 </div>
             </nav>
         </header>
-
+        
         <main class="py-4 my-container m-auto">
+            <Header></Header>
             @yield('content')
         </main>
 
@@ -174,3 +169,5 @@
     </div>
 </body>
 </html>
+
+

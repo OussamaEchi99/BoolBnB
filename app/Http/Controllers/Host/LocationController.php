@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\Category;
 use App\Feature;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
@@ -25,7 +26,7 @@ class LocationController extends Controller
             'locations' => $locations
         ];
 
-        return view('host.locations.index', $data);
+        return view('host.home', $data);
     }
 
     /**
@@ -72,6 +73,8 @@ class LocationController extends Controller
             // 2- Salvo il path dell'immagine nella colonna cover del database
             $new_location->photo = $img_path;
         }
+
+        $new_location->user_id = Auth::id();
 
         $new_location->save();
 

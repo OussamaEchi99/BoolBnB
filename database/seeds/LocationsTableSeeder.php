@@ -21,8 +21,8 @@ class LocationsTableSeeder extends Seeder
         $new_location->city = 'Roma';
         $new_location->address = 'Via Flaminia';
         $new_location->number = 23;
-        $new_location->lat = 41.9109;
-        $new_location->long = 12.4818;
+        $new_location->lat = 42.001585;
+        $new_location->long = 12.495673;
         $new_location->rooms = 1;
         $new_location->beds = 2;
         $new_location->bathrooms = 1;
