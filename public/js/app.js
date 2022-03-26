@@ -2107,6 +2107,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
   data: function data() {
@@ -2115,18 +2119,12 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    getLocation: function getLocation(locationSlug) {
+    getLocation: function getLocation() {
       var _this = this;
 
-      axios.get('/api/locations/', {
-        params: {
-          slug: locationSlug
-        }
-      }).then(function (response) {
-        console.log(response.data.results.data);
-
+      axios.get('/api/locations/' + this.$route.params.slug).then(function (response) {
         if (response.data.success) {
-          _this.location = response.data.results.data[0];
+          _this.location = response.data.results;
         } else {
           _this.$router.push({
             name: 'not-found'
@@ -2136,7 +2134,8 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.getLocation('barberini-maison');
+    this.getLocation();
+    console.log(this.$route.params.slug);
   }
 });
 
@@ -38789,7 +38788,18 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section", [_c("h1", [_vm._v(_vm._s(_vm.location.name))])])
+  return _c("section", [
+    _c("h1", [_vm._v(_vm._s(_vm.location.name))]),
+    _vm._v(" "),
+    _c("div", { staticClass: "img-fluid" }, [
+      _vm.location.photo
+        ? _c("img", {
+            staticClass: "main_img",
+            attrs: { src: _vm.location.photo, alt: "location.name" },
+          })
+        : _vm._e(),
+    ]),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -54898,7 +54908,7 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_1__["default"]({
     name: "search",
     component: _pages_Search_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
   }, {
-    path: "/host/location/:slug",
+    path: "/location/:slug",
     name: "location-details",
     component: _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
   }, {
