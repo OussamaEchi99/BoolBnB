@@ -19935,6 +19935,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 =======
 <<<<<<< HEAD
@@ -19943,6 +19944,9 @@ module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto
 module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 >>>>>>> 096c9fb3f4a6296b6b9eec9f69802c4bad6a2405
 >>>>>>> origin/master
+=======
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+>>>>>>> 0eb497585297a46d3ff70dfd61d8a9f511538708
 
 
 /***/ })

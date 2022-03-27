@@ -55289,6 +55289,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 =======
@@ -55300,6 +55301,10 @@ __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources
 module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 >>>>>>> 096c9fb3f4a6296b6b9eec9f69802c4bad6a2405
 >>>>>>> origin/master
+=======
+__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 0eb497585297a46d3ff70dfd61d8a9f511538708
 
 
 /***/ })

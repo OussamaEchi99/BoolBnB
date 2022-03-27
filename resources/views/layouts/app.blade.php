@@ -14,7 +14,6 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     <!-- Fonts -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
@@ -117,24 +116,23 @@
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item" href="{{ route('host.locations.index') }}">
-                                            Tutte le locations
+                                            <i class="fas fa-house-user dropdown-icon"></i>Le mie locations
                                         </a>
-
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item" href="{{ route('host.home') }}">
-                                            Dashboard
+                                            <i class="fas fa-border-all dropdown-icon"></i>Dashboard
                                         </a>
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item" href="{{ route('host.sponsors') }}">
-                                            Sponsor
+                                            <i class="fas fa-money-bill-wave dropdown-icon"></i>Sponsor
                                         </a>
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item" href="{{ route('host.statistics') }}">
-                                            Statistiche
+                                            <i class="fas fa-chart-line dropdown-icon"></i>Statistiche
                                         </a>
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item" href="{{ route('host.locations.create') }}">
-                                            Aggiungi annuncio
+                                            <i class="fas fa-plus dropdown-icon"></i>Aggiungi annuncio
                                         </a>
                                         
     
@@ -145,7 +143,7 @@
                                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();"
                                         >
-                                            Esci
+                                        <i class="fas fa-sign-out-alt dropdown-icon"></i>  Esci
                                         </a>
     
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
