@@ -23,7 +23,6 @@
                 @endforelse
             </div>
 
-            
             <div class="mb-2">
                 <strong>Indirizzo:</strong> {{$location->country}} {{$location->city}} {{$location->address}}, {{$location->number}}
             </div>

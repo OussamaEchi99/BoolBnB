@@ -35,8 +35,6 @@ export default {
                 if(response.data.success) {
                     this.location = response.data.results;
                     this.locationId = this.location.id;
-                    
-                    console.log(this.locationId)
                 } 
                 else {
                     this.$router.push({ name: 'not-found' });
@@ -47,8 +45,9 @@ export default {
             axios.get('https://ip-fast.com/api/ip/')
             .then((response) => {
                 this.userIpAddress = response.data;
-                console.log(this.userIpAddress)
                 this.sendIpAddressToBackend();
+                console.log(this.locationId);
+                console.log(this.userIpAddress);
             });
         },
         sendIpAddressToBackend() {

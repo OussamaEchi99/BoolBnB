@@ -15,20 +15,23 @@ return [
     |
     */
 
-    'paths' => ['api/*'],
+    'exposed_headers' => ['Authorization'],
 
-    'allowed_methods' => ['*'],
 
-    'allowed_origins' => ['*'],
+    // 'paths' => ['api/*'],
 
-    'allowed_origins_patterns' => [],
+    // 'allowed_methods' => ['*'],
 
-    'allowed_headers' => ['*'],
+    // 'allowed_origins' => ['*'],
 
-    'exposed_headers' => false,
+    // 'allowed_origins_patterns' => [],
 
-    'max_age' => false,
+    // 'allowed_headers' => ['*'],
 
-    'supports_credentials' => false,
+    // 'exposed_headers' => false,
+
+    // 'max_age' => false,
+
+    // 'supports_credentials' => false,
 
 ];

@@ -2163,7 +2163,6 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.success) {
           _this.location = response.data.results;
           _this.locationId = _this.location.id;
-          console.log(_this.locationId);
         } else {
           _this.$router.push({
             name: 'not-found'
@@ -2176,9 +2175,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('https://ip-fast.com/api/ip/').then(function (response) {
         _this2.userIpAddress = response.data;
-        console.log(_this2.userIpAddress);
 
         _this2.sendIpAddressToBackend();
+
+        console.log(_this2.locationId);
+        console.log(_this2.userIpAddress);
       });
     },
     sendIpAddressToBackend: function sendIpAddressToBackend() {
@@ -55309,8 +55310,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
