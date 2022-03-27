@@ -12,13 +12,11 @@ class HomeController extends Controller
 {
     public function index() {
         $user = Auth::user();
-        $locations = Location::all();
 
         $data = [
             'user' => $user,
-            'locations' => $locations
         ];
 
-        return view('host.locations.index', $data);
+        return view('host.dashboard.index');
     }
 }
