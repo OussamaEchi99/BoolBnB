@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h1 class="mb-3">Le mie locations</h1>
     <div class="row row-cols-3">
         @foreach ($locations as $location)
             @if ($location->user_id == Auth::id())

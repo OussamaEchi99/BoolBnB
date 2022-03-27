@@ -22,7 +22,9 @@ export default {
     name: 'Location',
     data: function() {
         return {
-            location: {}
+            location: {},
+            userIpAddress: '',
+            locationId: 0
         };
     },
     methods: {
@@ -32,16 +34,34 @@ export default {
             .then((response) => {
                 if(response.data.success) {
                     this.location = response.data.results;
+                    this.locationId = this.location.id;
+                    
+                    console.log(this.locationId)
                 } 
                 else {
                     this.$router.push({ name: 'not-found' });
                 }
             });
+        },
+        getIpAddress() {
+            axios.get('https://ip-fast.com/api/ip/')
+            .then((response) => {
+                this.userIpAddress = response.data;
+                console.log(this.userIpAddress)
+                this.sendIpAddressToBackend();
+            });
+        },
+        sendIpAddressToBackend() {
+            axios.post('/api/visuals/store', {
+                ip: this.userIpAddress,
+                location_id: this.locationId
+            })
         }
         
     },
     created: function() {
         this.getLocation();
+        this.getIpAddress();
     }
 }
 

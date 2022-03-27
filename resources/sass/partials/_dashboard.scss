@@ -1,0 +1,31 @@
+section#host-dashboard {
+
+    h1 {
+        margin-bottom: 40px;
+    }
+
+    .dashboard-internal-section {
+        margin-bottom: 30px;
+    }
+
+    a.fast-actions-btn {
+        display: inline-block;
+        margin: 10px 0;
+        padding: 30px 20px;
+        width: 100%;
+        text-align: center;
+        text-decoration: none;
+        background-color: white;
+        border-radius: 50px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+        font-size: 26px;
+        // background-color: red;
+
+        span.fast-action-icon {
+            display: inline-block;
+            font-size: 30px;
+            margin-right: 10px;
+        }
+    }
+
+}
