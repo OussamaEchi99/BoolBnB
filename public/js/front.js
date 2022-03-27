@@ -2129,7 +2129,9 @@ __webpack_require__.r(__webpack_exports__);
   name: 'Location',
   data: function data() {
     return {
-      location: {}
+      location: {},
+      userIpAddress: '',
+      locationId: 0
     };
   },
   methods: {
@@ -2139,16 +2141,35 @@ __webpack_require__.r(__webpack_exports__);
       axios.get('/api/locations/' + this.$route.params.slug).then(function (response) {
         if (response.data.success) {
           _this.location = response.data.results;
+          _this.locationId = _this.location.id;
+          console.log(_this.locationId);
         } else {
           _this.$router.push({
             name: 'not-found'
           });
         }
       });
+    },
+    getIpAddress: function getIpAddress() {
+      var _this2 = this;
+
+      axios.get('https://ip-fast.com/api/ip/').then(function (response) {
+        _this2.userIpAddress = response.data;
+        console.log(_this2.userIpAddress);
+
+        _this2.sendIpAddressToBackend();
+      });
+    },
+    sendIpAddressToBackend: function sendIpAddressToBackend() {
+      axios.post('/api/visuals/store', {
+        ip: this.userIpAddress,
+        location_id: this.locationId
+      });
     }
   },
   created: function created() {
     this.getLocation();
+    this.getIpAddress();
   }
 }); // let center = [this.long,this.lat]
 // map.on('load',() =>{
