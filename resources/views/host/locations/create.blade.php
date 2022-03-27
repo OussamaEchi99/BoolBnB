@@ -158,16 +158,15 @@
 <script>
     let latitudine = 0;
     let longitudine = 0;
-    let Ukey = '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau';
+    let Ukey = 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2';
     let UcountryCode = 'IT';
 
     function getApi() {
         let city = document.getElementById("city").value;
         let address = document.getElementById("address").value;
         let number = document.getElementById("number").value;
-        console.log(number);
-
-
+   
+       
             axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
                 params: {
                     key: Ukey,
