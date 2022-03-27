@@ -7,12 +7,9 @@
             <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
         </div>        
         
-        
-        <div class="container">
-            <div id="map" style="width: 100%; height: 70vh;"></div>
-        </div>
-        <script type="application/javascript" src="https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.5.0/services/services-web.min.js"></script>
-        
+        <router-link class="no-style" :to="{ name: 'contact', params: {id: location.id }}">
+            Clicca qui per contattare il proprietario dell'immobile
+        </router-link>
         
     </section>
 </template>
@@ -46,8 +43,6 @@ export default {
             .then((response) => {
                 this.userIpAddress = response.data;
                 this.sendIpAddressToBackend();
-                console.log(this.locationId);
-                console.log(this.userIpAddress);
             });
         },
         sendIpAddressToBackend() {
@@ -64,11 +59,6 @@ export default {
     }
 }
 
-// let center = [this.long,this.lat]
-
-// map.on('load',() =>{
-//     new tt.Marker().setLngLat(center).addTo(map)
-// })
 </script>
 
 <style lang="scss" scoped>

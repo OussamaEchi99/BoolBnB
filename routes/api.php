@@ -28,3 +28,5 @@ Route::get('/locations/{slug}','Api\LocationController@show');
 
 // Visuals API
 Route::post('/visuals/store','Api\VisualController@store');
+
+Route::post('/leads/store', 'Api\LeadController@store');
