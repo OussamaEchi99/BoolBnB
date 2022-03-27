@@ -2142,7 +2142,6 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.success) {
           _this.location = response.data.results;
           _this.locationId = _this.location.id;
-          console.log(_this.locationId);
         } else {
           _this.$router.push({
             name: 'not-found'
@@ -2155,9 +2154,11 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('https://ip-fast.com/api/ip/').then(function (response) {
         _this2.userIpAddress = response.data;
-        console.log(_this2.userIpAddress);
 
         _this2.sendIpAddressToBackend();
+
+        console.log(_this2.locationId);
+        console.log(_this2.userIpAddress);
       });
     },
     sendIpAddressToBackend: function sendIpAddressToBackend() {
