@@ -2,21 +2,27 @@
 
 @section('content')
 <div class="container">
-    @foreach ($locations as $location)
-        <div class="row location">
-            <div class="col-6">
-                <a href="#">{{ $location->name }}</a>
-            </div>
+    <h1>Sponsorizza i tuoi appartamenti</h1>
+    @if (!$locations->isEmpty())
+        @foreach ($locations as $location)
+            <div class="row location">
+                <div class="col-6">
+                    <a href="#">{{ $location->name }}</a>
+                </div>
 
-            <div class="col-6 d-flex">
-                @foreach ($sponsors as $sponsor)
-                    <div class="mx-4">
-                        <a class="subscription $sponsor->subscription ? $sponsor->subscription : '' " href="#">{{ $sponsor->subscription }}</a>
-                    </div>
-                @endforeach
+                <div class="col-6 d-flex">
+                    @foreach ($sponsors as $sponsor)
+                        <div class="mx-4">
+                            <a class="subscription $sponsor->subscription ? $sponsor->subscription : '' " href="#">{{ $sponsor->subscription }}</a>
+                        </div>
+                    @endforeach
+                </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
+    @else
+        <span>Non hai ancora nessun annuncio</span>
+    @endif
+    
 </div>
 @endsection
 
