@@ -9,6 +9,7 @@ import Search from './pages/Search.vue';
 import Location from './pages/Location.vue';
 import NotFound from './pages/NotFound.vue';
 import Homehost from './pages/Homehost.vue';
+import ContactHost from './pages/ContactHost';
 
 const router = new VueRouter({
     mode: "history",
@@ -38,6 +39,11 @@ const router = new VueRouter({
             name: "not-found",
             component: NotFound
         },
+        {
+            path: "/location/:slug/contact",
+            name: "contact",
+            component: ContactHost
+        }
     ]
 });
 
