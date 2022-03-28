@@ -1943,27 +1943,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
     return {
       locations: [],
-      currentPage: 1,
-      lastPage: false
+      locationId: "" // currentPage: 1,
+      // lastPage: false
+
     };
   },
   methods: {
-    getLocations: function getLocations(pageNumber) {
+    getLocations: function getLocations() {
       var _this = this;
 
-      axios.get('/api/locations', {
+      axios.get('http://127.0.0.1:8000/api/locations', {
         params: {
-          page: pageNumber
+          // page: pageNumber,
+          category: this.locationId
         }
       }).then(function (response) {
-        _this.locations = response.data.results.data;
-        _this.currentPage = response.data.results.current_page;
-        _this.lastPage = response.data.results.last_page;
+        _this.locations = response.data.results; // this.currentPage = response.data.results.current_page;
+        // this.lastPage = response.data.results.last_page;
+
+        console.log(response);
       });
     },
     truncateText: function truncateText(text, maxCharsNumber) {
@@ -1975,7 +1994,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.getLocations(1);
+    this.getLocations();
   }
 });
 
@@ -3567,138 +3586,113 @@ var render = function () {
   return _c("section", [
     _c("div", { staticClass: "container" }, [
       _c(
-        "div",
-        { staticClass: "elements row" },
-        _vm._l(_vm.locations, function (location) {
-          return _c(
-            "div",
-            { key: location.id, staticClass: "col-12 col-md-6" },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "no-style",
-                  attrs: {
-                    to: {
-                      name: "location-details",
-                      params: { slug: location.slug },
-                    },
-                  },
-                },
-                [
-                  _c("div", { staticClass: "single_element" }, [
-                    _c("strong", { staticClass: "title" }, [
-                      _vm._v(_vm._s(location.name)),
-                    ]),
-                    _vm._v(" "),
-                    location.photo
-                      ? _c("img", {
-                          staticClass: "main_img",
-                          attrs: { src: location.photo, alt: "location.name" },
-                        })
-                      : _vm._e(),
-                    _vm._v(" "),
-                    location.description
-                      ? _c("p", { staticClass: "description" }, [
-                          _vm._v(
-                            _vm._s(_vm.truncateText(location.description, 150))
-                          ),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "price" }, [
-                      _vm._v(_vm._s(location.price) + "€ a notte"),
-                    ]),
-                  ]),
-                ]
-              ),
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.locationId,
+              expression: "locationId",
+            },
+          ],
+          staticClass: "form-select",
+          attrs: { "aria-label": "Default select example" },
+          on: {
+            change: [
+              function ($event) {
+                var $$selectedVal = Array.prototype.filter
+                  .call($event.target.options, function (o) {
+                    return o.selected
+                  })
+                  .map(function (o) {
+                    var val = "_value" in o ? o._value : o.value
+                    return val
+                  })
+                _vm.locationId = $event.target.multiple
+                  ? $$selectedVal
+                  : $$selectedVal[0]
+              },
+              _vm.getLocations,
             ],
-            1
-          )
-        }),
-        0
+          },
+        },
+        [
+          _c("option", { attrs: { value: "", selected: "" } }, [
+            _vm._v("Tutte"),
+          ]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "1" } }, [_vm._v("casa")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "2" } }, [_vm._v("appartamento")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "3" } }, [_vm._v("villa")]),
+          _vm._v(" "),
+          _c("option", { attrs: { value: "4" } }, [_vm._v("stanza")]),
+        ]
       ),
       _vm._v(" "),
-      _c("nav", [
-        _c(
-          "ul",
-          { staticClass: "pagination" },
-          [
-            _c(
-              "li",
-              {
-                staticClass: "page-item",
-                class: { disabled: _vm.currentPage == 1 },
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function ($event) {
-                        return _vm.getLocations(_vm.currentPage - 1)
-                      },
-                    },
-                  },
-                  [_vm._v("Previous")]
-                ),
-              ]
-            ),
-            _vm._v(" "),
-            _vm._l(_vm.lastPage, function (n) {
-              return _c(
-                "li",
-                {
-                  key: n,
-                  staticClass: "page-item",
-                  class: { active: _vm.currentPage == n },
-                },
-                [
-                  _c(
-                    "a",
-                    {
-                      staticClass: "page-link",
-                      attrs: { href: "#" },
-                      on: {
-                        click: function ($event) {
-                          return _vm.getLocations(n)
+      _c(
+        "div",
+        { staticClass: "elements row" },
+        [
+          _vm.locations.length < 1
+            ? _c("h3", [_vm._v("Non ci sono location con questa categoria")])
+            : _vm._l(_vm.locations, function (location) {
+                return _c(
+                  "div",
+                  { key: location.id, staticClass: "col-12 col-md-6" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "no-style",
+                        attrs: {
+                          to: {
+                            name: "location-details",
+                            params: { slug: location.slug },
+                          },
                         },
                       },
-                    },
-                    [_vm._v(_vm._s(n))]
-                  ),
-                ]
-              )
-            }),
-            _vm._v(" "),
-            _c(
-              "li",
-              {
-                staticClass: "page-item",
-                class: { disabled: _vm.currentPage == _vm.lastPage },
-              },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass: "page-link",
-                    attrs: { href: "#" },
-                    on: {
-                      click: function ($event) {
-                        return _vm.getLocations(_vm.currentPage + 1)
-                      },
-                    },
-                  },
-                  [_vm._v("Next")]
-                ),
-              ]
-            ),
-          ],
-          2
-        ),
-      ]),
+                      [
+                        _c("div", { staticClass: "single_element" }, [
+                          _c("strong", { staticClass: "title" }, [
+                            _vm._v(_vm._s(location.name)),
+                          ]),
+                          _vm._v(" "),
+                          location.photo
+                            ? _c("img", {
+                                staticClass: "main_img",
+                                attrs: {
+                                  src: location.photo,
+                                  alt: "location.name",
+                                },
+                              })
+                            : _vm._e(),
+                          _vm._v(" "),
+                          location.description
+                            ? _c("p", { staticClass: "description" }, [
+                                _vm._v(
+                                  _vm._s(
+                                    _vm.truncateText(location.description, 150)
+                                  )
+                                ),
+                              ])
+                            : _vm._e(),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "price" }, [
+                            _vm._v(_vm._s(location.price) + "€ a notte"),
+                          ]),
+                        ]),
+                      ]
+                    ),
+                  ],
+                  1
+                )
+              }),
+        ],
+        2
+      ),
     ]),
   ])
 }
@@ -20313,11 +20307,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\front.js */"./resources/js/front.js");
-=======
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
->>>>>>> origin/master
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
