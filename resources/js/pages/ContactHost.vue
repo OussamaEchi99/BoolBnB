@@ -58,7 +58,7 @@ export default {
         return {
             location_id: this.$route.params.id,
             email: '',
-            name: '',
+            name: 'Alberto Bisetti',
             object: '',
             message: '',
             success: false,
@@ -66,6 +66,20 @@ export default {
         };
     },
     methods: {
+        getUser() {
+        axios.get('/api/leads/take')
+        .then((response) => {
+            if(response) {
+                console.log(response)
+                // this.user = response.data.results;
+                // this.name = this.user.name;
+                // this.email = this.user.email;
+            } 
+            else {
+                this.$router.push({ name: 'not-found' });
+            }
+        });
+        },
         sendMessage: function() {
             axios.post('/api/leads/store', {
                 location_id: this.location_id,
@@ -89,6 +103,9 @@ export default {
                 }
             });
         }
+    },
+    created: function(){
+        this.getUser();
     }
 }
 </script>
