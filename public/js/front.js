@@ -2099,7 +2099,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       location_id: this.$route.params.id,
       email: '',
-      name: '',
+      name: 'Alberto Bisetti',
       object: '',
       message: '',
       success: false,
@@ -2107,8 +2107,23 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    sendMessage: function sendMessage() {
+    getUser: function getUser() {
       var _this = this;
+
+      axios.get('/api/leads/take').then(function (response) {
+        if (response) {
+          console.log(response); // this.user = response.data.results;
+          // this.name = this.user.name;
+          // this.email = this.user.email;
+        } else {
+          _this.$router.push({
+            name: 'not-found'
+          });
+        }
+      });
+    },
+    sendMessage: function sendMessage() {
+      var _this2 = this;
 
       axios.post('/api/leads/store', {
         location_id: this.location_id,
@@ -2118,19 +2133,22 @@ __webpack_require__.r(__webpack_exports__);
         message: this.message
       }).then(function (response) {
         if (response.data.success) {
-          _this.location_id = '';
-          _this.name = '';
-          _this.email = '';
-          _this.object = '';
-          _this.message = '';
-          _this.success = true;
-          _this.error = {};
+          _this2.location_id = '';
+          _this2.name = '';
+          _this2.email = '';
+          _this2.object = '';
+          _this2.message = '';
+          _this2.success = true;
+          _this2.error = {};
         } else {
-          _this.success = false;
-          _this.errors = response.data.errors;
+          _this2.success = false;
+          _this2.errors = response.data.errors;
         }
       });
     }
+  },
+  created: function created() {
+    this.getUser();
   }
 });
 
