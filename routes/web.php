@@ -26,6 +26,8 @@ Route::middleware('auth')
         Route::get('/home', 'SponsorController@index')->name('sponsors');
         Route::get('/statistics', 'StatisticController@index')->name('statistics');
         Route::get('/statistics/{location}', 'StatisticController@show')->name('apartment_statistics');
+        Route::get('/emails', 'LeadController@index') -> name('emails');
+        Route::get('/emails/{location}', 'LeadController@show')->name('location_emails');
     });
 
 
