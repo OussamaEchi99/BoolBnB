@@ -5,12 +5,41 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Lead;
+use App\User;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\LocationContactMail;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
-{
+{   
+    public function __construct()
+    {
+        $this->middleware('auth:api');
+    }
+
+    public function take(){
+
+        $usertmp = User::all();
+        
+        $usernow = auth('middleware')->user();
+        $usernow = Auth::user()->name;
+
+        foreach($usertmp as $usersingle){
+            if($usersingle->email){
+                return response()->json([
+                    'success' => true,
+                    'results' => $usernow
+                ]);
+            } 
+        }
+        return response()->json([
+            'success' => false,
+            'results' => []
+        ]);
+            
+    }
+
     public function store(Request $request) {
         $data = $request->all();
         

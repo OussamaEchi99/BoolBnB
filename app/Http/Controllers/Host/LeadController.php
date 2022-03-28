@@ -15,17 +15,17 @@ class LeadController extends Controller
 
         $data = [
             'locations' => $locations,
-            
         ];
-
         return view('host.emails.index',$data);
     }
 
     public function show($id){
+        $location = Location::where('id', '=' , $id)->get();
         $emails = Lead::where('location_id', '=', $id)->get();
 
         $data = [
             'emails' => $emails,
+            'location' => $location,
         ];
 
         return view('host.emails.show',$data);
