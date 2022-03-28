@@ -5,10 +5,7 @@
             <!-- Select -->
             <select class="form-select" aria-label="Default select example" @change="getLocations" v-model="locationId">
                 <option value="" selected>Tutte</option>
-                <option value="1">casa</option>
-                <option value="2">appartamento</option>
-                <option value="3">villa</option>
-                <option value="4">stanza</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
             </select>
 
 
@@ -56,6 +53,7 @@ export default {
         return {
             locations: [],
             locationId: "",
+            categories: {}
             // currentPage: 1,
             // lastPage: false
         };
@@ -75,6 +73,12 @@ export default {
                 console.log(response);
             });
         },
+        getCategories: function() {
+            axios.get('http://127.0.0.1:8000/api/categories')
+            .then((response) => {
+                this.categories = response.data.results;
+            })
+        },
         truncateText: function(text, maxCharsNumber) {
             if(text.length > maxCharsNumber) {
                 return text.substr(0, maxCharsNumber) + '...';
@@ -84,6 +88,7 @@ export default {
     },
     created: function() {
         this.getLocations();
+        this.getCategories();
     }
 }
 </script>

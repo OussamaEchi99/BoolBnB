@@ -1956,15 +1956,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
     return {
       locations: [],
-      locationId: "" // currentPage: 1,
+      locationId: "",
+      categories: {} // currentPage: 1,
       // lastPage: false
 
     };
@@ -1985,6 +1983,13 @@ __webpack_require__.r(__webpack_exports__);
         console.log(response);
       });
     },
+    getCategories: function getCategories() {
+      var _this2 = this;
+
+      axios.get('http://127.0.0.1:8000/api/categories').then(function (response) {
+        _this2.categories = response.data.results;
+      });
+    },
     truncateText: function truncateText(text, maxCharsNumber) {
       if (text.length > maxCharsNumber) {
         return text.substr(0, maxCharsNumber) + '...';
@@ -1995,6 +2000,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getLocations();
+    this.getCategories();
   }
 });
 
@@ -3622,14 +3628,15 @@ var render = function () {
             _vm._v("Tutte"),
           ]),
           _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("casa")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "2" } }, [_vm._v("appartamento")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "3" } }, [_vm._v("villa")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "4" } }, [_vm._v("stanza")]),
-        ]
+          _vm._l(_vm.categories, function (category) {
+            return _c(
+              "option",
+              { key: category.id, domProps: { value: category.id } },
+              [_vm._v(_vm._s(category.name))]
+            )
+          }),
+        ],
+        2
       ),
       _vm._v(" "),
       _c(
