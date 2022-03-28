@@ -67,7 +67,6 @@ export default {
     },
     methods: {
         sendMessage: function() {
-            console.log(this.$route.params.id)
             axios.post('/api/leads/store', {
                 location_id: this.location_id,
                 email: this.email,

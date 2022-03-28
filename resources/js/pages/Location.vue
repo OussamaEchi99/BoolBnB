@@ -43,6 +43,7 @@ export default {
             .then((response) => {
                 this.userIpAddress = response.data;
                 this.sendIpAddressToBackend();
+                console.log(this.userIpAddress)
             });
         },
         sendIpAddressToBackend() {

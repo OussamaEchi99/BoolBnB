@@ -2143,7 +2143,6 @@ __webpack_require__.r(__webpack_exports__);
     sendMessage: function sendMessage() {
       var _this = this;
 
-      console.log(this.$route.params.id);
       axios.post('/api/leads/store', {
         location_id: this.location_id,
         email: this.email,
@@ -2280,6 +2279,8 @@ __webpack_require__.r(__webpack_exports__);
         _this2.userIpAddress = response.data;
 
         _this2.sendIpAddressToBackend();
+
+        console.log(_this2.userIpAddress);
       });
     },
     sendIpAddressToBackend: function sendIpAddressToBackend() {

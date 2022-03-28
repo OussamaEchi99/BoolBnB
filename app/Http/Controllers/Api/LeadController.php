@@ -31,7 +31,6 @@ class LeadController extends Controller
         $new_lead = new Lead();
         $new_lead->fill($data);
 
-        dd($new_lead);
         $new_lead->save();
         Mail::to('customerservice@boolbnb.it')->send(new LocationContactMail($new_lead));
 
