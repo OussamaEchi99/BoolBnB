@@ -41,10 +41,14 @@
                             <span class="fast-action-icon"><i class="fa-solid fa-money-bill-trend-up"></i></span>Sponsorizza un post
                         </a>
                     </div>
-                    <div class="col offset-3 offset-md-3">
+                    <div class="col">
                         <a class="fast-actions-btn" href="{{ route('host.sponsors') }}">
                             <span class="fast-action-icon"><i class="fa-solid fa-money-bill-trend-up"></i></span>Sponsorizza un post
                         </a>
+                    </div>
+                    <div class="col">
+                        <a class="fast-actions-btn" href="{{route('host.emails')}}">
+                            <span class="fast-action-icon"><i class="fa-solid fa-money-bill-trend-up"></i></span>Visualizza messaggi                    </a>
                     </div>
                 </div>
             </section>
