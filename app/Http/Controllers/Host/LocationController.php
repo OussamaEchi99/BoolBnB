@@ -156,7 +156,7 @@ class LocationController extends Controller
 
             // Salva nella colonna photo il path al nuovo file
             $form_data['photo'] = $img_path;
-        // }
+        }
 
         // if($form_data['image']) {
         //     if($post->cover) {
