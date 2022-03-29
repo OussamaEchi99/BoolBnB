@@ -2355,8 +2355,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
 //
@@ -2366,7 +2364,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
->>>>>>> 311568a166b6631b997eab134ab33fa25f778af1
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
   data: function data() {
@@ -2386,25 +2383,6 @@ __webpack_require__.r(__webpack_exports__);
       mapImgZoom16: ''
     };
   },
-<<<<<<< HEAD
-  methods: {// getLocation() {
-    //     axios.get('/api/locations/' + this.$route.params.slug)
-    //     .then((response) => {
-    //         if(response.data.success) {
-    //             this.location = response.data.results;
-    //         } 
-    //         else {
-    //             this.$router.push({ name: 'not-found' });
-    //         }
-    //     });
-    // }
-  },
-  created: function created() {// this.getLocation();
-  }
-}); // map.on('load',() =>{
-//     new tt.Marker().setLngLat(center).addTo(map)
-// })
-=======
   methods: {
     getLocation: function getLocation() {
       var _this = this;
@@ -2459,7 +2437,6 @@ __webpack_require__.r(__webpack_exports__);
     this.getMapImage();
   }
 });
->>>>>>> 311568a166b6631b997eab134ab33fa25f778af1
 
 /***/ }),
 
@@ -39499,21 +39476,6 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("section", [
-<<<<<<< HEAD
-    _c("h1", [_vm._v(_vm._s(_vm.location.name))]),
-    _vm._v("\n    ciao\n\n    "),
-    _c("div", { staticClass: "img-fluid" }, [
-      _vm.location.photo
-        ? _c("img", {
-            staticClass: "main_img",
-            attrs: { src: _vm.location.photo, alt: "location.name" },
-          })
-        : _vm._e(),
-    ]),
-  ])
-}
-var staticRenderFns = []
-=======
     _c(
       "div",
       { staticClass: "container" },
@@ -39563,7 +39525,6 @@ var staticRenderFns = [
     ])
   },
 ]
->>>>>>> 311568a166b6631b997eab134ab33fa25f778af1
 render._withStripped = true
 
 
@@ -55074,6 +55035,7 @@ var map = {
 	"./components/Index.vue": "./resources/js/components/Index.vue",
 	"./components/LocationMap.vue": "./resources/js/components/LocationMap.vue",
 	"./components/Navbar.vue": "./resources/js/components/Navbar.vue",
+	"./pages/ContactHost.vue": "./resources/js/pages/ContactHost.vue",
 	"./pages/Home.vue": "./resources/js/pages/Home.vue",
 	"./pages/Homehost.vue": "./resources/js/pages/Homehost.vue",
 	"./pages/Location.vue": "./resources/js/pages/Location.vue",
@@ -55759,14 +55721,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************!*\
   !*** ./resources/js/pages/Location.vue ***!
   \*****************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Location_vue_vue_type_template_id_ceca7084_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Location.vue?vue&type=template&id=ceca7084&scoped=true& */ "./resources/js/pages/Location.vue?vue&type=template&id=ceca7084&scoped=true&");
 /* harmony import */ var _Location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Location.vue?vue&type=script&lang=js& */ "./resources/js/pages/Location.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Location_vue_vue_type_style_index_0_id_ceca7084_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Location.vue?vue&type=style&index=0&id=ceca7084&lang=scss&scoped=true& */ "./resources/js/pages/Location.vue?vue&type=style&index=0&id=ceca7084&lang=scss&scoped=true&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Location_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _Location_vue_vue_type_style_index_0_id_ceca7084_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Location.vue?vue&type=style&index=0&id=ceca7084&lang=scss&scoped=true& */ "./resources/js/pages/Location.vue?vue&type=style&index=0&id=ceca7084&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55798,7 +55761,7 @@ component.options.__file = "resources/js/pages/Location.vue"
 /*!******************************************************************!*\
   !*** ./resources/js/pages/Location.vue?vue&type=script&lang=js& ***!
   \******************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56196,13 +56159,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 311568a166b6631b997eab134ab33fa25f778af1
 
 
 /***/ })
