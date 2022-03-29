@@ -6,6 +6,7 @@
 
             <h1>Statistiche dei tuoi appartamenti</h1>
 
+            @if (!$locations->isEmpty())
             <div class="row row-cols-3">
                 @foreach ($locations as $location)
 
@@ -31,6 +32,10 @@
                 @endforeach
 
             </div>
+            @else
+                <span><strong>Non hai ancora nessun annuncio</strong></span>
+            @endif
+            
         </div>
     </section>
 @endsection

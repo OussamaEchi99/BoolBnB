@@ -7,7 +7,7 @@
             @foreach ($locations as $location)
                 <li class="list_element my-4">
                     <a href="{{ route('host.location_emails', ['location' => $location->id]) }}">
-                        <span><strong>{{$location->name}}</strong></span>
+                        <span>{{$location->name}}</span>
                     </a>
                 </li>
             @endforeach
