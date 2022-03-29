@@ -145,11 +145,7 @@ class LocationController extends Controller
             $form_data['slug'] = Location::getUniqueSlugFromName($form_data['name']);
         }
 
-<<<<<<< HEAD
-        // if(in_array('photo', $form_data)) {
-=======
         if($form_data['image']) {
->>>>>>> 665637cb848cf7e0f06bd9db374a727722ef46d8
             // Cancella il file precedente
             if($location->photo) {
                 Storage::delete($location->photo);

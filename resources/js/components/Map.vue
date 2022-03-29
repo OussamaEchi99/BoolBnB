@@ -1,11 +1,8 @@
 <template>
     <section>
         <div id="map" class="map"></div>
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 665637cb848cf7e0f06bd9db374a727722ef46d8
     </section>
 </template>
 
