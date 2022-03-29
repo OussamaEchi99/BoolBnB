@@ -20384,10 +20384,17 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 =======
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\front.js */"./resources/js/front.js");
 >>>>>>> origin/show-and-map
+=======
+module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+=======
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\front.js */"./resources/js/front.js");
+>>>>>>> 36268ed4be7b01672a12178b3f7fc8eefa9f8491
+>>>>>>> 4b088b1436733eafab4f69af40e197ede3536f6a
 
 
 /***/ })
