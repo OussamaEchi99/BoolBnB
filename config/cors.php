@@ -18,20 +18,20 @@ return [
     'exposed_headers' => ['Authorization'],
 
 
-    // 'paths' => ['api/*'],
+    'paths' => ['api/*'],
 
-    // 'allowed_methods' => ['*'],
+    'allowed_methods' => ['*'],
 
-    // 'allowed_origins' => ['*'],
+    'allowed_origins' => ['*'],
 
-    // 'allowed_origins_patterns' => [],
+    'allowed_origins_patterns' => [],
 
-    // 'allowed_headers' => ['*'],
+    'allowed_headers' => ['*'],
 
-    // 'exposed_headers' => false,
+    // 'exposed_headers' => true,
 
-    // 'max_age' => false,
+    'max_age' => false,
 
-    // 'supports_credentials' => false,
+    'supports_credentials' => false,
 
 ];
