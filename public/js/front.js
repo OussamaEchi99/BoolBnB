@@ -2027,16 +2027,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Map',
   methods: {
-    getMap: function getMap() {
-      tt.setProductInfo('prova', '1');
-      tt.map({
+    // getMap: function() {
+    //     tt.setProductInfo('prova', '1');
+    //     tt.map({
+    //     key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+    //     container: 'map'
+    //     });
+    //     this.initializeMap();
+    // },
+    initializeMap: function initializeMap() {
+      var map = tt.map({
         key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
-        container: 'map'
+        container: 'map',
+        zoom: 15,
+        center: [9.665420, 45.704690]
       });
+      new tt.Marker().setLngLat([9.665420, 45.704690]).addTo(map);
     }
   },
   mounted: function mounted() {
-    this.getMap();
+    // this.getMap();
+    this.initializeMap();
   }
 });
 
@@ -2373,9 +2384,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  created: function created() {// this.getLocation();
-    // this.getIpAddress();
-    // this.getMapImage();
+  created: function created() {
+    this.getLocation();
+    this.getIpAddress();
+    this.getMapImage();
   }
 });
 
@@ -2485,7 +2497,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#map {\n  width: 100vw;\n  height: 100vh;\n}", ""]);
+exports.push([module.i, "#map {\n  width: 50vw;\n  height: 50vh;\n}", ""]);
 
 // exports
 

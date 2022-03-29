@@ -11,16 +11,27 @@
 export default {
    name: 'Map',
    methods: {
-        getMap: function() {
-            tt.setProductInfo('prova', '1');
-            tt.map({
+        // getMap: function() {
+        //     tt.setProductInfo('prova', '1');
+        //     tt.map({
+        //     key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+        //     container: 'map'
+        //     });
+        //     this.initializeMap();
+        // },
+        initializeMap: function() {
+            const map = tt.map({
             key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
-            container: 'map'
+            container: 'map',
+            zoom: 15,
+            center: [9.665420, 45.704690],
             });
+            new tt.Marker().setLngLat([9.665420, 45.704690]).addTo(map);
         }
     },
     mounted: function() {
-        this.getMap();
+        // this.getMap();
+        this.initializeMap();
     }
 
 }
@@ -28,8 +39,8 @@ export default {
 
 <style lang="scss">
 #map {
-           width: 100vw;
-           height: 100vh;
+           width: 50vw;
+           height: 50vh;
        }
     
 </style>

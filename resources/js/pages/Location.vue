@@ -94,9 +94,9 @@ export default {
         
     },
     created: function() {
-        // this.getLocation();
-        // this.getIpAddress();
-        // this.getMapImage();
+        this.getLocation();
+        this.getIpAddress();
+        this.getMapImage();
     }
 }
 
