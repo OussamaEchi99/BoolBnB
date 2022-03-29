@@ -65,10 +65,10 @@ class LocationController extends Controller
         $new_location->slug = $this->getUniqueSlugFromName($form_data['name']);
 
         // Save Cover Img
-        if (isset($form_data['photo'])) {
+        if (isset($form_data['image'])) {
 
             // 1- Salvo l'immagine caricata nella cartella di Storage
-            $img_path = Storage::put('location_photos', $form_data['photo']);
+            $img_path = Storage::put('location_photos', $form_data['image']);
 
             // 2- Salvo il path dell'immagine nella colonna cover del database
             $new_location->photo = $img_path;
@@ -145,14 +145,18 @@ class LocationController extends Controller
             $form_data['slug'] = Location::getUniqueSlugFromName($form_data['name']);
         }
 
+<<<<<<< HEAD
         // if(in_array('photo', $form_data)) {
+=======
+        if($form_data['image']) {
+>>>>>>> 665637cb848cf7e0f06bd9db374a727722ef46d8
             // Cancella il file precedente
             if($location->photo) {
                 Storage::delete($location->photo);
             }
 
             // Upload del nuovo file
-            $img_path = Storage::put('location_photos', $form_data['photo']);
+            $img_path = Storage::put('location_photos', $form_data['image']);
 
             // Salva nella colonna photo il path al nuovo file
             $form_data['photo'] = $img_path;

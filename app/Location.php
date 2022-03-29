@@ -24,6 +24,7 @@ class Location extends Model
         'price',
         'visible',
         'category_id',
+        'photo',
         'description'
     ];
 

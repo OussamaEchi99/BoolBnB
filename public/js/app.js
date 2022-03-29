@@ -2054,6 +2054,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Map',
   methods: {
@@ -2067,7 +2072,7 @@ __webpack_require__.r(__webpack_exports__);
     // },
     initializeMap: function initializeMap() {
       var map = tt.map({
-        key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+        key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
         container: 'map',
         zoom: 15,
         center: [9.665420, 45.704690]
@@ -39062,6 +39067,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("section", [
       _c("div", { staticClass: "map", attrs: { id: "map" } }),
+      _vm._v(
+        "\n<<<<<<< HEAD\n=======\n\n\n>>>>>>> 665637cb848cf7e0f06bd9db374a727722ef46d8\n    "
+      ),
     ])
   },
 ]
@@ -55960,13 +55968,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 453660a819891fdbd659b8b87e8d0111d6f8e978
 
 
 /***/ })

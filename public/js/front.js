@@ -2021,6 +2021,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Map',
   methods: {
@@ -2034,7 +2039,7 @@ __webpack_require__.r(__webpack_exports__);
     // },
     initializeMap: function initializeMap() {
       var map = tt.map({
-        key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+        key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
         container: 'map',
         zoom: 15,
         center: [9.665420, 45.704690]
@@ -3882,6 +3887,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("section", [
       _c("div", { staticClass: "map", attrs: { id: "map" } }),
+      _vm._v(
+        "\n<<<<<<< HEAD\n=======\n\n\n>>>>>>> 665637cb848cf7e0f06bd9db374a727722ef46d8\n    "
+      ),
     ])
   },
 ]
@@ -20587,11 +20595,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
-=======
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\front.js */"./resources/js/front.js");
->>>>>>> 453660a819891fdbd659b8b87e8d0111d6f8e978
 
 
 /***/ })
