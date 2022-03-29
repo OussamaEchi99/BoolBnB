@@ -18,5 +18,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Location API
 Route::get('/locations', 'Api\LocationController@index');
 Route::get('/locations/{slug}','Api\LocationController@show');
+
+// Visuals API
+Route::post('/visuals/store','Api\VisualController@store');
+
+Route::post('/leads/store', 'Api\LeadController@store');
+
+Route::get('/categories', 'Api\CategoryController@index');

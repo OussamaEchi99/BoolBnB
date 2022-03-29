@@ -1,19 +1,32 @@
 <template>
     <section>
         <div class="container">
+
+            <!-- Select -->
+            <select class="form-select" aria-label="Default select example" @change="getLocations" v-model="locationId">
+                <option value="" selected>Tutte</option>
+                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+            </select>
+
+
             <div class="elements row">
-                <div class="col-12 col-md-6" v-for="location in locations" :key="location.id">
-                    <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
-                        <div class="single_element">
-                            <strong class="title">{{location.name}}</strong>
-                            <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
-                            <p v-if="location.description" class="description">{{truncateText(location.description, 150)}}</p>
-                            <span class="price">{{location.price}}€ a notte</span>
-                        </div>
-                    </router-link>
-                </div>
+                
+                    <h3 v-if="locations.length < 1">Non ci sono location con questa categoria</h3>
+                    
+                    <div v-else class="col-12 col-md-6" v-for="location in locations" :key="location.id">
+                        <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
+                            <div class="single_element">
+                                <strong class="title">{{location.name}}</strong>
+                                <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
+                                <p v-if="location.description" class="description">{{truncateText(location.description, 150)}}</p>
+                                <span class="price">{{location.price}}€ a notte</span>
+                            </div>
+                        </router-link>
+                    </div>
+                    
+                
             </div>
-            <nav>
+            <!-- <nav>
                 <ul class="pagination">
                     <li class="page-item" :class="{ 'disabled': currentPage == 1 }">
                         <a @click="getLocations(currentPage - 1)" class="page-link" href="#">Previous</a>
@@ -28,7 +41,7 @@
                         <a @click="getLocations(currentPage + 1)" class="page-link" href="#">Next</a>
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
         </div>
     </section>
 </template>
@@ -39,22 +52,32 @@ export default {
     data: function() {
         return {
             locations: [],
-            currentPage: 1,
-            lastPage: false
+            locationId: "",
+            categories: {}
+            // currentPage: 1,
+            // lastPage: false
         };
     },
     methods: {
-        getLocations: function(pageNumber) {
-            axios.get('/api/locations', {
+        getLocations: function() {
+            axios.get('http://127.0.0.1:8000/api/locations', {
                 params: {
-                    page: pageNumber
+                    // page: pageNumber,
+                    category: this.locationId
                 }
             })
             .then((response) => {
-                this.locations = response.data.results.data;
-                this.currentPage = response.data.results.current_page;
-                this.lastPage = response.data.results.last_page;
+                this.locations = response.data.results;
+                // this.currentPage = response.data.results.current_page;
+                // this.lastPage = response.data.results.last_page;
+                console.log(response);
             });
+        },
+        getCategories: function() {
+            axios.get('http://127.0.0.1:8000/api/categories')
+            .then((response) => {
+                this.categories = response.data.results;
+            })
         },
         truncateText: function(text, maxCharsNumber) {
             if(text.length > maxCharsNumber) {
@@ -64,7 +87,8 @@ export default {
         }
     },
     created: function() {
-        this.getLocations(1);
+        this.getLocations();
+        this.getCategories();
     }
 }
 </script>

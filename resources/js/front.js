@@ -5,6 +5,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 import App from './views/App.vue';
 import router from './router';
+<<<<<<< HEAD
 // import tt from '@tomtom-international/web-sdk-maps';
 
     
@@ -13,6 +14,8 @@ import router from './router';
 //     container: 'map'
 // });
 
+=======
+>>>>>>> 311568a166b6631b997eab134ab33fa25f778af1
 
 const app = new Vue({
     el: '#root',

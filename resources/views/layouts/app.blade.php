@@ -115,12 +115,16 @@
     
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         {{-- link menu utente loggato --}}
-                                        <a class="dropdown-item" href="{{ route('host.locations.index') }}">
+                                        <a class="dropdown-item " href="{{ route('host.locations.index') }}">
                                             <i class="fas fa-house-user dropdown-icon"></i>Le mie locations
                                         </a>
                                         {{-- link menu utente loggato --}}
-                                        <a class="dropdown-item" href="{{ route('host.home') }}">
+                                        <a class="dropdown-item " href="{{ route('host.home') }}">
                                             <i class="fas fa-border-all dropdown-icon"></i>Dashboard
+                                        </a>
+                                        {{-- link menu utente loggato --}}
+                                        <a class="dropdown-item " href="{{ route('host.emails') }}">
+                                            <i class="fas fa-envelope dropdown-icon"></i>Messaggi
                                         </a>
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item" href="{{ route('host.sponsors') }}">
@@ -131,7 +135,7 @@
                                             <i class="fas fa-chart-line dropdown-icon"></i>Statistiche
                                         </a>
                                         {{-- link menu utente loggato --}}
-                                        <a class="dropdown-item" href="{{ route('host.locations.create') }}">
+                                        <a class="dropdown-item " href="{{ route('host.locations.create') }}">
                                             <i class="fas fa-plus dropdown-icon"></i>Aggiungi annuncio
                                         </a>
                                         

@@ -1,12 +1,30 @@
 <template>
     <section>
         
+<<<<<<< HEAD
         <h1>{{location.name}}</h1>
         ciao
 
         <div class="img-fluid">
             <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
         </div>        
+=======
+        <div class="container">
+            <h1>{{location.name}}</h1>
+
+            <div class="img-fluid">
+                <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
+            </div>        
+            
+            <router-link class="no-style" :to="{ name: 'contact', params: {id: location.id }}">
+                Clicca qui per contattare il proprietario dell'immobile
+            </router-link>
+
+            <div class="map">
+                <img src="https://api.tomtom.com/map/1/staticimage?key=IEix9iHTEHOJolKXAoByVdl4reKermIB&center=9.655420,45.704690&zoom=16&width=500&height=500&format=jpg" alt="mappa">
+            </div>
+        </div>
+>>>>>>> 311568a166b6631b997eab134ab33fa25f778af1
         
     </section>
 </template>
@@ -17,11 +35,25 @@ export default {
     name: 'Location',
     data: function() {
         return {
-            location: {}
+            location: {},
+            locationLong: '',
+            locationLat: '',
+            userIpAddress: '',
+            locationId: 0,
+            TomTomApiKey: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+            mapCoordinate: '9.655420,45.704690',
+            mapZoom: 13,
+            mapWidth: 500,
+            mapHeight: 500,
+            imgFormat: 'jpg',
+            mapImgZoom13: '',
+            mapImgZoom16: ''
+
         };
     },
     methods: {
 
+<<<<<<< HEAD
         // getLocation() {
         //     axios.get('/api/locations/' + this.$route.params.slug)
         //     .then((response) => {
@@ -44,6 +76,60 @@ export default {
 // map.on('load',() =>{
 //     new tt.Marker().setLngLat(center).addTo(map)
 // })
+=======
+        getLocation() {
+            axios.get('/api/locations/' + this.$route.params.slug)
+            .then((response) => {
+                if(response.data.success) {
+                    this.location = response.data.results;
+                    this.locationId = this.location.id;
+                    this.locationLong = this.location.long;
+                    this.locationLat = this.location.lat;
+                } 
+                else {
+                    this.$router.push({ name: 'not-found' });
+                }
+            });
+        },
+        getIpAddress() {
+            axios.get('https://ip-fast.com/api/ip/')
+            .then((response) => {
+                this.userIpAddress = response.data;
+                this.sendIpAddressToBackend();
+            });
+        },
+        sendIpAddressToBackend() {
+            axios.post('/api/visuals/store', {
+                ip: this.userIpAddress,
+                location_id: this.locationId
+            })
+        },
+        getMapImage() {
+            axios.get('https://api.tomtom.com/map/1/staticimage?key=IEix9iHTEHOJolKXAoByVdl4reKermIB&center=9.655420,45.704690&zoom=16&width=500&height=500&format=jpg', {
+                params: {
+                    // apiKey: this.TomTomApiKey,
+                    // center: this.mapCoordinate,
+                    // zoom: this.mapZoom,
+                    // width: this.mapWidth,
+                    // height: this.mapHeight,
+                    // format: this.imgFormat
+                }
+            })
+            .then((response) => {
+                this.mapImgZoom13 = response;
+                // console.log(response)
+            });
+        },
+        
+    },
+    created: function() {
+        this.getLocation();
+        this.getIpAddress();
+        this.getMapImage();
+    }
+}
+
+>>>>>>> 311568a166b6631b997eab134ab33fa25f778af1
 </script>
 
 <style lang="scss" scoped>
