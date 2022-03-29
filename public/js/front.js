@@ -20587,7 +20587,11 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+=======
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\front.js */"./resources/js/front.js");
+>>>>>>> 453660a819891fdbd659b8b87e8d0111d6f8e978
 
 
 /***/ })
