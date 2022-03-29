@@ -20,10 +20,10 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::all();
-
+        // $locations = Location::all();
+        $locations_filtered = Location::where('user_id','=',Auth::id())->get();
         $data = [
-            'locations' => $locations
+            'locations' => $locations_filtered
         ];
 
         return view('host.locations.index', $data);

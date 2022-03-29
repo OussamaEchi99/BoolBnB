@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Locations</h1>
+    <div class="container">
+        <h1>Locations</h1>
         @if (!$locations->isEmpty())
         <ul class="list-group">
             @foreach ($locations as $location)
@@ -15,6 +16,7 @@
         @else
             <div>Non hai ancora inserito annunci</div>
         @endif
+    </div>
 @endsection
 
 <style>

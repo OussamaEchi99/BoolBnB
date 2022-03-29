@@ -1,9 +1,6 @@
 <template>
     <section>
-        <h1>sono una mappa</h1>
         <div id="map" class="map"></div>
-        
-
     </section>
 </template>
 
@@ -39,8 +36,8 @@ export default {
 
 <style lang="scss">
 #map {
-           width: 50vw;
-           height: 50vh;
+           width: 100%;
+           height: 400px;
        }
     
 </style>

@@ -2021,9 +2021,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Map',
   methods: {
@@ -2312,7 +2309,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
@@ -2497,7 +2493,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#map {\n  width: 50vw;\n  height: 50vh;\n}", ""]);
+exports.push([module.i, "#map {\n  width: 100%;\n  height: 400px;\n}", ""]);
 
 // exports
 
@@ -3885,8 +3881,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", [
-      _c("h1", [_vm._v("sono una mappa")]),
-      _vm._v(" "),
       _c("div", { staticClass: "map", attrs: { id: "map" } }),
     ])
   },
@@ -4290,7 +4284,7 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
-        _c("Map"),
+        _c("div", [_c("Map")], 1),
       ],
       1
     ),
