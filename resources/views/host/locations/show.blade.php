@@ -59,6 +59,8 @@
                 </form>
             </div>
 
+            <location-map :lng="{{ $location -> long }}" :lat="{{ $location -> lat }}"></location-map>
+
         </div>
     </section>
 @endsection
