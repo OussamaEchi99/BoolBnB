@@ -2070,7 +2070,7 @@ __webpack_require__.r(__webpack_exports__);
     // },
     initializeMap: function initializeMap() {
       var map = tt.map({
-        key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+        key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
         container: 'map',
         zoom: 15,
         center: [9.665420, 45.704690]

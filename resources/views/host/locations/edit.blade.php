@@ -140,12 +140,12 @@
 
             {{-- Location Photo --}}
             <div class="mb-3">
-                <label for="photo" class="form-label">Immagine:</label>
+                <label for="image" class="form-label">Immagine:</label>
                 <div>
                     <input
                         type="file"
-                        id="photo"
-                        name="photo"
+                        id="image"
+                        name="image"
                     >
                 </div>
 
@@ -168,7 +168,7 @@
             {{-- Edit Button --}}
             <button type="submit" class="btn btn-primary">Modifica</button>
 
-          </form>
+        </form>
     </section>
 @endsection
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>

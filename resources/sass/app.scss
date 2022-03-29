@@ -11,3 +11,9 @@
 
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
+
+// Grandezza thumb immagine precedente
+// quando si modifica l'annuncio di una location
+.previous-image img {
+    width: 180px;
+}
