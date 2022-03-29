@@ -2240,13 +2240,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
   data: function data() {
     return {
       location: {},
+      locationLong: '',
+      locationLat: '',
       userIpAddress: '',
-      locationId: 0
+      locationId: 0,
+      TomTomApiKey: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+      mapCoordinate: '9.655420,45.704690',
+      mapZoom: 13,
+      mapWidth: 500,
+      mapHeight: 500,
+      imgFormat: 'jpg',
+      mapImgZoom13: '',
+      mapImgZoom16: ''
     };
   },
   methods: {
@@ -2257,6 +2273,8 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data.success) {
           _this.location = response.data.results;
           _this.locationId = _this.location.id;
+          _this.locationLong = _this.location["long"];
+          _this.locationLat = _this.location.lat;
         } else {
           _this.$router.push({
             name: 'not-found'
@@ -2271,8 +2289,6 @@ __webpack_require__.r(__webpack_exports__);
         _this2.userIpAddress = response.data;
 
         _this2.sendIpAddressToBackend();
-
-        console.log(_this2.userIpAddress);
       });
     },
     sendIpAddressToBackend: function sendIpAddressToBackend() {
@@ -2280,11 +2296,27 @@ __webpack_require__.r(__webpack_exports__);
         ip: this.userIpAddress,
         location_id: this.locationId
       });
+    },
+    getMapImage: function getMapImage() {
+      var _this3 = this;
+
+      axios.get('https://api.tomtom.com/map/1/staticimage?key=IEix9iHTEHOJolKXAoByVdl4reKermIB&center=9.655420,45.704690&zoom=16&width=500&height=500&format=jpg', {
+        params: {// apiKey: this.TomTomApiKey,
+          // center: this.mapCoordinate,
+          // zoom: this.mapZoom,
+          // width: this.mapWidth,
+          // height: this.mapHeight,
+          // format: this.imgFormat
+        }
+      }).then(function (response) {
+        _this3.mapImgZoom13 = response; // console.log(response)
+      });
     }
   },
   created: function created() {
     this.getLocation();
     this.getIpAddress();
+    this.getMapImage();
   }
 });
 
@@ -4074,37 +4106,56 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "section",
-    [
-      _c("h1", [_vm._v(_vm._s(_vm.location.name))]),
-      _vm._v(" "),
-      _c("div", { staticClass: "img-fluid" }, [
-        _vm.location.photo
-          ? _c("img", {
-              staticClass: "main_img",
-              attrs: { src: _vm.location.photo, alt: "location.name" },
-            })
-          : _vm._e(),
-      ]),
-      _vm._v(" "),
-      _c(
-        "router-link",
-        {
-          staticClass: "no-style",
-          attrs: { to: { name: "contact", params: { id: _vm.location.id } } },
-        },
-        [
-          _vm._v(
-            "\n        Clicca qui per contattare il proprietario dell'immobile\n    "
-          ),
-        ]
-      ),
-    ],
-    1
-  )
+  return _c("section", [
+    _c(
+      "div",
+      { staticClass: "container" },
+      [
+        _c("h1", [_vm._v(_vm._s(_vm.location.name))]),
+        _vm._v(" "),
+        _c("div", { staticClass: "img-fluid" }, [
+          _vm.location.photo
+            ? _c("img", {
+                staticClass: "main_img",
+                attrs: { src: _vm.location.photo, alt: "location.name" },
+              })
+            : _vm._e(),
+        ]),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          {
+            staticClass: "no-style",
+            attrs: { to: { name: "contact", params: { id: _vm.location.id } } },
+          },
+          [
+            _vm._v(
+              "\n            Clicca qui per contattare il proprietario dell'immobile\n        "
+            ),
+          ]
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+      ],
+      1
+    ),
+  ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "map" }, [
+      _c("img", {
+        attrs: {
+          src: "https://api.tomtom.com/map/1/staticimage?key=IEix9iHTEHOJolKXAoByVdl4reKermIB&center=9.655420,45.704690&zoom=16&width=500&height=500&format=jpg",
+          alt: "mappa",
+        },
+      }),
+    ])
+  },
+]
 render._withStripped = true
 
 
