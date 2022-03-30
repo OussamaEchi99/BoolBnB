@@ -73,6 +73,8 @@ export default {
                 ip: this.userIpAddress,
                 location_id: this.locationId
             })
+                // console.log(this.userIpAddress);
+                // console.log(this.locationId);
         },
         getMapImage() {
             axios.get('https://api.tomtom.com/map/1/staticimage?key=IEix9iHTEHOJolKXAoByVdl4reKermIB&center=9.655420,45.704690&zoom=16&width=500&height=500&format=jpg', {
