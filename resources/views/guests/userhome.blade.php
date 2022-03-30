@@ -2,7 +2,6 @@
 
 @section('content')
     <div>
-        {{Auth::id()}}
         <Hostapp/>
     </div>
 @endsection

@@ -2056,25 +2056,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Map',
   methods: {
-    // getMap: function() {
-    //     tt.setProductInfo('prova', '1');
-    //     tt.map({
-    //     key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
-    //     container: 'map'
-    //     });
-    //     this.initializeMap();
-    // },
     initializeMap: function initializeMap() {
       var map = tt.map({
         key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
         container: 'map',
         zoom: 15,
         center: [9.665420, 45.704690]
-      });
+      }); // aggiunta controlli mappa
+
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
       new tt.Marker().setLngLat([9.665420, 45.704690]).addTo(map);
     }
   },
@@ -2204,7 +2198,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       location_id: this.$route.params.id,
       email: '',
-      name: 'Alberto Bisetti',
+      name: '',
       object: '',
       message: '',
       success: false,
@@ -2346,6 +2340,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
@@ -2355,21 +2364,25 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       location: {},
-      locationLong: '',
-      locationLat: '',
+      locationLong: 0,
+      locationLat: 0,
       userIpAddress: '',
-      locationId: 0,
-      TomTomApiKey: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
-      mapCoordinate: '9.655420,45.704690',
-      mapZoom: 13,
-      mapWidth: 500,
-      mapHeight: 500,
-      imgFormat: 'jpg',
-      mapImgZoom13: '',
-      mapImgZoom16: ''
+      TomTomApiKey: 'IEix9iHTEHOJolKXAoByVdl4reKermIB'
     };
   },
   methods: {
+    initializeMap: function initializeMap() {
+      var map = tt.map({
+        key: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+        container: 'map',
+        zoom: 15,
+        center: [this.locationLong, this.locationLat]
+      }); // aggiunta controlli mappa
+
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
+      new tt.Marker().setLngLat([this.locationLong, this.locationLat]).addTo(map);
+    },
     getLocation: function getLocation() {
       var _this = this;
 
@@ -2379,6 +2392,10 @@ __webpack_require__.r(__webpack_exports__);
           _this.locationId = _this.location.id;
           _this.locationLong = _this.location["long"];
           _this.locationLat = _this.location.lat;
+
+          _this.getIpAddress();
+
+          _this.initializeMap();
         } else {
           _this.$router.push({
             name: 'not-found'
@@ -2400,28 +2417,12 @@ __webpack_require__.r(__webpack_exports__);
         ip: this.userIpAddress,
         location_id: this.locationId
       });
-    },
-    getMapImage: function getMapImage() {
-      var _this3 = this;
-
-      axios.get('https://api.tomtom.com/map/1/staticimage?key=IEix9iHTEHOJolKXAoByVdl4reKermIB&center=9.655420,45.704690&zoom=16&width=500&height=500&format=jpg', {
-        params: {// apiKey: this.TomTomApiKey,
-          // center: this.mapCoordinate,
-          // zoom: this.mapZoom,
-          // width: this.mapWidth,
-          // height: this.mapHeight,
-          // format: this.imgFormat
-        }
-      }).then(function (response) {
-        _this3.mapImgZoom13 = response; // console.log(response)
-      });
     }
   },
   created: function created() {
     this.getLocation();
-    this.getIpAddress();
-    this.getMapImage();
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -6894,7 +6895,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#map {\n  width: 50vw;\n  height: 50vh;\n}", ""]);
+exports.push([module.i, "#map {\n  width: 50%;\n  height: 400px;\n}", ""]);
 
 // exports
 
@@ -6932,7 +6933,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".main_img[data-v-ceca7084] {\n  height: 50px;\n}", ""]);
+exports.push([module.i, ".main_img[data-v-ceca7084] {\n  width: 70%;\n}", ""]);
 
 // exports
 
@@ -39065,8 +39066,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", [
-      _c("h1", [_vm._v("sono una mappa")]),
-      _vm._v(" "),
       _c("div", { staticClass: "map", attrs: { id: "map" } }),
     ])
   },
@@ -39457,6 +39456,60 @@ var render = function () {
             : _vm._e(),
         ]),
         _vm._v(" "),
+        _c("div", [
+          _vm._v(
+            "(" +
+              _vm._s(_vm.location.country) +
+              ")" +
+              _vm._s(_vm.location.city) +
+              " - " +
+              _vm._s(_vm.location.address) +
+              " " +
+              _vm._s(_vm.location.number)
+          ),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("strong", [_vm._v("Stanze:")]),
+          _vm._v(" " + _vm._s(_vm.location.rooms)),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("strong", [_vm._v("Posti letto:")]),
+          _vm._v(" " + _vm._s(_vm.location.beds)),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("strong", [_vm._v("Bagni:")]),
+          _vm._v(" " + _vm._s(_vm.location.bathrooms)),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("strong", [_vm._v("Area:")]),
+          _vm._v(" " + _vm._s(_vm.location.square_meters) + " mq"),
+        ]),
+        _vm._v(" "),
+        _c("div", [
+          _c("strong", [_vm._v("Prezzo a notte:")]),
+          _vm._v(" " + _vm._s(_vm.location.price) + " €"),
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          [
+            _c("strong", [_vm._v("Features:")]),
+            _vm._v(" "),
+            _vm._l(_vm.location.features, function (element, index) {
+              return _c("span", { key: index }, [
+                _vm._v(_vm._s(element.name) + " "),
+              ])
+            }),
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _c("p", [_vm._v(_vm._s(_vm.location.description))]),
+        _vm._v(" "),
         _c(
           "router-link",
           {
@@ -39470,7 +39523,7 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
-        _c("Map"),
+        _c("div", { staticClass: "map", attrs: { id: "map" } }),
       ],
       1
     ),
@@ -55966,8 +56019,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

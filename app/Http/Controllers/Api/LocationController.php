@@ -96,25 +96,25 @@ class LocationController extends Controller
         // }
     }
 
-    // public function show($slug) {
-    //     $location = Location::where('slug', '=', $slug)->with(['category', 'features'])->first();
+    public function show($slug) {
+        $location = Location::where('slug', '=', $slug)->with(['category', 'features'])->first();
 
-    //     if(str_contains($location->photo, 'location_photos')){
-    //         $location->photo = url('storage/' . $location->photo);
-    //     }else{
-    //         $location->photo;
-    //     }
+        if(str_contains($location->photo, 'location_photos')){
+            $location->photo = url('storage/' . $location->photo);
+        }else{
+            $location->photo;
+        }
         
-    //     if($location) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'results' => $location
-    //         ]);
-    //     } else {
-    //         return response()->json([
-    //             'success' => false,
-    //             'results' => []
-    //         ]);
-    //     }
-    // }
+        if($location) {
+            return response()->json([
+                'success' => true,
+                'results' => $location
+            ]);
+        } else {
+            return response()->json([
+                'success' => false,
+                'results' => []
+            ]);
+        }
+    }
 }

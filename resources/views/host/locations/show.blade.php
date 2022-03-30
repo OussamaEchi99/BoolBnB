@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    <section>
+    <section id="show">
         <div class="container">
             <h1>{{ $location->name }}</h1>
             
@@ -45,6 +45,14 @@
                
             <p>{{ $location->description }}</p>
 
+            {{-- Sponsors Buttons --}}
+            <div>
+                <h4>Sponsorizza il tuo appartamento</h4>
+                @foreach ($sponsors as $sponsor)
+                <button class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button>
+                @endforeach
+            </div>
+
             <div>
                 <a href="{{ route('host.locations.edit', ['location' => $location->id]) }}">Modifica location</a>
             </div>
@@ -62,19 +70,16 @@
     </section>
 @endsection
 
-<style>
+{{-- SCRIPT --}}
+<script>
 
-    section{
-        height: calc(100vh - 100px);
-        overflow-y: auto;
-    }
-    h1{
-        text-align: center;
-    }
+    function saveSponsor(locationId, sponsorId) {
 
-    .big_picture{
-        height: 50vh;
-        margin: auto;
-        display: flex;
-    }
-</style>
+        // Mando i dati nel controller per salvarli nel db
+        axios.post('/api/sponsors/store', {
+            location_id: locationId,
+            sponsor_id: sponsorId
+        });
+    };
+    
+</script>
