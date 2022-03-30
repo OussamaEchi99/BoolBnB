@@ -154,7 +154,7 @@
         </div>
     </section>
 @endsection
-<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+{{-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> --}}
 <script>
     let latitudine = 0;
     let longitudine = 0;

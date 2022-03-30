@@ -56,6 +56,9 @@ export default {
                     this.locationId = this.location.id;
                     this.locationLong = this.location.long;
                     this.locationLat = this.location.lat;
+                    this.getIpAddress();
+                    // console.log(this.locationId);
+                    console.log(this.userIpAddress);
                 } 
                 else {
                     this.$router.push({ name: 'not-found' });
@@ -67,10 +70,16 @@ export default {
             .then((response) => {
                 this.userIpAddress = response.data;
                 this.sendIpAddressToBackend();
+                console.log(this.userIpAddress);
+                console.log(this.locationId);
             });
+            
         },
+        
         sendIpAddressToBackend() {
+            // console.log(this.locationId);
             axios.post('/api/visuals/store', {
+                
                 ip: this.userIpAddress,
                 location_id: this.locationId
             })
@@ -95,9 +104,13 @@ export default {
     },
     created: function() {
         this.getLocation();
-        this.getIpAddress();
-        this.getMapImage();
-    }
+        // this.getIpAddress();
+        // this.getMapImage();
+        
+    },
+    // mounted: function() {
+    //     this.getIpAddress();
+    // }
 }
 
 </script>

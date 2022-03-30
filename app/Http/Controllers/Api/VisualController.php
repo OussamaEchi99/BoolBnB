@@ -18,7 +18,7 @@ class VisualController extends Controller
 
     public function store(Request $request, ?User $user, Location $location) {
         $data = $request->all();
-        // dd($data);
+        dd($data);
 
         $new_visual = new Visual();
         $new_visual->ip = $data['ip'];
@@ -39,8 +39,19 @@ class VisualController extends Controller
         // dd($location);
 
         // Se non sono io il proprietario calcolo la visual altrimenti no.
-        if(!$user->id === $location->user_id) {
-            $new_visual->save();
-        }
+        // if(!$user->id === $location->user_id) {
+        //     $new_visual->save();
+        // }
+
+        $new_visual->save();
+
+        // return response()->json([
+        //     if(!$user->id === $location->user_id) {
+        //         $new_visual->save();
+        //     },
+        //     'success' => true
+        // ]);
+
+        // ['location' => $new_location->id]
     }
 }
