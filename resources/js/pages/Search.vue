@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h1>Search page</h1>
+        <h1>Pagina di ricerca</h1>
     </section>
 </template>
 
