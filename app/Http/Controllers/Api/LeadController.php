@@ -13,30 +13,27 @@ use Illuminate\Support\Facades\Auth;
 
 class LeadController extends Controller
 {   
-    public function __construct()
-    {
-        $this->middleware('auth:api');
-    }
-
     public function take(){
 
-        $usertmp = User::all();
-        
-        $usernow = auth('middleware')->user();
-        $usernow = Auth::user()->name;
+        // $usertmp = User::all();
+        $usernow = Auth::id();
 
-        foreach($usertmp as $usersingle){
-            if($usersingle->email){
-                return response()->json([
-                    'success' => true,
-                    'results' => $usernow
-                ]);
-            } 
-        }
         return response()->json([
-            'success' => false,
-            'results' => []
+            'success' => true,
+            'results' => $usernow
         ]);
+        // foreach($usertmp as $usersingle){
+        //     if($usersingle->id){
+        //         return response()->json([
+        //             'success' => true,
+        //             'results' => $usernow
+        //         ]);
+        //     } 
+        // }
+        // return response()->json([
+        //     'success' => false,
+        //     'results' => []
+        // ]);
             
     }
 

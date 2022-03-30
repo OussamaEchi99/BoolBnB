@@ -2023,7 +2023,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Map',
   methods: {
@@ -2037,7 +2036,7 @@ __webpack_require__.r(__webpack_exports__);
     // },
     initializeMap: function initializeMap() {
       var map = tt.map({
-        key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+        key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
         container: 'map',
         zoom: 15,
         center: [9.665420, 45.704690]
@@ -2312,7 +2311,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Location',
@@ -2497,7 +2495,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#map {\n  width: 50vw;\n  height: 50vh;\n}", ""]);
+exports.push([module.i, "#map {\n  width: 100%;\n  height: 400px;\n}", ""]);
 
 // exports
 
@@ -3885,8 +3883,6 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", [
-      _c("h1", [_vm._v("sono una mappa")]),
-      _vm._v(" "),
       _c("div", { staticClass: "map", attrs: { id: "map" } }),
     ])
   },
@@ -4290,7 +4286,7 @@ var render = function () {
           ]
         ),
         _vm._v(" "),
-        _c("Map"),
+        _c("div", [_c("Map")], 1),
       ],
       1
     ),
@@ -20593,7 +20589,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
