@@ -15663,3 +15663,7 @@ a.text-dark:focus {
   }
 }
 
+.previous-image img {
+  width: 180px;
+}
+

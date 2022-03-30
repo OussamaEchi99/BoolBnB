@@ -20,10 +20,10 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::all();
-
+        // $locations = Location::all();
+        $locations_filtered = Location::where('user_id','=',Auth::id())->get();
         $data = [
-            'locations' => $locations
+            'locations' => $locations_filtered
         ];
 
         return view('host.locations.index', $data);
@@ -145,7 +145,7 @@ class LocationController extends Controller
             $form_data['slug'] = Location::getUniqueSlugFromName($form_data['name']);
         }
 
-        if(($form_data['image'])) {
+        if($form_data['image']) {
             // Cancella il file precedente
             if($location->photo) {
                 Storage::delete($location->photo);
@@ -157,6 +157,14 @@ class LocationController extends Controller
             // Salva nella colonna photo il path al nuovo file
             $form_data['photo'] = $img_path;
         }
+
+        // if($form_data['image']) {
+        //     if($post->cover) {
+        //         Storage::delete($post->cover);
+        //     }
+        //     $img_path = Storage::put('post_covers', $form_data['image']);
+        //     $form_data['cover'] = $img_path;
+        // }
 
         $location->update($form_data);
 

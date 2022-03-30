@@ -1,8 +1,7 @@
 <template>
     <section>
-        <h1>sono una mappa</h1>
         <div id="map" class="map"></div>
-        
+
 
     </section>
 </template>
@@ -21,7 +20,7 @@ export default {
         // },
         initializeMap: function() {
             const map = tt.map({
-            key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+            key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
             container: 'map',
             zoom: 15,
             center: [9.665420, 45.704690],
@@ -43,8 +42,8 @@ export default {
 
 <style lang="scss">
 #map {
-           width: 50vw;
-           height: 50vh;
+           width: 100%;
+           height: 400px;
        }
-    
+
 </style>

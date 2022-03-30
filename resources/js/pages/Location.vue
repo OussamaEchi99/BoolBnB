@@ -11,11 +11,10 @@
             <router-link class="no-style" :to="{ name: 'contact', params: {id: location.id }}">
                 Clicca qui per contattare il proprietario dell'immobile
             </router-link>
-
-            <!-- <div class="map">
-                <img src="https://api.tomtom.com/map/1/staticimage?key=IEix9iHTEHOJolKXAoByVdl4reKermIB&center=9.655420,45.704690&zoom=16&width=500&height=500&format=jpg" alt="mappa">
-            </div> -->
-            <Map />
+            
+            <div>
+                <Map />
+            </div>
         </div>
         
     </section>
