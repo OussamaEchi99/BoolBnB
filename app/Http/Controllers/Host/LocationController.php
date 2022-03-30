@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\Category;
 use App\Feature;
+use App\Sponsor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -100,9 +101,11 @@ class LocationController extends Controller
     public function show($id)
     {
         $location = Location::findOrFail($id);
+        $sponsors = Sponsor::all();
 
         $data = [
-            'location' => $location
+            'location' => $location,
+            'sponsors' => $sponsors
         ];
 
         return view('host.locations.show', $data);

@@ -169,7 +169,7 @@
             </nav>
         </header>
         
-        <main class="py-4 my-container m-auto">
+        <main class="my-container m-auto">
             {{-- <App></App> --}}
             @yield('content')
         </main>
