@@ -58,7 +58,7 @@ export default {
         return {
             location_id: this.$route.params.id,
             email: '',
-            name: 'Alberto Bisetti',
+            name: '',
             object: '',
             message: '',
             success: false,

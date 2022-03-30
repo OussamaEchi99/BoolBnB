@@ -10,14 +10,6 @@
 export default {
    name: 'Map',
    methods: {
-        // getMap: function() {
-        //     tt.setProductInfo('prova', '1');
-        //     tt.map({
-        //     key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
-        //     container: 'map'
-        //     });
-        //     this.initializeMap();
-        // },
         initializeMap: function() {
             const map = tt.map({
             key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
@@ -42,7 +34,7 @@ export default {
 
 <style lang="scss">
 #map {
-           width: 100%;
+           width: 50%;
            height: 400px;
        }
 
