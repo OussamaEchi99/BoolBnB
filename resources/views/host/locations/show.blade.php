@@ -4,7 +4,7 @@
     <section id="show">
         <div class="container">
             <h1>{{ $location->name }}</h1>
-            
+
             <div class="img-fluid">
                 @if (str_contains($location->photo, 'location_photos'))
                     <img src="{{ asset('storage/' . $location->photo) }}" class="big_picture rounded mb-3" alt="{{ $location->name }}">
@@ -15,11 +15,11 @@
 
             <div class="mb-2"><strong>Categoria:</strong> {{ $location->category ? $location->category->name : 'nessuna' }}</div>
 
-            <div class="mb-2"><strong>Features:</strong>
+            <div class="mb-2"><strong>Servizi:</strong>
                 @forelse ($location->features as $feature)
                     {{ $feature->name }}{{ $loop->last ? '' : ', ' }}
                 @empty
-                    nessuna
+                    nessuno
                 @endforelse
             </div>
 
@@ -28,26 +28,26 @@
             </div>
 
             <div class="mb-2">
-                <strong>Camere:</strong> {{$location->rooms}}
+                <strong>N. Stanze:</strong> {{$location->rooms}}
             </div>
             <div class="mb-2">
-                <strong>Posti letto:</strong> {{$location->beds}}
+                <strong>N. Letti:</strong> {{$location->beds}}
             </div>
             <div class="mb-2">
-                <strong>Bagni:</strong> {{$location->bathrooms}}
+                <strong>N. Bagni:</strong> {{$location->bathrooms}}
             </div>
             <div class="mb-2">
-                <strong>Metri quadrati:</strong> {{$location->square_meters}} 
+                <strong>Metri Quadri:</strong> {{$location->square_meters}}
             </div>
             <div class="mb-2">
-                <strong>Prezzo a notte:</strong> {{$location->price}} €
-            </div>         
-               
+                <strong>Prezzo (per notte):</strong> {{$location->price}} €
+            </div>
+
             <p>{{ $location->description }}</p>
 
             {{-- Sponsors Buttons --}}
             <div>
-                <h4>Sponsorizza il tuo appartamento</h4>
+                <h4>Sponsorizza il tuo appartamento:</h4>
                 @foreach ($sponsors as $sponsor)
                 <button class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button>
                 @endforeach
@@ -81,5 +81,5 @@
             sponsor_id: sponsorId
         });
     };
-    
+
 </script>
