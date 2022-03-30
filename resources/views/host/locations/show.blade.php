@@ -47,6 +47,7 @@
 
             {{-- Sponsors Buttons --}}
             <div>
+                <h4>Sponsorizza il tuo appartamento</h4>
                 @foreach ($sponsors as $sponsor)
                 <button class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button>
                 @endforeach

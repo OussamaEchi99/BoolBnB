@@ -4738,6 +4738,29 @@ section#sponsor .gold {
   background-color: yellow;
 }
 
+::-webkit-scrollbar {
+  width: 0.6em;
+  height: 0.4em;
+  border-radius: 4px;
+  background: rgba(211, 211, 211, 0);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #add8e6;
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #93cde2;
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #add8e6;
+  border: none;
+}
+
 /*!
  * Bootstrap v4.6.1 (https://getbootstrap.com/)
  * Copyright 2011-2021 The Bootstrap Authors
