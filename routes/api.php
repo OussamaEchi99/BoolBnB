@@ -28,3 +28,5 @@ Route::post('/visuals/store','Api\VisualController@store');
 Route::post('/leads/store', 'Api\LeadController@store');
 
 Route::get('/categories', 'Api\CategoryController@index');
+
+Route::post('/sponsors/store', 'Api\SponsorController@store');

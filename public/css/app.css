@@ -4614,6 +4614,12 @@ a {
   color: inherit;
 }
 
+.subscription {
+  border: 1px solid lightgray;
+  padding: 6px 15px;
+  border-radius: 25px;
+}
+
 .header .btn-menu {
   background-color: lightblue;
   border-radius: 25px;
@@ -4699,6 +4705,37 @@ section#host-dashboard a.fast-actions-btn span.fast-action-icon {
   display: inline-block;
   font-size: 30px;
   margin-right: 10px;
+}
+
+section#show {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+section#show h1 {
+  text-align: center;
+}
+
+section#show .big_picture {
+  height: 50vh;
+  margin: auto;
+  display: flex;
+}
+
+section#sponsor .location {
+  border: 1px solid lightgray;
+  margin: 10px 0;
+  padding: 15px 15px;
+  border-radius: 50px;
+}
+
+section#sponsor .location-name {
+  display: inline-block;
+  line-height: 35px;
+}
+
+section#sponsor .gold {
+  background-color: yellow;
 }
 
 /*!

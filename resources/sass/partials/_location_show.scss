@@ -1,0 +1,16 @@
+section#show {
+
+    height: calc(100vh - 100px);
+    overflow-y: auto;
+
+    h1{
+        text-align: center;
+    }
+
+    .big_picture{
+        height: 50vh;
+        margin: auto;
+        display: flex;
+    }
+
+}

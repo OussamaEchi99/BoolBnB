@@ -21,4 +21,5 @@ class SponsorController extends Controller
 
         return view('host.sponsors.index', $data);
     }
+
 }
