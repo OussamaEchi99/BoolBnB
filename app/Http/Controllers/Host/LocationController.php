@@ -55,27 +55,32 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
+        // Prendo i dati che mi arrivano dal create
         $form_data = $request->all();
 
+        // Faccio la validazione
         $request->validate($this->getValidationRules());
+        
         $new_location = new Location();
-
         $new_location->fill($form_data);
 
+        // Creao uno slug univoco
         $new_location->slug = $this->getUniqueSlugFromName($form_data['name']);
 
         // Save Cover Img
-        if (isset($form_data['image'])) {
+        if (isset($form_data['photo'])) {
 
             // 1- Salvo l'immagine caricata nella cartella di Storage
-            $img_path = Storage::put('location_photos', $form_data['image']);
+            $img_path = Storage::put('location_photos', $form_data['photo']);
 
             // 2- Salvo il path dell'immagine nella colonna cover del database
             $new_location->photo = $img_path;
         }
 
+        // Aggiungo il proprietario della locations
         $new_location->user_id = Auth::id();
 
+        // Salvo nel DB
         $new_location->save();
 
         // Se sono presenti servizi, li salvo nel database
