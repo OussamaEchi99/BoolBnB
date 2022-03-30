@@ -2409,7 +2409,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('/api/visuals/store', {
         ip: this.userIpAddress,
         location_id: this.locationId
-      });
+      }); // console.log(this.userIpAddress);
+      // console.log(this.locationId);
     },
     getMapImage: function getMapImage() {
       var _this3 = this;
