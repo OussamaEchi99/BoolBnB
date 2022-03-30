@@ -15,7 +15,7 @@ class VisualController extends Controller
 
     public function store(Request $request) {
         $data = $request->all();
-        // dd($data);
+        dd($data);
 
         $new_visual = new Visual();
         $new_visual->ip = $data['ip'];

@@ -25,6 +25,10 @@ export default {
             zoom: 15,
             center: [9.665420, 45.704690],
             });
+             // aggiunta controlli mappa
+            map.addControl(new tt.FullscreenControl());
+            map.addControl(new tt.NavigationControl());
+
             new tt.Marker().setLngLat([9.665420, 45.704690]).addTo(map);
         }
     },

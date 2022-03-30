@@ -2040,7 +2040,10 @@ __webpack_require__.r(__webpack_exports__);
         container: 'map',
         zoom: 15,
         center: [9.665420, 45.704690]
-      });
+      }); // aggiunta controlli mappa
+
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
       new tt.Marker().setLngLat([9.665420, 45.704690]).addTo(map);
     }
   },
@@ -2344,6 +2347,11 @@ __webpack_require__.r(__webpack_exports__);
           _this.locationId = _this.location.id;
           _this.locationLong = _this.location["long"];
           _this.locationLat = _this.location.lat;
+
+          _this.getIpAddress(); // console.log(this.locationId);
+
+
+          console.log(_this.userIpAddress);
         } else {
           _this.$router.push({
             name: 'not-found'
@@ -2358,9 +2366,13 @@ __webpack_require__.r(__webpack_exports__);
         _this2.userIpAddress = response.data;
 
         _this2.sendIpAddressToBackend();
+
+        console.log(_this2.userIpAddress);
+        console.log(_this2.locationId);
       });
     },
     sendIpAddressToBackend: function sendIpAddressToBackend() {
+      // console.log(this.locationId);
       axios.post('/api/visuals/store', {
         ip: this.userIpAddress,
         location_id: this.locationId
@@ -2384,10 +2396,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {
-    this.getLocation();
-    this.getIpAddress();
-    this.getMapImage();
-  }
+    this.getLocation(); // this.getIpAddress();
+    // this.getMapImage();
+  } // mounted: function() {
+  //     this.getIpAddress();
+  // }
+
 });
 
 /***/ }),
@@ -20590,7 +20604,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\front.js */"./resources/js/front.js");
+module.exports = __webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })
