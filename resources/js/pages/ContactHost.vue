@@ -2,13 +2,13 @@
     <div>
         <section>
             <div class="container">
-                <h1>Contanct us</h1>
+                <h1>Contatta l'Host</h1>
 
                 <div v-if="success">Email sent succesfully</div>
 
                 <form>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email address</label>
+                        <label for="email" class="form-label">Indirizzo Email</label>
                         <input v-model="email" type="email" class="form-control" id="email">
                     </div>
 
@@ -26,7 +26,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="object" class="form-label">Oggetto Email</label>
+                        <label for="object" class="form-label">Oggetto dell'Email</label>
                         <input v-model="object" type="text" class="form-control" id="object">
                     </div>
 
@@ -35,7 +35,7 @@
                     </div>
 
                     <div class="mb-3">
-                        <label for="message" class="form-label">Testo Email</label>
+                        <label for="message" class="form-label">Testo dell'Email</label>
                         <textarea v-model="message" class="form-control" id="message" cols="30" rows="10"></textarea>
                     </div>
 
@@ -43,7 +43,7 @@
                         <p v-for="(error, index) in errors.message" :key="index">{{ error }}</p>
                     </div>
 
-                    <button type="submit" @click.prevent="sendMessage()" class="btn btn-primary">Submit</button>
+                    <button type="submit" @click.prevent="sendMessage()" class="btn btn-primary">Invia</button>
                 </form>
             </div>
         </section>
@@ -74,7 +74,7 @@ export default {
                 // this.user = response.data.results;
                 // this.name = this.user.name;
                 // this.email = this.user.email;
-            } 
+            }
             else {
                 this.$router.push({ name: 'not-found' });
             }

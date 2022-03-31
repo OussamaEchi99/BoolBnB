@@ -1,6 +1,6 @@
 <template>
     <section>
-        <h1>CERCA BENE, LA PAGINA SEGUENTE NON ESISTE</h1>
+        <h1>La pagina che stai cercando non è stata trovata</h1>
     </section>
 </template>
 

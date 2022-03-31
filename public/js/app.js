@@ -39188,7 +39188,7 @@ var render = function () {
   return _c("div", [
     _c("section", [
       _c("div", { staticClass: "container" }, [
-        _c("h1", [_vm._v("Contanct us")]),
+        _c("h1", [_vm._v("Contatta l'Host")]),
         _vm._v(" "),
         _vm.success ? _c("div", [_vm._v("Email sent succesfully")]) : _vm._e(),
         _vm._v(" "),
@@ -39197,7 +39197,7 @@ var render = function () {
             _c(
               "label",
               { staticClass: "form-label", attrs: { for: "email" } },
-              [_vm._v("Email address")]
+              [_vm._v("Indirizzo Email")]
             ),
             _vm._v(" "),
             _c("input", {
@@ -39275,7 +39275,7 @@ var render = function () {
             _c(
               "label",
               { staticClass: "form-label", attrs: { for: "object" } },
-              [_vm._v("Oggetto Email")]
+              [_vm._v("Oggetto dell'Email")]
             ),
             _vm._v(" "),
             _c("input", {
@@ -39315,7 +39315,7 @@ var render = function () {
             _c(
               "label",
               { staticClass: "form-label", attrs: { for: "message" } },
-              [_vm._v("Testo Email")]
+              [_vm._v("Testo dell'Email")]
             ),
             _vm._v(" "),
             _c("textarea", {
@@ -39363,7 +39363,7 @@ var render = function () {
                 },
               },
             },
-            [_vm._v("Submit")]
+            [_vm._v("Invia")]
           ),
         ]),
       ]),
@@ -39470,34 +39470,34 @@ var render = function () {
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("strong", [_vm._v("Stanze:")]),
+          _c("strong", [_vm._v("N. Stanze:")]),
           _vm._v(" " + _vm._s(_vm.location.rooms)),
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("strong", [_vm._v("Posti letto:")]),
+          _c("strong", [_vm._v("N. Posti letto:")]),
           _vm._v(" " + _vm._s(_vm.location.beds)),
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("strong", [_vm._v("Bagni:")]),
+          _c("strong", [_vm._v("N. Bagni:")]),
           _vm._v(" " + _vm._s(_vm.location.bathrooms)),
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("strong", [_vm._v("Area:")]),
+          _c("strong", [_vm._v("Metri Quadri:")]),
           _vm._v(" " + _vm._s(_vm.location.square_meters) + " mq"),
         ]),
         _vm._v(" "),
         _c("div", [
-          _c("strong", [_vm._v("Prezzo a notte:")]),
+          _c("strong", [_vm._v("Prezzo (per notte):")]),
           _vm._v(" " + _vm._s(_vm.location.price) + " €"),
         ]),
         _vm._v(" "),
         _c(
           "div",
           [
-            _c("strong", [_vm._v("Features:")]),
+            _c("strong", [_vm._v("Servizi:")]),
             _vm._v(" "),
             _vm._l(_vm.location.features, function (element, index) {
               return _c("span", { key: index }, [
@@ -39518,7 +39518,7 @@ var render = function () {
           },
           [
             _vm._v(
-              "\n            Clicca qui per contattare il proprietario dell'immobile\n        "
+              "\n            Clicca qui per contattare il proprietario della location\n        "
             ),
           ]
         ),
@@ -39559,7 +39559,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", [
-      _c("h1", [_vm._v("CERCA BENE, LA PAGINA SEGUENTE NON ESISTE")]),
+      _c("h1", [_vm._v("La pagina che stai cercando non è stata trovata")]),
     ])
   },
 ]
@@ -39591,7 +39591,7 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("section", [_c("h1", [_vm._v("Search page")])])
+    return _c("section", [_c("h1", [_vm._v("Pagina di ricerca")])])
   },
 ]
 render._withStripped = true
@@ -56019,8 +56019,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\boolbnb\boolbnb\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

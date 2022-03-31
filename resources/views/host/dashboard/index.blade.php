@@ -5,15 +5,15 @@
     <section id="host-dashboard">
         <div class="container">
             {{-- Title --}}
-            <h1>Benvenuto nell'area HOST</h1>
+            <h1>Benvenuto nell'area riservata all'Host</h1>
             {{-- Account Actions --}}
             <section class="dashboard-internal-section">
                 <h3>Il tuo account</h3>
-        
+
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 row-cols-xl-2">
                     <div class="col my-3">
                         <a class="fast-actions-btn" href="{{ route('host.locations.create') }}">
-                            <span id="home" class="fas fa-home"><i id="plus" class="fas fa-plus"></i></span>  Aggiungi un annuncio
+                            <span id="home" class="fas fa-home"><i id="plus" class="fas fa-plus"></i></span>    Aggiungi un annuncio
                         </a>
                     </div>
                     <div class="col my-3">
@@ -28,12 +28,13 @@
                     </div>
                     <div class="col my-3">
                         <a class="fast-actions-btn" href="{{route('host.emails')}}">
-                            <span class="fast-action-icon"><i class="fas fa-envelope"></i></span>Visualizza messaggi                    </a>
+                            <span class="fast-action-icon"><i class="fas fa-envelope"></i></span>Visualizza i messaggi
+                        </a>
                     </div>
                 </div>
             </section>
-            
-        
+
+
         </div>
     </section>
 

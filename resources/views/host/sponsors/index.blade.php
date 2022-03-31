@@ -3,14 +3,14 @@
 @section('content')
     <section id="sponsor">
         <div class="container">
-            <h1>Sponsorizza i tuoi appartamenti</h1>
+            <h1>Sponsorizza le tue location</h1>
             @if (!$locations->isEmpty())
                 @foreach ($locations as $location)
                     <div class="row location">
                         <div class="col-6">
                             <a class="location-name" href="#">{{ $location->name }}</a>
                         </div>
-        
+
                         <div class="col-6 d-flex">
                             @foreach ($sponsors as $sponsor)
                                 <div class="mx-4">
@@ -24,7 +24,7 @@
             @else
                 <span>Non hai ancora nessun annuncio</span>
             @endif
-            
+
         </div>
     </section>
 @endsection
@@ -40,5 +40,5 @@
             sponsor_id: sponsorId
         });
     };
-    
+
 </script>
