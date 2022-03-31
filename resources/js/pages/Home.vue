@@ -4,9 +4,13 @@
         <input type="text" v-model="searchText">
         <!-- <a href="/search">Cerca un appartamento</a> -->
         
-        <router-link :to="{ name: 'search', params: {homeSearch: searchText }}">
+
+        <button>
+            <router-link :to="{ name: 'search', params: {homeSearch: searchText }}">
                 Cerca un appartamento
-        </router-link>
+            </router-link>
+        </button>
+        
     </div>
 
 </template>
