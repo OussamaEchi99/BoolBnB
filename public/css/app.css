@@ -4620,10 +4620,6 @@ a {
   border-radius: 25px;
 }
 
-.my_d_none {
-  display: none;
-}
-
 .header .btn-menu {
   background-color: lightblue;
   border-radius: 25px;
@@ -4724,40 +4720,6 @@ section#show .big_picture {
   height: 50vh;
   margin: auto;
   display: flex;
-}
-
-section#show .button {
-  cursor: pointer;
-  font-weight: 500;
-  left: 3px;
-  line-height: inherit;
-  position: relative;
-  text-decoration: none;
-  text-align: center;
-  border-style: solid;
-  border-width: 1px;
-  border-radius: 3px;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  display: inline-block;
-}
-
-section#show .button--small {
-  padding: 10px 20px;
-  font-size: 0.875rem;
-}
-
-section#show .button--green {
-  outline: none;
-  background-color: #64d18a;
-  border-color: #64d18a;
-  color: white;
-  transition: all 200ms ease;
-}
-
-section#show .button--green:hover {
-  background-color: #8bdda8;
-  color: white;
 }
 
 section#sponsor .location {
