@@ -1899,6 +1899,191 @@ module.exports = {
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Index.vue?vue&type=script&lang=js&":
+/*!****************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Index.vue?vue&type=script&lang=js& ***!
+  \****************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Index',
+  data: function data() {
+    return {
+      locations: [],
+      tmpCategory: '',
+      categories: [],
+      searchText: '',
+      searchLat: 0,
+      searchLon: 0,
+      deg: 0,
+      distance: 20 // pageSearchText: "",
+      // currentPage: 1,
+      // lastPage: false
+
+    };
+  },
+  methods: {
+    getLocationsAndCategories: function getLocationsAndCategories() {
+      var _this = this;
+
+      axios.get('http://127.0.0.1:8000/api/locations', {// params: {
+        //     // page: pageNumber,
+        //     category: this.locationId
+        // }
+      }).then(function (response) {
+        _this.locations = response.data.results.locations;
+        _this.categories = response.data.results.categories; // this.currentPage = response.data.results.current_page;
+        // this.lastPage = response.data.results.last_page;
+      });
+    },
+    truncateText: function truncateText(text, maxCharsNumber) {
+      if (text.length > maxCharsNumber) {
+        return text.substr(0, maxCharsNumber) + '...';
+      }
+
+      return text;
+    },
+    getCoordinates: function getCoordinates() {
+      var _this2 = this;
+
+      if (this.searchText.length > 1) {
+        axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
+          params: {
+            key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+            countryCode: 'IT',
+            municipality: this.searchText
+          }
+        }).then(function (response) {
+          _this2.searchLat = response.data.results[0].position.lat;
+          _this2.searchLon = response.data.results[0].position.lon;
+
+          for (var i = 0; i < _this2.locations.length; i++) {
+            var single_location = _this2.locations[i];
+            var el = document.getElementById(single_location.id);
+            el.classList.remove("hide");
+          }
+
+          ;
+
+          var _loop = function _loop(_i) {
+            var single_location = _this2.locations[_i];
+
+            if (_this2.getDistanceFromLatLonInKm(_this2.locations[_i].lat, _this2.locations[_i]["long"], _this2.searchLat, _this2.searchLon) > _this2.distance) {
+              // console.log(this.locations[i].lat , this.locations[i].long, this.searchLat, this.searchLon)
+              var addClass = function addClass() {
+                var el = document.getElementById(single_location.id);
+                el.classList.add("hide");
+              };
+
+              addClass();
+            }
+          };
+
+          for (var _i = 0; _i < _this2.locations.length; _i++) {
+            _loop(_i);
+          }
+        });
+      } else {
+        for (var i = 0; i < this.locations.length; i++) {
+          var single_location = this.locations[i];
+          var el = document.getElementById(single_location.id);
+          el.classList.remove("hide");
+        }
+
+        ;
+      }
+    },
+    // getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    getDistanceFromLatLonInKm: function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+      function deg2rad(deg) {
+        return deg * (Math.PI / 180);
+      }
+
+      var R = 6371; // Radius of the earth in km
+
+      var dLat = deg2rad(lat2 - lat1); // deg2rad below
+
+      var dLon = deg2rad(lon2 - lon1);
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c; // Distance in km
+      // console.log(d)
+
+      return d;
+    }
+  },
+  created: function created() {
+    this.getLocationsAndCategories();
+  }
+});
+
+/***/ }),
+
+>>>>>>> origin/HEAD
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=script&lang=js& ***!
@@ -2130,7 +2315,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 
+=======
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+>>>>>>> origin/HEAD
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   components: {
@@ -2360,6 +2558,28 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
+/***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Index.vue?vue&type=style&index=0&id=bb962f12&lang=scss&scoped=true&":
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Index.vue?vue&type=style&index=0&id=bb962f12&lang=scss&scoped=true& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, ".no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.single_element[data-v-bb962f12] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  border-radius: 20px;\n}\n.single_element .title[data-v-bb962f12] {\n  font-size: 30px;\n}\n.single_element .main_img[data-v-bb962f12] {\n  width: 100%;\n  height: 300px;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.single_element .description[data-v-bb962f12] {\n  margin: 20px 0;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
+
+// exports
+
+
+/***/ }),
+
+>>>>>>> origin/HEAD
 /***/ "./node_modules/css-loader/index.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/sass-loader/dist/cjs.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=style&index=0&lang=scss&":
 /*!*************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/css-loader!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--7-2!./node_modules/sass-loader/dist/cjs.js??ref--7-3!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=style&index=0&lang=scss& ***!
@@ -3571,6 +3791,204 @@ exports.clearImmediate = (typeof self !== "undefined" && self.clearImmediate) ||
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Index.vue?vue&type=template&id=bb962f12&scoped=true&":
+/*!********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Index.vue?vue&type=template&id=bb962f12&scoped=true& ***!
+  \********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function () {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("section", [
+    _c("div", { staticClass: "container" }, [
+      _c(
+        "select",
+        {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.tmpCategory,
+              expression: "tmpCategory",
+            },
+          ],
+          staticClass: "form-select",
+          attrs: { "aria-label": "Default select example" },
+          on: {
+            change: function ($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function (o) {
+                  return o.selected
+                })
+                .map(function (o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.tmpCategory = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
+          },
+        },
+        [
+          _c("option", { attrs: { selected: "" }, domProps: { value: 0 } }, [
+            _vm._v("Tutte"),
+          ]),
+          _vm._v(" "),
+          _vm._l(_vm.categories, function (category) {
+            return _c(
+              "option",
+              { key: category.id, domProps: { value: category.id } },
+              [_vm._v(_vm._s(category.name))]
+            )
+          }),
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchText,
+            expression: "searchText",
+          },
+        ],
+        attrs: { type: "text", placeholder: "Cerca una città" },
+        domProps: { value: _vm.searchText },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchText = $event.target.value
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "vol" } }, [_vm._v("Range ricerca")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.distance,
+            expression: "distance",
+          },
+        ],
+        attrs: {
+          value: "20",
+          type: "range",
+          id: "range",
+          name: "range",
+          min: "10",
+          max: "50",
+        },
+        domProps: { value: _vm.distance },
+        on: {
+          __r: function ($event) {
+            _vm.distance = $event.target.value
+          },
+        },
+      }),
+      _vm._v("\n        " + _vm._s(_vm.distance) + "\n\n        "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function ($event) {
+              return _vm.getCoordinates()
+            },
+          },
+        },
+        [_vm._v("Trova la casa più adatta a te")]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "element row my-4" },
+        _vm._l(_vm.locations, function (location) {
+          return _c(
+            "div",
+            {
+              key: location.id,
+              staticClass: "col-12 col-md-6 single-location",
+              class:
+                location.category_id != _vm.tmpCategory && _vm.tmpCategory != 0
+                  ? "hide"
+                  : "show",
+              attrs: { id: location.id },
+            },
+            [
+              _c(
+                "router-link",
+                {
+                  staticClass: "no-style",
+                  attrs: {
+                    to: {
+                      name: "location-details",
+                      params: { slug: location.slug },
+                    },
+                  },
+                },
+                [
+                  _c("div", { staticClass: "single_element" }, [
+                    _c("strong", { staticClass: "title" }, [
+                      _vm._v(_vm._s(location.name)),
+                    ]),
+                    _vm._v(" "),
+                    _c("img", {
+                      staticClass: "main_img",
+                      attrs: {
+                        src: location.photo.includes("https:")
+                          ? location.photo
+                          : "http://127.0.0.1:8000/storage/" + location.photo,
+                        alt: "location.name",
+                      },
+                    }),
+                    _vm._v(" "),
+                    location.description
+                      ? _c("p", { staticClass: "description" }, [
+                          _vm._v(
+                            _vm._s(_vm.truncateText(location.description, 150))
+                          ),
+                        ])
+                      : _vm._e(),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "price" }, [
+                      _vm._v(_vm._s(location.price) + "€ a notte"),
+                    ]),
+                  ]),
+                ]
+              ),
+            ],
+            1
+          )
+        }),
+        0
+      ),
+    ]),
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+>>>>>>> origin/HEAD
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=template&id=479a2f41&":
 /*!******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=template&id=479a2f41& ***!
@@ -3926,7 +4344,50 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
+<<<<<<< HEAD
   return _c("div", [_c("Index")], 1)
+=======
+  return _c("div", [
+    _c("h1", [_vm._v("Home")]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
+        {
+          name: "model",
+          rawName: "v-model",
+          value: _vm.searchText,
+          expression: "searchText",
+        },
+      ],
+      attrs: { type: "text" },
+      domProps: { value: _vm.searchText },
+      on: {
+        input: function ($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.searchText = $event.target.value
+        },
+      },
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      [
+        _c(
+          "router-link",
+          {
+            attrs: {
+              to: { name: "search", params: { homeSearch: _vm.searchText } },
+            },
+          },
+          [_vm._v("\n            Cerca un appartamento\n        ")]
+        ),
+      ],
+      1
+    ),
+  ])
+>>>>>>> origin/HEAD
 }
 var staticRenderFns = []
 render._withStripped = true
