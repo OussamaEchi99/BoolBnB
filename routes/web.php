@@ -39,3 +39,4 @@ Route::get('{any?}',function(){
 Route::options('/{path}', function(){ 
     return '';
 })->where('path', '.*');
+
