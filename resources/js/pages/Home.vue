@@ -1,17 +1,23 @@
 <template>
     <div>
-        <Index />
+        <h1>Home</h1>
+        <input type="text" v-model="searchText">
+        <!-- <a href="/search">Cerca un appartamento</a> -->
+        
+        <router-link :to="{ name: 'search', params: {homeSearch: searchText }}">
+                Cerca un appartamento
+        </router-link>
     </div>
 
 </template>
 
 <script>
-import Index from '../components/Index.vue';
 export default {
     name: 'Home',
-    components: {
-        Index,
+    data: function() {
+        return {
+            searchText: '',
+        }
     }
-
 }
 </script>

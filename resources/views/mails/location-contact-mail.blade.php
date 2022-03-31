@@ -10,7 +10,7 @@
    <h1>Nuovo messaggio</h1>
 
    <div>Nome: {{$new_lead->name}}</div>
-   <div>Nome: {{$new_lead->email}}</div>
-   <p>Nome: {{$new_lead->message}}</p>
+   <div>Mail: {{$new_lead->email}}</div>
+   <p>Messaggio: {{$new_lead->message}}</p>
 </body>
 </html>

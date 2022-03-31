@@ -38,11 +38,11 @@
                         {{-- {{ config('app.name', 'Laravel') }} --}}
                         BoolBnB
                     </a>
-    
+
                     {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                         <span class="navbar-toggler-icon"></span>
                     </button> --}}
-    
+
                     <div id="navbarSupportedContent">
                         {{-- class="collapse navbar-collapse" --}}
                         <!-- Left Side Of Navbar -->
@@ -63,7 +63,7 @@
                                 </a>
                             </li> --}}
                         </ul>
-    
+
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto flex-grow-0">
                             @guest
@@ -78,22 +78,22 @@
                                                 <i class="fas fa-bars"></i>
                                             </div>
                                             <div class="circle">
-                                                
+
                                             </div>
-                                            
+
                                         </button>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right"  aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="{{ route('login') }}">
                                                 {{ __('Login') }}
                                             </a>
-                        
+
                                             <a class="dropdown-item" href="{{ route('register') }}">
                                                 {{ __('Register') }}
                                             </a>
                                     </div>
                                 </li>
-    
+
                                 @if (Route::has('register'))
                                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                             <a class="dropdown-item" href="{{ route('register') }}">
@@ -117,13 +117,13 @@
                                                 {{ strtoupper(Auth::user()->name[0]) }}
                                             </div>
                                         </button>
-                                        
+
                                     </a>
-    
+
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item " href="{{ route('host.locations.index') }}">
-                                            <i class="fas fa-house-user dropdown-icon"></i>Le mie locations
+                                            <i class="fas fa-house-user dropdown-icon"></i>Le mie location
                                         </a>
                                         {{-- link menu utente loggato --}}
                                         <a class="dropdown-item " href="{{ route('host.home') }}">
@@ -145,18 +145,18 @@
                                         <a class="dropdown-item " href="{{ route('host.locations.create') }}">
                                             <i class="fas fa-plus dropdown-icon"></i>Aggiungi annuncio
                                         </a>
-                                        
-    
+
+
                                         {{-- logout --}}
-                                        <a 
-                                            class="dropdown-item" 
+                                        <a
+                                            class="dropdown-item"
                                             href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                             document.getElementById('logout-form').submit();"
                                         >
-                                        <i class="fas fa-sign-out-alt dropdown-icon"></i>  Esci
+                                        <i class="fas fa-sign-out-alt dropdown-icon"></i>Esci
                                         </a>
-    
+
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                             @csrf
                                         </form>
@@ -168,13 +168,13 @@
                 </div>
             </nav>
         </header>
-        
+
         <main class="my-container m-auto">
             {{-- <App></App> --}}
             @yield('content')
         </main>
 
-        
+
     </div>
 </body>
 </html>

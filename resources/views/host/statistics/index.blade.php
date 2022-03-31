@@ -4,7 +4,7 @@
     <section>
         <div class="container">
 
-            <h1>Statistiche dei tuoi appartamenti</h1>
+            <h1>Statistiche delle tue location</h1>
 
             @if (!$locations->isEmpty())
                 <div class="row row-cols-3">
@@ -14,7 +14,7 @@
                         <div class="col">
                             <div class="card mt-2">
 
-                                
+
                                 @if (str_contains($location->photo, 'location_photos'))
                                     <img src="{{ asset('storage/' . $location->photo) }}" class="card-img-top" alt="{{ $location->name }}">
                                 @else
@@ -28,14 +28,14 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                     @endforeach
 
                 </div>
             @else
                 <span>Non hai ancora nessun annuncio</span>
             @endif
-            
+
         </div>
     </section>
 @endsection

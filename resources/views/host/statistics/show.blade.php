@@ -5,7 +5,7 @@
         <div class="container">
 
             {{-- Title --}}
-            <h1 class="titolo">Le statistiche del tuo appartamento | {{ $location->name }}</h1>
+            <h1 class="titolo">Le statistiche della tua location | {{ $location->name }}</h1>
 
             <div class="visuals-card-container">
 
