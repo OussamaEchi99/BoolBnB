@@ -39190,7 +39190,13 @@ var render = function () {
       _c("div", { staticClass: "container" }, [
         _c("h1", [_vm._v("Contatta l'Host")]),
         _vm._v(" "),
-        _vm.success ? _c("div", [_vm._v("Email sent succesfully")]) : _vm._e(),
+        _vm.success
+          ? _c("div", [
+              _c("h3", { staticStyle: { color: "green" } }, [
+                _vm._v("L'Email è stata inviata correttamente!"),
+              ]),
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("form", [
           _c("div", { staticClass: "mb-3" }, [
