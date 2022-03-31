@@ -2212,28 +2212,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-// var button = document.querySelector('#submit-button');
-//     braintree.dropin.create({
-//       authorization: "Braintree_ClientToken::generate()",
-//       container: '#dropin-container'
-//     }, function (createErr, instance) {
-//       button.addEventListener('click', function () {
-//         instance.requestPaymentMethod(function (err, payload) {
-//           $.get(route('payment.process'), {payload}, function (response) {
-//             if (response.success) {
-//               alert('Payment successfull!');
-//             } else {
-//               alert('Payment failed');
-//             }
-//           }, 'json');
-//         });
-//       });
-//     });
+var button = document.querySelector('#submit-button');
+braintree.dropin.create({
+  authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+  selector: '#dropin-container'
+}, function (err, instance) {
+  button.addEventListener('click', function () {
+    instance.requestPaymentMethod(function (requestPaymentMethodErr, payload) {
+      $.ajax({
+        type: 'POST',
+        url: '/checkout',
+        data: {
+          'paymentMethodNonce': payload.nonce
+        }
+      }).done(function (result) {
+        // Tear down the Drop-in UI
+        instance.teardown(function (teardownErr) {
+          if (teardownErr) {
+            console.error('Could not tear down Drop-in UI!');
+          } else {
+            console.info('Drop-in UI has been torn down!'); // Remove the 'Submit payment' button
+
+            $('#submit-button').remove();
+          }
+        });
+
+        if (result.success) {
+          $('#checkout-message').html('<h1>Success</h1><p>Your Drop-in UI is working! Check your <a href="https://sandbox.braintreegateway.com/login">sandbox Control Panel</a> for your test transactions.</p><p>Refresh to try another transaction.</p>');
+        } else {
+          console.log(result);
+          $('#checkout-message').html('<h1>Error</h1><p>Check your console.</p>');
+        }
+      });
+    });
+  });
+});
 
 /***/ }),
 
@@ -39445,9 +39458,29 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("section")
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("section", [
+      _c("div", { attrs: { id: "checkout-message" } }),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "dropin-container" } }),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "button button--small button--green",
+          attrs: { id: "submit-button" },
+        },
+        [_vm._v("Purchase")]
+      ),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -55374,7 +55407,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Index_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Index.vue */ "./resources/js/components/Index.vue");
 /* harmony import */ var _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./pages/Location.vue */ "./resources/js/pages/Location.vue");
 /* harmony import */ var _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./views/Hostapp.vue */ "./resources/js/views/Hostapp.vue");
-/* harmony import */ var _components_Payament_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Payament.vue */ "./resources/js/components/Payament.vue");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -55384,7 +55416,6 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
-
 
 
 
@@ -55410,7 +55441,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Navbar', _components_Navba
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Index', _components_Index_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Location', _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Hostapp', _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Payament', _components_Payament_vue__WEBPACK_IMPORTED_MODULE_6__["default"]); // Vue.component('Navbar', require('./components/Navbar.vue'));
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('payament-section', __webpack_require__(/*! ./components/Payament.vue */ "./resources/js/components/Payament.vue")["default"]); // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -55426,6 +55457,10 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   // }
 
 });
+
+var checkout = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module './routes/checkout'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+
+app.use('/checkout', checkout);
 
 /***/ }),
 
@@ -56629,13 +56664,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
-=======
-__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
->>>>>>> 922bbe27a55b34421ebf92aa3d535d6c6592ea6b
 
 
 /***/ })

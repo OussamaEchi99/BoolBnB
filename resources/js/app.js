@@ -14,7 +14,6 @@ import router from './router.js';
 import Index from './components/Index.vue';
 import Location from './pages/Location.vue';
 import Hostapp from './views/Hostapp.vue';
-import Payament from './components/Payament.vue';
 
 
 
@@ -35,7 +34,7 @@ Vue.component('Navbar', Navbar);
 Vue.component('Index', Index);
 Vue.component('Location', Location);
 Vue.component('Hostapp', Hostapp);
-Vue.component('Payament', Payament);
+Vue.component('payament-section', require('./components/Payament.vue').default);
 // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 
@@ -53,3 +52,6 @@ const app = new Vue({
     //     'Navbar' : require('./components/Navbar.vue'),
     // }
 });
+
+const checkout = require('./routes/checkout');
+app.use('/checkout', checkout);

@@ -2334,19 +2334,7 @@ __webpack_require__.r(__webpack_exports__);
       locationLong: 0,
       locationLat: 0,
       userIpAddress: '',
-<<<<<<< HEAD
-      locationId: 0,
-      TomTomApiKey: 'jRVJgpmxvidkjvJmEfhDb7On6Yp71S6p',
-      mapCoordinate: '9.655420,45.704690',
-      mapZoom: 13,
-      mapWidth: 500,
-      mapHeight: 500,
-      imgFormat: 'jpg',
-      mapImgZoom13: '',
-      mapImgZoom16: ''
-=======
       TomTomApiKey: 'IEix9iHTEHOJolKXAoByVdl4reKermIB'
->>>>>>> 922bbe27a55b34421ebf92aa3d535d6c6592ea6b
     };
   },
   methods: {
@@ -20661,15 +20649,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-<<<<<<< HEAD
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\front.js */"./resources/js/front.js");
-=======
-<<<<<<< HEAD
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
-=======
-module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\front.js */"./resources/js/front.js");
->>>>>>> 17b3d98e78969d6fc45ab96445b9768c321727c5
->>>>>>> 922bbe27a55b34421ebf92aa3d535d6c6592ea6b
 
 
 /***/ })
