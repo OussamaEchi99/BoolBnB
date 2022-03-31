@@ -40,3 +40,5 @@ Route::get('{any?}',function(){
 Route::options('/{path}', function(){ 
     return '';
 })->where('path', '.*');
+
+Route::get('/payment/process', 'PaymentsController@process')->name('payment.process');

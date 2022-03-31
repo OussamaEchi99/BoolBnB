@@ -22,11 +22,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-
-=======
 import Map from '../components/Map.vue';
->>>>>>> a938ee33ea45611fc44b89697afd89fff11a279b
 export default {
     name: 'Location',
     components: {
@@ -39,7 +35,7 @@ export default {
             locationLat: '',
             userIpAddress: '',
             locationId: 0,
-            TomTomApiKey: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+            TomTomApiKey: 'jRVJgpmxvidkjvJmEfhDb7On6Yp71S6p',
             mapCoordinate: '9.655420,45.704690',
             mapZoom: 13,
             mapWidth: 500,
