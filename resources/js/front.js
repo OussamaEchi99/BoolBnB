@@ -11,3 +11,11 @@ const app = new Vue({
     render: h => h(App),
     router
 });
+
+// var map = tt.map({
+
+//     key: 'jRVJgpmxvidkjvJmEfhDb7On6Yp71S6p',
+
+//     container: 'map'
+
+// });

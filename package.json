@@ -25,7 +25,11 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.15.4",
+<<<<<<< HEAD
+        "braintree": "^3.10.0",
+=======
         "express-generator": "^4.16.1",
+>>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b
         "vue-router": "^3.5.3"
     }
 }
