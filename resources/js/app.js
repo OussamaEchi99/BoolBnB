@@ -34,6 +34,8 @@ Vue.component('Navbar', Navbar);
 Vue.component('Index', Index);
 Vue.component('Location', Location);
 Vue.component('Hostapp', Hostapp);
+
+Vue.component('map-component', require('./components/Map.vue').default);
 // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 

@@ -2043,11 +2043,9 @@ __webpack_require__.r(__webpack_exports__);
 /*!**************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Map.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/*! no static exports found */
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
 //
 //
 //
@@ -2056,27 +2054,274 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Map',
-  methods: {
-    initializeMap: function initializeMap() {
-      var map = tt.map({
-        key: '4xOYA50eGLm6ip0bG0fIFwWnKd4PpRau',
-        container: 'map',
-        zoom: 15,
-        center: [9.665420, 45.704690]
-      }); // aggiunta controlli mappa
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+tt.setProductInfo('Codepen Examples', '${analytics.productVersion}');
+var map = tt.map({
+  key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+  container: 'map',
+  center: [15.4, 53.0],
+  zoom: 3
+});
+var infoHint = new InfoHint('info', 'bottom-center', 5000).addTo(document.getElementById('map'));
+var errorHint = new InfoHint('error', 'bottom-center', 5000).addTo(document.getElementById('map')); // Options for the fuzzySearch service
 
-      map.addControl(new tt.FullscreenControl());
-      map.addControl(new tt.NavigationControl());
-      new tt.Marker().setLngLat([9.665420, 45.704690]).addTo(map);
-    }
+var searchOptions = {
+  key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+  language: 'en-GB',
+  limit: 5
+}; // Options for the autocomplete service
+
+var autocompleteOptions = {
+  key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+  language: 'en-GB'
+};
+var searchBoxOptions = {
+  minNumberOfCharacters: 0,
+  searchOptions: searchOptions,
+  autocompleteOptions: autocompleteOptions,
+  distanceFromPoint: [15.4, 53.0]
+};
+var ttSearchBox = new tt.plugins.SearchBox(tt.services, searchBoxOptions);
+document.querySelector('.tt-side-panel__header').appendChild(ttSearchBox.getSearchBoxHTML());
+var state = {
+  previousOptions: {
+    query: null,
+    center: null
   },
-  mounted: function mounted() {
-    // this.getMap();
-    this.initializeMap();
+  callbackId: null,
+  userLocation: null
+};
+map.addControl(new tt.FullscreenControl({
+  container: document.querySelector('body')
+}));
+map.addControl(new tt.NavigationControl());
+new SidePanel('.tt-side-panel', map);
+var geolocateControl = new tt.GeolocateControl({
+  positionOptions: {
+    enableHighAccuracy: false
   }
 });
+geolocateControl.on('geolocate', function (event) {
+  var coordinates = event.coords;
+  state.userLocation = [coordinates.longitude, coordinates.latitude];
+  ttSearchBox.updateOptions(Object.assign({}, ttSearchBox.getOptions(), {
+    distanceFromPoint: state.userLocation
+  }));
+});
+map.addControl(geolocateControl);
+var resultsManager = new ResultsManager();
+var searchMarkersManager = new SearchMarkersManager(map);
+map.on('load', handleMapEvent);
+map.on('moveend', handleMapEvent);
+ttSearchBox.on('tomtom.searchbox.resultscleared', handleResultsCleared);
+ttSearchBox.on('tomtom.searchbox.resultsfound', handleResultsFound);
+ttSearchBox.on('tomtom.searchbox.resultfocused', handleResultSelection);
+ttSearchBox.on('tomtom.searchbox.resultselected', handleResultSelection);
+
+function handleMapEvent() {
+  // Update search options to provide geobiasing based on current map center
+  var oldSearchOptions = ttSearchBox.getOptions().searchOptions;
+  var oldautocompleteOptions = ttSearchBox.getOptions().autocompleteOptions;
+  var newSearchOptions = Object.assign({}, oldSearchOptions, {
+    center: map.getCenter()
+  });
+  var newAutocompleteOptions = Object.assign({}, oldautocompleteOptions, {
+    center: map.getCenter()
+  });
+  ttSearchBox.updateOptions(Object.assign({}, searchBoxOptions, {
+    placeholder: 'Query e.g. Washington',
+    searchOptions: newSearchOptions,
+    autocompleteOptions: newAutocompleteOptions,
+    distanceFromPoint: state.userLocation
+  }));
+}
+
+function handleResultsCleared() {
+  searchMarkersManager.clear();
+  resultsManager.clear();
+}
+
+function handleResultsFound(event) {
+  // Display fuzzySearch results if request was triggered by pressing enter
+  if (event.data.results && event.data.results.fuzzySearch && event.data.metadata.triggeredBy === 'submit') {
+    var results = event.data.results.fuzzySearch.results;
+
+    if (results.length === 0) {
+      handleNoResults();
+    }
+
+    searchMarkersManager.draw(results);
+    resultsManager.success();
+    fillResultsList(results);
+    fitToViewport(results);
+  }
+
+  if (event.data.errors) {
+    errorHint.setMessage('There was an error returned by the service.');
+  }
+}
+
+function handleResultSelection(event) {
+  if (isFuzzySearchResult(event)) {
+    // Display selected result on the map
+    var result = event.data.result;
+    resultsManager.success();
+    searchMarkersManager.draw([result]);
+    fillResultsList([result]);
+    searchMarkersManager.openPopup(result.id);
+    fitToViewport(result);
+    state.callbackId = null;
+    infoHint.hide();
+  } else if (stateChangedSinceLastCall(event)) {
+    var currentCallbackId = Math.random().toString(36).substring(2, 9);
+    state.callbackId = currentCallbackId; // Make fuzzySearch call with selected autocomplete result as filter
+
+    handleFuzzyCallForSegment(event, currentCallbackId);
+  }
+}
+
+function isFuzzySearchResult(event) {
+  return !('matches' in event.data.result);
+}
+
+function stateChangedSinceLastCall(event) {
+  return Object.keys(searchMarkersManager.getMarkers()).length === 0 || !(state.previousOptions.query === event.data.result.value && state.previousOptions.center.toString() === map.getCenter().toString());
+}
+
+function getBounds(data) {
+  var btmRight;
+  var topLeft;
+
+  if (data.viewport) {
+    btmRight = [data.viewport.btmRightPoint.lng, data.viewport.btmRightPoint.lat];
+    topLeft = [data.viewport.topLeftPoint.lng, data.viewport.topLeftPoint.lat];
+  }
+
+  return [btmRight, topLeft];
+}
+
+function fitToViewport(markerData) {
+  if (!markerData || markerData instanceof Array && !markerData.length) {
+    return;
+  }
+
+  var bounds = new tt.LngLatBounds();
+
+  if (markerData instanceof Array) {
+    markerData.forEach(function (marker) {
+      bounds.extend(getBounds(marker));
+    });
+  } else {
+    bounds.extend(getBounds(markerData));
+  }
+
+  map.fitBounds(bounds, {
+    padding: 100,
+    linear: true
+  });
+}
+
+function handleFuzzyCallForSegment(event, currentCallbackId) {
+  var query = ttSearchBox.getValue();
+  var segmentType = event.data.result.type;
+  var commonOptions = Object.assign({}, searchOptions, {
+    query: query,
+    limit: 15,
+    center: map.getCenter(),
+    typeahead: true,
+    language: 'en-GB'
+  });
+  var filter;
+
+  if (segmentType === 'category') {
+    filter = {
+      categorySet: event.data.result.id
+    };
+  }
+
+  if (segmentType === 'brand') {
+    filter = {
+      brandSet: event.data.result.value
+    };
+  }
+
+  var options = Object.assign({}, commonOptions, filter);
+  infoHint.setMessage('Loading results...');
+  errorHint.hide();
+  resultsManager.loading();
+  tt.services.fuzzySearch(options).then(function (response) {
+    if (state.callbackId !== currentCallbackId) {
+      return;
+    }
+
+    if (response.results.length === 0) {
+      handleNoResults();
+      return;
+    }
+
+    resultsManager.success();
+    searchMarkersManager.draw(response.results);
+    fillResultsList(response.results);
+    map.once('moveend', function () {
+      state.previousOptions = {
+        query: query,
+        center: map.getCenter()
+      };
+    });
+    fitToViewport(response.results);
+  })["catch"](function (error) {
+    if (error.data && error.data.errorText) {
+      errorHint.setMessage(error.data.errorText);
+    }
+
+    resultsManager.resultsNotFound();
+  })["finally"](function () {
+    infoHint.hide();
+  });
+}
+
+function handleNoResults() {
+  resultsManager.clear();
+  resultsManager.resultsNotFound();
+  searchMarkersManager.clear();
+  infoHint.setMessage('No results for "' + ttSearchBox.getValue() + '" found nearby. Try changing the viewport.');
+}
+
+function fillResultsList(results) {
+  resultsManager.clear();
+  var resultList = DomHelpers.createResultList();
+  results.forEach(function (result) {
+    var distance = state.userLocation ? SearchResultsParser.getResultDistance(result) : undefined;
+    var addressLines = SearchResultsParser.getAddressLines(result);
+    var searchResult = this.DomHelpers.createSearchResult(addressLines[0], addressLines[1], distance ? Formatters.formatAsMetricDistance(distance) : '');
+    var resultItem = DomHelpers.createResultItem();
+    resultItem.appendChild(searchResult);
+    resultItem.setAttribute('data-id', result.id);
+
+    resultItem.onclick = function (event) {
+      var id = event.currentTarget.getAttribute('data-id');
+      searchMarkersManager.openPopup(id);
+      searchMarkersManager.jumpToMarker(id);
+    };
+
+    resultList.appendChild(resultItem);
+  });
+  resultsManager.append(resultList);
+}
 
 /***/ }),
 
@@ -39066,7 +39311,40 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("section", [
-      _c("div", { staticClass: "map", attrs: { id: "map" } }),
+      _vm._v("CIAO\n    "),
+      _c("div", { staticClass: "map-view" }, [
+        _c("div", { staticClass: "tt-side-panel" }, [
+          _c("header", { staticClass: "tt-side-panel__header" }),
+          _vm._v(" "),
+          _c("div", { staticClass: "tt-tabs js-tabs" }, [
+            _c("div", { staticClass: "tt-tabs__panel" }, [
+              _c("div", {
+                staticClass: "js-results",
+                attrs: { hidden: "hidden" },
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "js-results-loader",
+                  attrs: { hidden: "hidden" },
+                },
+                [
+                  _c("div", { staticClass: "loader-center" }, [
+                    _c("span", { staticClass: "loader" }),
+                  ]),
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", {
+                staticClass: "tt-tabs__placeholder js-results-placeholder",
+              }),
+            ]),
+          ]),
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "full-map", attrs: { id: "map" } }),
+      ]),
     ])
   },
 ]
@@ -55046,7 +55324,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Navbar', _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Index', _components_Index_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Location', _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Hostapp', _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__["default"]); // Vue.component('Navbar', require('./components/Navbar.vue'));
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Hostapp', _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('map-component', __webpack_require__(/*! ./components/Map.vue */ "./resources/js/components/Map.vue")["default"]); // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -55270,14 +55549,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*****************************************!*\
   !*** ./resources/js/components/Map.vue ***!
   \*****************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Map_vue_vue_type_template_id_479a2f41___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Map.vue?vue&type=template&id=479a2f41& */ "./resources/js/components/Map.vue?vue&type=template&id=479a2f41&");
 /* harmony import */ var _Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Map.vue?vue&type=script&lang=js& */ "./resources/js/components/Map.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Map_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Map.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/Map.vue?vue&type=style&index=0&lang=scss&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _Map_vue_vue_type_style_index_0_lang_scss___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Map.vue?vue&type=style&index=0&lang=scss& */ "./resources/js/components/Map.vue?vue&type=style&index=0&lang=scss&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55309,13 +55589,15 @@ component.options.__file = "resources/js/components/Map.vue"
 /*!******************************************************************!*\
   !*** ./resources/js/components/Map.vue?vue&type=script&lang=js& ***!
   \******************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Map.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Map.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Map_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
@@ -56019,8 +56301,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\user\Boolean\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
