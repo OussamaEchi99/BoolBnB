@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container">
-        <h1>Locations</h1>
+        <h1>Messaggi ricevuti per le tue location</h1>
         @if (!$locations->isEmpty())
         <ul class="list-group">
             @foreach ($locations as $location)
@@ -14,7 +14,7 @@
             @endforeach
         </ul>
         @else
-            <div>Non hai ancora inserito annunci</div>
+            <div>Non hai ancora inserito delle location</div>
         @endif
     </div>
 @endsection

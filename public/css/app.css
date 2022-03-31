@@ -4620,6 +4620,10 @@ a {
   border-radius: 25px;
 }
 
+.my_d_none {
+  display: none;
+}
+
 .header .btn-menu {
   background-color: lightblue;
   border-radius: 25px;

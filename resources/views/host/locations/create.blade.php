@@ -17,8 +17,6 @@
                 </div>
             @endif
 
-            <button onclick="getApi()">Calcola coordinate</button>
-
             <form action="{{ route('host.locations.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 @method('POST')
@@ -52,18 +50,6 @@
                  <div class="mb-3">
                     <label for="number" class="form-label">Numero civico:</label>
                     <input type="text" required min="1" max="15000" class="form-control" id="number" name="number" value="{{ old('number') }}">
-                </div>
-
-                {{-- LAT --}}
-                <div class="mb-3">
-                    <label for="lat" class="form-label">Latitudine:</label>
-                    <input readonly type="number" class="form-control" id="lat" name="lat" value="{{ old('lat') }}">
-                </div>
-
-                {{-- LONG --}}
-                <div class="mb-3">
-                    <label for="long" class="form-label">Longitudine:</label>
-                    <input readonly type="number" class="form-control" id="long" name="long" value="{{ old('long') }}">
                 </div>
 
                 {{-- Visible --}}
@@ -142,15 +128,16 @@
                 </div>
 
                 {{-- Description --}}
-                <div class="mb-3">
+                <div id="description" class="mb-3">
                     <label for="description" class="form-label">Descrizione:</label>
                     <textarea class="form-control" maxlength="60000" name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
                 </div>
 
                 {{-- Create Button --}}
-                <button type="submit" class="btn btn-primary">Crea</button>
+                <button id="send" style="display: none" type="submit" class="btn btn-primary">Crea</button>
 
             </form>
+            <button onclick="getApi()" class="btn btn-primary">Crea</button>
         </div>
     </section>
 @endsection
@@ -181,6 +168,12 @@
                 longitudine = response.data.results[0].position.lon;
                 document.getElementById("lat").value = latitudine;
                 document.getElementById("long").value = longitudine;
+                createButton();
             });
-        };
+    };
+
+    function createButton(){
+        document.getElementById("send").click();
+    };
+
 </script>

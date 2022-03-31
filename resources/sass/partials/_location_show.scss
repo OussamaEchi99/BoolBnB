@@ -3,16 +3,17 @@ section#show {
     height: calc(100vh - 100px);
     overflow-y: auto;
 
-    h1{
+    h1 {
         text-align: center;
     }
 
-    .big_picture{
+    .big_picture {
         height: 50vh;
         margin: auto;
         display: flex;
     }
 
+<<<<<<< HEAD
     .button {
         cursor: pointer;
         font-weight: 500;
@@ -47,3 +48,6 @@ section#show {
         color: white;
       }
 }
+=======
+}
+>>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b
