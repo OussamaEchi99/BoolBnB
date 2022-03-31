@@ -15,7 +15,7 @@ class AddUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('lastname', 50)->after('name')->nullable();
-            $table->tinyInteger('phone')->after('password')->nullable();
+            $table->string('phone',50)->after('password')->nullable();
             $table->date('birth')->after('phone')->nullable();
         });
     }

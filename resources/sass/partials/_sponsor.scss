@@ -1,0 +1,18 @@
+section#sponsor {
+    
+    .location{
+        border: 1px solid lightgray;
+        margin: 10px 0;
+        padding: 15px 15px;
+        border-radius: 50px;
+    }
+
+    .location-name {
+        display: inline-block;
+        line-height: 35px;
+    }
+
+    .gold{
+        background-color: yellow;
+    }
+}

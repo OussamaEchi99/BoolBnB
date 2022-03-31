@@ -24,8 +24,6 @@ class CreateLocationSponsorTable extends Migration
                 ->references('id')
                 ->on('sponsors');
 
-            $table->primary(['location_id', 'sponsor_id']);
-
             $table->dateTime('start');
             $table->dateTime('end');
         });

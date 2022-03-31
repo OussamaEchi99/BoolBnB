@@ -15,7 +15,6 @@ return [
     |
     */
 
-    'exposed_headers' => ['Authorization'],
 
 
     'paths' => ['api/*'],
@@ -28,7 +27,7 @@ return [
 
     'allowed_headers' => ['*'],
 
-    // 'exposed_headers' => true,
+    'exposed_headers' => false,
 
     'max_age' => false,
 

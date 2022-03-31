@@ -4614,6 +4614,12 @@ a {
   color: inherit;
 }
 
+.subscription {
+  border: 1px solid lightgray;
+  padding: 6px 15px;
+  border-radius: 25px;
+}
+
 .header .btn-menu {
   background-color: lightblue;
   border-radius: 25px;
@@ -4699,6 +4705,60 @@ section#host-dashboard a.fast-actions-btn span.fast-action-icon {
   display: inline-block;
   font-size: 30px;
   margin-right: 10px;
+}
+
+section#show {
+  height: calc(100vh - 100px);
+  overflow-y: auto;
+}
+
+section#show h1 {
+  text-align: center;
+}
+
+section#show .big_picture {
+  height: 50vh;
+  margin: auto;
+  display: flex;
+}
+
+section#sponsor .location {
+  border: 1px solid lightgray;
+  margin: 10px 0;
+  padding: 15px 15px;
+  border-radius: 50px;
+}
+
+section#sponsor .location-name {
+  display: inline-block;
+  line-height: 35px;
+}
+
+section#sponsor .gold {
+  background-color: yellow;
+}
+
+::-webkit-scrollbar {
+  width: 0.6em;
+  height: 0.4em;
+  border-radius: 4px;
+  background: rgba(211, 211, 211, 0);
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #add8e6;
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #93cde2;
+  border: none;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background-color: #add8e6;
+  border: none;
 }
 
 /*!
@@ -15663,6 +15723,7 @@ a.text-dark:focus {
   }
 }
 
+<<<<<<< HEAD
 .mapboxgl-map {
   font: 12px/20px Helvetica Neue, Arial, Helvetica, sans-serif;
   overflow: hidden;
@@ -16460,5 +16521,9 @@ a.mapboxgl-ctrl-logo.mapboxgl-compact {
 .mapboxgl-canvas,
 .mapboxgl-popup-close-button {
   outline: none;
+=======
+.previous-image img {
+  width: 180px;
+>>>>>>> 922bbe27a55b34421ebf92aa3d535d6c6592ea6b
 }
 

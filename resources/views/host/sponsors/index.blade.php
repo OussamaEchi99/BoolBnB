@@ -1,67 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <h1>Sponsorizza i tuoi appartamenti</h1>
-    @if (!$locations->isEmpty())
-        @foreach ($locations as $location)
-            <div class="row location">
-                <div class="col-6">
-                    <a href="#">{{ $location->name }}</a>
-                </div>
-
-                <div class="col-6 d-flex">
-                    @foreach ($sponsors as $sponsor)
-                        <div class="mx-4">
-                            <a class="subscription $sponsor->subscription ? $sponsor->subscription : '' " href="#">{{ $sponsor->subscription }}</a>
+    <section id="sponsor">
+        <div class="container">
+            <h1>Sponsorizza i tuoi appartamenti</h1>
+            @if (!$locations->isEmpty())
+                @foreach ($locations as $location)
+                    <div class="row location">
+                        <div class="col-6">
+                            <a class="location-name" href="#">{{ $location->name }}</a>
                         </div>
-                    @endforeach
-                </div>
-            </div>
-        @endforeach
-    @else
-        <span>Non hai ancora nessun annuncio</span>
-    @endif
-    
-</div>
+        
+                        <div class="col-6 d-flex">
+                            @foreach ($sponsors as $sponsor)
+                                <div class="mx-4">
+                                    {{-- <a id="sponsor" class="subscription" href="#">{{ $sponsor->subscription }}</a> --}}
+                                    <button type="button" class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endforeach
+            @else
+                <span>Non hai ancora nessun annuncio</span>
+            @endif
+            
+        </div>
+    </section>
 @endsection
 
+{{-- SCRIPT --}}
 <script>
-    var button = document.querySelector('#submit-button');
 
-    braintree.dropin.create({
-        authorization: "{{ Braintree_ClientToken::generate() }}",
-        container: '#dropin-container'
-        }, function (createErr, instance) {
-        button.addEventListener('click', function () {
-            instance.requestPaymentMethod(function (err, payload) {
-            $.get('{{ route('payment.process') }}', {payload}, function (response) {
-                if (response.success) {
-                alert('Payment successfull!');
-                } else {
-                alert('Payment failed');
-                }
-            }, 'json');
-            });
+    function saveSponsor(locationId, sponsorId) {
+
+        // Mando i dati nel controller per salvarli nel db
+        axios.post('/api/sponsors/store', {
+            location_id: locationId,
+            sponsor_id: sponsorId
         });
-    });
-  </script>
-
-<style>
-    .location{
-        border: 1px solid lightgray;
-        padding: 15px 15px;
-        border-radius: 25px;
-    }
-
-    .subscription{
-        border: 1px solid lightgray;
-        padding: 6px 15px;
-        border-radius: 25px;
-    }
-
-    .gold{
-        background-color: yellow;
-    }
-
-</style>
+    };
+    
+</script>

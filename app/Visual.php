@@ -8,6 +8,7 @@ class Visual extends Model
 {
     protected $fillable = [
         'ip',
+        // 'date',
         'location_id'
     ];
 

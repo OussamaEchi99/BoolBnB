@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Location;
 use App\Category;
 use App\Feature;
+use App\Sponsor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -20,10 +21,10 @@ class LocationController extends Controller
      */
     public function index()
     {
-        $locations = Location::all();
-
+        // $locations = Location::all();
+        $locations_filtered = Location::where('user_id','=',Auth::id())->get();
         $data = [
-            'locations' => $locations
+            'locations' => $locations_filtered
         ];
 
         return view('host.locations.index', $data);
@@ -55,13 +56,16 @@ class LocationController extends Controller
      */
     public function store(Request $request)
     {
+        // Prendo i dati che mi arrivano dal create
         $form_data = $request->all();
 
+        // Faccio la validazione
         $request->validate($this->getValidationRules());
+        
         $new_location = new Location();
-
         $new_location->fill($form_data);
 
+        // Creao uno slug univoco
         $new_location->slug = $this->getUniqueSlugFromName($form_data['name']);
 
         // Save Cover Img
@@ -74,8 +78,10 @@ class LocationController extends Controller
             $new_location->photo = $img_path;
         }
 
+        // Aggiungo il proprietario della locations
         $new_location->user_id = Auth::id();
 
+        // Salvo nel DB
         $new_location->save();
 
         // Se sono presenti servizi, li salvo nel database
@@ -95,9 +101,11 @@ class LocationController extends Controller
     public function show($id)
     {
         $location = Location::findOrFail($id);
+        $sponsors = Sponsor::all();
 
         $data = [
-            'location' => $location
+            'location' => $location,
+            'sponsors' => $sponsors
         ];
 
         return view('host.locations.show', $data);
@@ -145,18 +153,26 @@ class LocationController extends Controller
             $form_data['slug'] = Location::getUniqueSlugFromName($form_data['name']);
         }
 
-        if(in_array('photo', $form_data)) {
+        if($form_data['image']) {
             // Cancella il file precedente
             if($location->photo) {
                 Storage::delete($location->photo);
             }
 
             // Upload del nuovo file
-            $img_path = Storage::put('location_photos', $form_data['photo']);
+            $img_path = Storage::put('location_photos', $form_data['image']);
 
             // Salva nella colonna photo il path al nuovo file
             $form_data['photo'] = $img_path;
         }
+
+        // if($form_data['image']) {
+        //     if($post->cover) {
+        //         Storage::delete($post->cover);
+        //     }
+        //     $img_path = Storage::put('post_covers', $form_data['image']);
+        //     $form_data['cover'] = $img_path;
+        // }
 
         $location->update($form_data);
 
