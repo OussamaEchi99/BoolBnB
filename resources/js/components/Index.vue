@@ -8,24 +8,28 @@
                 <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
             </select>
 
+            <!-- Search -->
+            <input v-model="pageSearchText" @keyup="locationResearchFunction()" type="text" placeholder="Cerca una città">
+                
+            <div class="element row">
+                <div class="col-12 col-md-6 single-location" v-for="location in locations" :key="location.id">
+                            
+                    <!-- Single Location -->
+                    <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
+                        <div class="single_element">
+                            <strong class="title">{{location.name}}</strong>
+                            <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
+                            <p v-if="location.description" class="description">{{truncateText(location.description, 150)}}</p>
+                            <span class="price">{{location.price}}€ a notte</span>
+                        </div>
+                    </router-link>
 
-            <div class="elements row">
-                
-                    <h3 v-if="locations.length < 1">Non ci sono location con questa categoria</h3>
-                    
-                    <div v-else class="col-12 col-md-6" v-for="location in locations" :key="location.id">
-                        <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
-                            <div class="single_element">
-                                <strong class="title">{{location.name}}</strong>
-                                <img class="main_img" v-if="location.photo" :src="location.photo" alt="location.name">
-                                <p v-if="location.description" class="description">{{truncateText(location.description, 150)}}</p>
-                                <span class="price">{{location.price}}€ a notte</span>
-                            </div>
-                        </router-link>
-                    </div>
-                    
-                
+                </div>
             </div>
+
+
+            <!-- PAGINATION -->
+
             <!-- <nav>
                 <ul class="pagination">
                     <li class="page-item" :class="{ 'disabled': currentPage == 1 }">
@@ -42,6 +46,8 @@
                     </li>
                 </ul>
             </nav> -->
+
+
         </div>
     </section>
 </template>
@@ -49,11 +55,16 @@
 <script>
 export default {
     name: 'Index',
+    props: {
+        searchText: String
+    },
     data: function() {
         return {
             locations: [],
             locationId: "",
-            categories: {}
+            categories: {},
+            // filteredLocation: [],
+            pageSearchText: "",
             // currentPage: 1,
             // lastPage: false
         };
@@ -70,7 +81,9 @@ export default {
                 this.locations = response.data.results;
                 // this.currentPage = response.data.results.current_page;
                 // this.lastPage = response.data.results.last_page;
-                console.log(response);
+                // console.log(response);
+                // this.filteredSearchLocation();
+
             });
         },
         getCategories: function() {
@@ -84,7 +97,55 @@ export default {
                 return text.substr(0, maxCharsNumber) + '...';
             }
             return text;
-        }
+        },
+        // filteredSearchLocation: function() {
+
+        //     for (let i = 0; i < this.locations.length; i++) {
+        //         let singleLocation = this.locations[i]
+        //         if ( singleLocation.city.toLowerCase().includes(this.searchText.toLowerCase()) ) {
+        //             this.filteredLocation.push(singleLocation);
+        //         }
+                
+        //     }
+        // },
+        // Questa funzione permette di ricercare nella barra di ricerca una location,
+        // risolvendo anche il problema di lettere maiuscole e minuscole,
+        // dato che per lavorare trasforma tutto con toLowerCase().
+        locationResearchFunction() {
+            this.locations.forEach((element) => {
+                // console.log(element.city);
+                let allLocations = document.querySelector('.single-location');
+                // console.log(locations.classList)
+
+                let searchText = this.pageSearchText.toLowerCase();
+                let locationCity = element.city.toLowerCase();
+
+                if( !locationCity.includes(searchText) ) {
+                    
+                    // console.log(locations.classList)
+
+                    // console.log(allLocations.classList);
+
+                    allLocations.classList.add("d-none");
+                    console.log(allLocations.classList);
+
+
+                } else {
+
+                    // allLocations.classList.remove("d-none");
+
+                    
+                    // if( allLocations.classList.find("d-none") ) {
+                        // allLocations.classList.remove("d-none");
+                    // }
+                    
+                    // console.log(singleLocation)
+                    
+
+
+                }
+            });
+        },
     },
     created: function() {
         this.getLocations();

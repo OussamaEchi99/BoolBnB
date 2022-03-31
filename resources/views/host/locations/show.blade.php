@@ -66,13 +66,30 @@
                 </form>
             </div>
 
+            <payament-section><payament-section/>
+
+            <location-map :lng="{{ $location -> long }}" :lat="{{ $location -> lat }}"></location-map>
+
         </div>
     </section>
 @endsection
 
-{{-- SCRIPT --}}
-<script>
+{{-- <script>
+    var button = document.querySelector('#submit-button');
 
+<<<<<<< HEAD
+braintree.dropin.create({
+  authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
+  selector: '#dropin-container'
+}, function (err, instance) {
+  button.addEventListener('click', function () {
+    instance.requestPaymentMethod(function (err, payload) {
+      // Submit payload.nonce to your server
+    });
+  })
+});
+</script> --}}
+=======
     function saveSponsor(locationId, sponsorId) {
 
         // Mando i dati nel controller per salvarli nel db
@@ -83,3 +100,4 @@
     };
 
 </script>
+>>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b

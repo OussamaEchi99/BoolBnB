@@ -14,8 +14,30 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {{-- script mappa --}}
     {{-- <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps-web.min.js'></script> --}}
+    
     <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps-web.min.js'></script>
+<<<<<<< HEAD
     {{-- <script> (function(){ window.SS = window.SS || {}; SS.Require = function (callback){ if (typeof callback === 'function') { if (window.SS && SS.EventTrack) { callback(); } else { var siteSpect = document.getElementById('siteSpectLibraries'); var head = document.getElementsByTagName('head')[0]; if (siteSpect === null && typeof head !== 'undefined') { siteSpect = document.createElement('script'); siteSpect.type = 'text/javascript'; siteSpect.src = '/__ssobj/core.js+ssdomvar.js+generic-adapter.js';siteSpect.async = true; siteSpect.id = 'siteSpectLibraries'; head.appendChild(siteSpect); } if (window.addEventListener){ siteSpect.addEventListener('load', callback, false); } else { siteSpect.attachEvent('onload', callback, false); } } } };})(); </script> --}}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {{-- <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script> --}}
+    <script src="https://js.braintreegateway.com/web/dropin/1.33.0/js/dropin.js"></script>
+=======
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/services/services-web.min.js'></script>
+    <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.12//SearchBox-web.js'></script>
+
+    {{-- assets --}}
+    {{-- <script type='text/javascript' src="{{ asset('js/search-markers/search-marker.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/search/search-results-parser.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/search-markers/search-markers-manager.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/info-hint.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/mobile-or-tablet.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/search/results-manager.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/search/side-panel.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/search/dom-helpers.js') }}"></script>
+    <script type='text/javascript' src="{{ asset('js/formatters.js') }}"></script> --}}
+>>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -25,8 +47,11 @@
     {{-- stile mappa --}}
     {{-- <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/<version>/maps/maps.css'/> --}}
     <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.18.0/maps/maps.css'>
+    {{-- <link href="{{ asset('css/ui-library/index.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/ui-library/icons-css/poi.css') }}" rel="stylesheet" type="text/css"> --}}
 
-
+    {{-- search tomtom --}}
+    <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/plugins/SearchBox/3.1.12//SearchBox.css'/>
 </head>
 <body>
     <div id="app">
