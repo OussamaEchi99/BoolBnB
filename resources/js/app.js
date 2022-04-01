@@ -26,14 +26,16 @@ import Hostapp from './views/Hostapp.vue';
  * Eg. ./components/ExampleComponent.vue -> <example-component></example-component>
  */
 
-// const files = require.context('./', true, /\.vue$/i)
-// files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
+const files = require.context('./', true, /\.vue$/i)
+files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('Navbar', Navbar);
 Vue.component('Index', Index);
 Vue.component('Location', Location);
 Vue.component('Hostapp', Hostapp);
+
+Vue.component('map-component', require('./components/Map.vue').default);
 // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 
@@ -51,3 +53,4 @@ const app = new Vue({
     //     'Navbar' : require('./components/Navbar.vue'),
     // }
 });
+
