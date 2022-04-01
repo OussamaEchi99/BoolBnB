@@ -48,11 +48,6 @@ export default {
             }) 
         }
     },
-    // mounted() {
-    //     console.log('map mounted');
-    //     this.getMap();
-        
-    // }
 }
 </script>
 
