@@ -205,9 +205,6 @@
                 longitudine = response.data.results[0].position.lon;
                 document.getElementById("lat").value = latitudine;
                 document.getElementById("long").value = longitudine;
-
-                console.log(latitudine)
-                console.log(longitudine)
                 createButton();
             });
         };
