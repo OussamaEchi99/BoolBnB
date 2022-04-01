@@ -6,10 +6,10 @@
 // fonte https://developer.tomtom.com/blog/build-different/using-tomtom-maps-vue-3
 export default {
     name: 'LocationMap',
-    props: {
-        lng: 11.349230,
-        lat: 45.710370,
-    },
+    // props: {
+    //     lng: 11.349230,
+    //     lat: 45.710370,
+    // },
     data() {
         return {
             apiKey: 'jRVJgpmxvidkjvJmEfhDb7On6Yp71S6p', //tua key personale da developer.tomtom
@@ -48,11 +48,11 @@ export default {
             }) 
         }
     },
-    mounted() {
-        console.log('map mounted');
-        this.getMap();
+    // mounted() {
+    //     console.log('map mounted');
+    //     this.getMap();
         
-    }
+    // }
 }
 </script>
 

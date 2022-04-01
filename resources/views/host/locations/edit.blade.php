@@ -152,6 +152,16 @@
                 <textarea class="form-control" maxlength="60000" name="description" id="description" cols="30" rows="10">{{ old('description', $location->description) }}</textarea>
             </div>
 
+            {{-- LAT --}}
+            <div class="mb-3">
+                <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+            </div>
+
+            {{-- LONG --}}
+            <div class="mb-3">
+                <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+            </div>
+
             {{-- Edit Button --}}
             <button id="send" style="display: none" type="submit" class="btn btn-primary">Modifica</button>
 
