@@ -9,13 +9,11 @@
             </select>
 
             <!-- Search -->
-            <input v-model="searchText" type="text" placeholder="Cerca una città">
+            <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
 
             <label for="vol">Range ricerca</label>
             <input value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
-            {{distance}}
-
-            <button v-on:click="getCoordinates()">Trova la casa più adatta a te</button>
+            {{distance}}Km
                 
             <div class="element row my-4">
                 <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" class="col-12 col-md-6 single-location" v-for="location in locations" :key="location.id">
