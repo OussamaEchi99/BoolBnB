@@ -116,7 +116,6 @@ export default {
                     for (let i = 0; i < this.locations.length; i++) {
                         let single_location = this.locations[i];
                         if(this.getDistanceFromLatLonInKm(this.locations[i].lat,this.locations[i].long,this.searchLat,this.searchLon)>this.distance){
-                            // console.log(this.locations[i].lat , this.locations[i].long, this.searchLat, this.searchLon)
                             function addClass(){
                                 var el = document.getElementById(single_location.id);
                                 el.classList.add("hide");
