@@ -92,12 +92,12 @@
 
             {{-- LAT --}}
             <div class="mb-3">
-                <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="">
             </div>
 
             {{-- LONG --}}
             <div class="mb-3">
-                <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+                <input readonly type="number" class="form-control d-none" id="long" name="long" value="">
             </div>
 
             {{-- Category --}}
@@ -145,8 +145,6 @@
                     >
                 </div>
 
-                {{old('photo',$location->photo)}}
-
                 @if ($location->photo)
                 <div class="previous-image">
                     Immagine precedente:
@@ -191,7 +189,7 @@
         let address = document.getElementById("address").value;
         let number = document.getElementById("number").value;
 
-            axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
+            axios.get('https://api.tomtom.com/search/1/structuredGeocode.json', {
                 params: {
                     key: Ukey,
                     countryCode: UcountryCode,

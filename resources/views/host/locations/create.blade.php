@@ -108,12 +108,12 @@
 
                 {{-- LAT --}}
                 <div class="mb-3">
-                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="">
                 </div>
 
                 {{-- LONG --}}
                 <div class="mb-3">
-                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="">
                 </div>
 
                 {{-- Services --}}
@@ -176,20 +176,20 @@
 
             axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
                 params: {
-                    key: Ukey,
-                    countryCode: UcountryCode,
+                    key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+                    countryCode: 'IT',
                     municipality: city,
-                    streetName: address,
-                    streetNumber: number
+                    // streetName: address,
+                    // streetNumber: number
                 }
             })
             .then((response) => {
                 latitudine = response.data.results[0].position.lat;
                 longitudine = response.data.results[0].position.lon;
-                console.log(response);
                 document.getElementById("lat").value = latitudine;
                 document.getElementById("long").value = longitudine;
-                createButton();
+                console.log(response.data.results[0].position.lat)
+                // createButton();
             });
     };
 

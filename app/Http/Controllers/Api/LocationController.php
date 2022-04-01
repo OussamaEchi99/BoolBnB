@@ -18,7 +18,11 @@ class LocationController extends Controller
 
         $locations = Location::all();
         $categories = Category::all();
+        $sponsored = [];
 
+        // foreach($locations as $location){
+        //     dd($location->sponsors);
+        // }
         // $category = Category::where('id', '=', $category)->first();
 
         // $filtered_locations = [];
