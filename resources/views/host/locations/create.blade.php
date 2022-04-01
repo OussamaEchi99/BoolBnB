@@ -119,6 +119,16 @@
                     @endforeach
                 </div>
 
+                {{-- LAT --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                </div>
+
+                {{-- LONG --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+                </div>
+
                 {{-- Location Photo --}}
                 <div class="mb-3">
                     <label for="photo" class="form-label">Immagine:</label>
