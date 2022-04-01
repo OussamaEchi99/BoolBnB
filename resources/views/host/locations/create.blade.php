@@ -106,6 +106,16 @@
                     </div>
                 </div>
 
+                {{-- LAT --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                </div>
+
+                {{-- LONG --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+                </div>
+
                 {{-- Services --}}
                 <div class="mb-3">
                     <span>Servizi:</span>
@@ -176,6 +186,7 @@
             .then((response) => {
                 latitudine = response.data.results[0].position.lat;
                 longitudine = response.data.results[0].position.lon;
+                console.log(response);
                 document.getElementById("lat").value = latitudine;
                 document.getElementById("long").value = longitudine;
                 createButton();
