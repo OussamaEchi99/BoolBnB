@@ -55,5 +55,7 @@ const app = new Vue({
     // }
 });
 
+<<<<<<< HEAD
 const checkout = require('../routes/checkout');
 app.use('/checkout', checkout);
+>>>>>>> 12beef58f2fa56cfe869e51ab2662a53aed0e09e

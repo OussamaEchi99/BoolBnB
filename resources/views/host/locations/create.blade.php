@@ -106,6 +106,16 @@
                     </div>
                 </div>
 
+                {{-- LAT --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                </div>
+
+                {{-- LONG --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+                </div>
+
                 {{-- Services --}}
                 <div class="mb-3">
                     <span>Servizi:</span>
@@ -133,6 +143,16 @@
                     <textarea class="form-control" maxlength="60000" name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
                 </div>
 
+                {{-- LAT --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                </div>
+
+                {{-- LONG --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+                </div>
+
                 {{-- Create Button --}}
                 <button id="send" style="display: none" type="submit" class="btn btn-primary">Crea</button>
 
@@ -141,7 +161,7 @@
         </div>
     </section>
 @endsection
-{{-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> --}}
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     let latitudine = 0;
     let longitudine = 0;
@@ -166,6 +186,7 @@
             .then((response) => {
                 latitudine = response.data.results[0].position.lat;
                 longitudine = response.data.results[0].position.lon;
+                console.log(response);
                 document.getElementById("lat").value = latitudine;
                 document.getElementById("long").value = longitudine;
                 createButton();
