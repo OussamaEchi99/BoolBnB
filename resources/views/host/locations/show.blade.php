@@ -77,7 +77,6 @@
 {{-- <script>
     var button = document.querySelector('#submit-button');
 
-<<<<<<< HEAD
 braintree.dropin.create({
   authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
   selector: '#dropin-container'
@@ -89,15 +88,13 @@ braintree.dropin.create({
   })
 });
 </script> --}}
-=======
-    function saveSponsor(locationId, sponsorId) {
+    {{-- function saveSponsor(locationId, sponsorId) {
 
         // Mando i dati nel controller per salvarli nel db
         axios.post('/api/sponsors/store', {
             location_id: locationId,
             sponsor_id: sponsorId
         });
-    };
+    }; --}}
 
-</script>
->>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b
+{{-- </script> --}}
