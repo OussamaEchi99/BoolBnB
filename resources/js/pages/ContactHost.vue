@@ -4,7 +4,7 @@
             <div class="container">
                 <h1>Contatta l'Host</h1>
 
-                <div v-if="success">Email sent succesfully</div>
+                <div v-if="success"><h3 style="color:green">L'Email è stata inviata correttamente!</h3></div>
 
                 <form>
                     <div class="mb-3">

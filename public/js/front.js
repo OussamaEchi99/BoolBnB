@@ -1962,43 +1962,40 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
-  props: {
-    searchText: String
-  },
   data: function data() {
     return {
       locations: [],
-      locationId: "",
-      categories: {},
-      // filteredLocation: [],
-      pageSearchText: "" // currentPage: 1,
+      tmpCategory: '',
+      categories: [],
+      searchText: '',
+      searchLat: 0,
+      searchLon: 0,
+      deg: 0,
+      distance: 20 // pageSearchText: "",
+      // currentPage: 1,
       // lastPage: false
 
     };
   },
   methods: {
-    getLocations: function getLocations() {
+    getLocationsAndCategories: function getLocationsAndCategories() {
       var _this = this;
 
-      axios.get('http://127.0.0.1:8000/api/locations', {
-        params: {
-          // page: pageNumber,
-          category: this.locationId
-        }
+      axios.get('http://127.0.0.1:8000/api/locations', {// params: {
+        //     // page: pageNumber,
+        //     category: this.locationId
+        // }
       }).then(function (response) {
-        _this.locations = response.data.results; // this.currentPage = response.data.results.current_page;
+        _this.locations = response.data.results.locations;
+        _this.categories = response.data.results.categories; // this.currentPage = response.data.results.current_page;
         // this.lastPage = response.data.results.last_page;
-        // console.log(response);
-        // this.filteredSearchLocation();
-      });
-    },
-    getCategories: function getCategories() {
-      var _this2 = this;
-
-      axios.get('http://127.0.0.1:8000/api/categories').then(function (response) {
-        _this2.categories = response.data.results;
       });
     },
     truncateText: function truncateText(text, maxCharsNumber) {
@@ -2008,45 +2005,77 @@ __webpack_require__.r(__webpack_exports__);
 
       return text;
     },
-    // filteredSearchLocation: function() {
-    //     for (let i = 0; i < this.locations.length; i++) {
-    //         let singleLocation = this.locations[i]
-    //         if ( singleLocation.city.toLowerCase().includes(this.searchText.toLowerCase()) ) {
-    //             this.filteredLocation.push(singleLocation);
-    //         }
-    //     }
-    // },
-    // Questa funzione permette di ricercare nella barra di ricerca una location,
-    // risolvendo anche il problema di lettere maiuscole e minuscole,
-    // dato che per lavorare trasforma tutto con toLowerCase().
-    locationResearchFunction: function locationResearchFunction() {
-      var _this3 = this;
+    getCoordinates: function getCoordinates() {
+      var _this2 = this;
 
-      this.locations.forEach(function (element) {
-        // console.log(element.city);
-        var allLocations = document.querySelector('.single-location'); // console.log(locations.classList)
+      if (this.searchText.length > 1) {
+        axios.get('https://api.tomtom.com/search/2/structuredGeocode.json', {
+          params: {
+            key: 'R6KZnN9ipu52EGyKlInZsrp7MMTUJZP2',
+            countryCode: 'IT',
+            municipality: this.searchText
+          }
+        }).then(function (response) {
+          _this2.searchLat = response.data.results[0].position.lat;
+          _this2.searchLon = response.data.results[0].position.lon;
 
-        var searchText = _this3.pageSearchText.toLowerCase();
+          for (var i = 0; i < _this2.locations.length; i++) {
+            var single_location = _this2.locations[i];
+            var el = document.getElementById(single_location.id);
+            el.classList.remove("hide");
+          }
 
-        var locationCity = element.city.toLowerCase();
+          ;
 
-        if (!locationCity.includes(searchText)) {
-          // console.log(locations.classList)
-          // console.log(allLocations.classList);
-          allLocations.classList.add("d-none");
-          console.log(allLocations.classList);
-        } else {// allLocations.classList.remove("d-none");
-          // if( allLocations.classList.find("d-none") ) {
-          // allLocations.classList.remove("d-none");
-          // }
-          // console.log(singleLocation)
+          var _loop = function _loop(_i) {
+            var single_location = _this2.locations[_i];
+
+            if (_this2.getDistanceFromLatLonInKm(_this2.locations[_i].lat, _this2.locations[_i]["long"], _this2.searchLat, _this2.searchLon) > _this2.distance) {
+              // console.log(this.locations[i].lat , this.locations[i].long, this.searchLat, this.searchLon)
+              var addClass = function addClass() {
+                var el = document.getElementById(single_location.id);
+                el.classList.add("hide");
+              };
+
+              addClass();
+            }
+          };
+
+          for (var _i = 0; _i < _this2.locations.length; _i++) {
+            _loop(_i);
+          }
+        });
+      } else {
+        for (var i = 0; i < this.locations.length; i++) {
+          var single_location = this.locations[i];
+          var el = document.getElementById(single_location.id);
+          el.classList.remove("hide");
         }
-      });
+
+        ;
+      }
+    },
+    // getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+    getDistanceFromLatLonInKm: function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
+      function deg2rad(deg) {
+        return deg * (Math.PI / 180);
+      }
+
+      var R = 6371; // Radius of the earth in km
+
+      var dLat = deg2rad(lat2 - lat1); // deg2rad below
+
+      var dLon = deg2rad(lon2 - lon1);
+      var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+      var d = R * c; // Distance in km
+      // console.log(d)
+
+      return d;
     }
   },
   created: function created() {
-    this.getLocations();
-    this.getCategories();
+    this.getLocationsAndCategories();
   }
 });
 
@@ -2275,6 +2304,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -2542,7 +2575,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.single_element[data-v-bb962f12] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  border-radius: 20px;\n}\n.single_element .title[data-v-bb962f12] {\n  font-size: 30px;\n}\n.single_element .main_img[data-v-bb962f12] {\n  width: 100%;\n  height: 300px;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.single_element .description[data-v-bb962f12] {\n  margin: 20px 0;\n}", ""]);
+exports.push([module.i, ".no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.single_element[data-v-bb962f12] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  border-radius: 20px;\n}\n.single_element .title[data-v-bb962f12] {\n  font-size: 30px;\n}\n.single_element .main_img[data-v-bb962f12] {\n  width: 100%;\n  height: 300px;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.single_element .description[data-v-bb962f12] {\n  margin: 20px 0;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -3814,33 +3847,30 @@ var render = function () {
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.locationId,
-              expression: "locationId",
+              value: _vm.tmpCategory,
+              expression: "tmpCategory",
             },
           ],
           staticClass: "form-select",
           attrs: { "aria-label": "Default select example" },
           on: {
-            change: [
-              function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.locationId = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
-              _vm.getLocations,
-            ],
+            change: function ($event) {
+              var $$selectedVal = Array.prototype.filter
+                .call($event.target.options, function (o) {
+                  return o.selected
+                })
+                .map(function (o) {
+                  var val = "_value" in o ? o._value : o.value
+                  return val
+                })
+              _vm.tmpCategory = $event.target.multiple
+                ? $$selectedVal
+                : $$selectedVal[0]
+            },
           },
         },
         [
-          _c("option", { attrs: { value: "", selected: "" } }, [
+          _c("option", { attrs: { selected: "" }, domProps: { value: 0 } }, [
             _vm._v("Tutte"),
           ]),
           _vm._v(" "),
@@ -3860,34 +3890,75 @@ var render = function () {
           {
             name: "model",
             rawName: "v-model",
-            value: _vm.pageSearchText,
-            expression: "pageSearchText",
+            value: _vm.searchText,
+            expression: "searchText",
           },
         ],
         attrs: { type: "text", placeholder: "Cerca una città" },
-        domProps: { value: _vm.pageSearchText },
+        domProps: { value: _vm.searchText },
         on: {
-          keyup: function ($event) {
-            return _vm.locationResearchFunction()
-          },
           input: function ($event) {
             if ($event.target.composing) {
               return
             }
-            _vm.pageSearchText = $event.target.value
+            _vm.searchText = $event.target.value
           },
         },
       }),
       _vm._v(" "),
+      _c("label", { attrs: { for: "vol" } }, [_vm._v("Range ricerca")]),
+      _vm._v(" "),
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.distance,
+            expression: "distance",
+          },
+        ],
+        attrs: {
+          value: "20",
+          type: "range",
+          id: "range",
+          name: "range",
+          min: "10",
+          max: "50",
+        },
+        domProps: { value: _vm.distance },
+        on: {
+          __r: function ($event) {
+            _vm.distance = $event.target.value
+          },
+        },
+      }),
+      _vm._v("\n        " + _vm._s(_vm.distance) + "\n\n        "),
+      _c(
+        "button",
+        {
+          on: {
+            click: function ($event) {
+              return _vm.getCoordinates()
+            },
+          },
+        },
+        [_vm._v("Trova la casa più adatta a te")]
+      ),
+      _vm._v(" "),
       _c(
         "div",
-        { staticClass: "element row" },
+        { staticClass: "element row my-4" },
         _vm._l(_vm.locations, function (location) {
           return _c(
             "div",
             {
               key: location.id,
               staticClass: "col-12 col-md-6 single-location",
+              class:
+                location.category_id != _vm.tmpCategory && _vm.tmpCategory != 0
+                  ? "hide"
+                  : "show",
+              attrs: { id: location.id },
             },
             [
               _c(
@@ -3907,12 +3978,15 @@ var render = function () {
                       _vm._v(_vm._s(location.name)),
                     ]),
                     _vm._v(" "),
-                    location.photo
-                      ? _c("img", {
-                          staticClass: "main_img",
-                          attrs: { src: location.photo, alt: "location.name" },
-                        })
-                      : _vm._e(),
+                    _c("img", {
+                      staticClass: "main_img",
+                      attrs: {
+                        src: location.photo.includes("https:")
+                          ? location.photo
+                          : "http://127.0.0.1:8000/storage/" + location.photo,
+                        alt: "location.name",
+                      },
+                    }),
                     _vm._v(" "),
                     location.description
                       ? _c("p", { staticClass: "description" }, [
@@ -4091,7 +4165,13 @@ var render = function () {
       _c("div", { staticClass: "container" }, [
         _c("h1", [_vm._v("Contatta l'Host")]),
         _vm._v(" "),
-        _vm.success ? _c("div", [_vm._v("Email sent succesfully")]) : _vm._e(),
+        _vm.success
+          ? _c("div", [
+              _c("h3", { staticStyle: { color: "green" } }, [
+                _vm._v("L'Email è stata inviata correttamente!"),
+              ]),
+            ])
+          : _vm._e(),
         _vm._v(" "),
         _c("form", [
           _c("div", { staticClass: "mb-3" }, [
@@ -4293,44 +4373,46 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("h1", [_vm._v("Home")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.searchText,
-            expression: "searchText",
-          },
-        ],
-        attrs: { type: "text" },
-        domProps: { value: _vm.searchText },
-        on: {
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.searchText = $event.target.value
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c(
-        "router-link",
+  return _c("div", [
+    _c("h1", [_vm._v("Home")]),
+    _vm._v(" "),
+    _c("input", {
+      directives: [
         {
-          attrs: {
-            to: { name: "search", params: { homeSearch: _vm.searchText } },
-          },
+          name: "model",
+          rawName: "v-model",
+          value: _vm.searchText,
+          expression: "searchText",
         },
-        [_vm._v("\n            Cerca un appartamento\n    ")]
-      ),
-    ],
-    1
-  )
+      ],
+      attrs: { type: "text" },
+      domProps: { value: _vm.searchText },
+      on: {
+        input: function ($event) {
+          if ($event.target.composing) {
+            return
+          }
+          _vm.searchText = $event.target.value
+        },
+      },
+    }),
+    _vm._v(" "),
+    _c(
+      "button",
+      [
+        _c(
+          "router-link",
+          {
+            attrs: {
+              to: { name: "search", params: { homeSearch: _vm.searchText } },
+            },
+          },
+          [_vm._v("\n            Cerca un appartamento\n        ")]
+        ),
+      ],
+      1
+    ),
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

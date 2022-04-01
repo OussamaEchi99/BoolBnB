@@ -14,34 +14,35 @@ class LocationController extends Controller
         $data = $request->all();
         // dd($data);
 
-        $category = $data['category'];
+        // $category = $data['category'];
 
         $locations = Location::all();
+        $categories = Category::all();
 
-        $category = Category::where('id', '=', $category)->first();
+        // $category = Category::where('id', '=', $category)->first();
 
-        $filtered_locations = [];
+        // $filtered_locations = [];
 
-        foreach($locations as $location){
-            if(str_contains($location->photo, 'location_photos')){
-                $location->photo = url('storage/' . $location->photo);
-            }else{
-                $location->photo;
-            }
-        }
+        // foreach($locations as $location){
+        //     if(str_contains($location->photo, 'location_photos')){
+        //         $location->photo = url('storage/' . $location->photo);
+        //     }else{
+        //         $location->photo;
+        //     }
+        // }
 
-        if($category == '') {
-            return response()->json([
-                'success' => true,
-                'results' => $locations
-            ]);
-        } else {
-            foreach($locations as $location){
-                if($location->category_id == $category->id && $location->visible){
-                    $filtered_locations[] = $location;
-                }
-            }
-        }
+        // if($category == '') {
+        //     return response()->json([
+        //         'success' => true,
+        //         'results' => $locations
+        //     ]);
+        // } else {
+        //     foreach($locations as $location){
+        //         if($location->category_id == $category->id && $location->visible){
+        //             $filtered_locations[] = $location;
+        //         }
+        //     }
+        // }
 
         // if() {
             // foreach($locations as $location){
@@ -65,10 +66,13 @@ class LocationController extends Controller
 
         // dd($locations);
 
-        if(!empty($filtered_locations)) {
+        if(!empty($locations)) {
             return response()->json([
                 'success' => true,
-                'results' => $filtered_locations
+                'results' => [
+                    'locations' => $locations,
+                    'categories' => $categories
+                ]
             ]);
         } else {
             return response()->json([
