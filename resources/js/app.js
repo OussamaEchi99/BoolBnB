@@ -34,7 +34,6 @@ Vue.component('Navbar', Navbar);
 Vue.component('Index', Index);
 Vue.component('Location', Location);
 Vue.component('Hostapp', Hostapp);
-Vue.component('payament-section', require('./components/Payament.vue').default);
 
 Vue.component('map-component', require('./components/Map.vue').default);
 // Vue.component('Navbar', require('./components/Navbar.vue'));
@@ -55,5 +54,3 @@ const app = new Vue({
     // }
 });
 
-const checkout = require('../routes/checkout');
-app.use('/checkout', checkout);

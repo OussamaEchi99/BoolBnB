@@ -23,6 +23,14 @@
     <script src="http://code.jquery.com/jquery-3.2.1.min.js" crossorigin="anonymous"></script>
     {{-- <script src="https://js.braintreegateway.com/web/dropin/1.8.1/js/dropin.min.js"></script> --}}
     <script src="https://js.braintreegateway.com/web/dropin/1.33.0/js/dropin.js"></script>
+    
+    <script src="https://js.braintreegateway.com/web/3.38.1/js/client.min.js"></script>
+    <script src="https://js.braintreegateway.com/web/3.38.1/js/hosted-fields.min.js"></script>
+    <!-- Load PayPal's checkout.js Library. -->
+    <script src="https://www.paypalobjects.com/api/checkout.js" data-version-4 log-level="warn"></script>
+
+    <!-- Load the PayPal Checkout component. -->
+    <script src="https://js.braintreegateway.com/web/3.38.1/js/paypal-checkout.min.js"></script>
 
     {{-- assets --}}
     {{-- <script type='text/javascript' src="{{ asset('js/search-markers/search-marker.js') }}"></script>
