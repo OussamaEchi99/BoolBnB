@@ -90,6 +90,16 @@
                 <input type="number"  required min="0" class="form-control" id="price" name="price" value="{{ old('price', $location->price) }}">
             </div>
 
+            {{-- LAT --}}
+            <div class="mb-3">
+                <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+            </div>
+
+            {{-- LONG --}}
+            <div class="mb-3">
+                <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+            </div>
+
             {{-- Category --}}
             <div class="mb-3">
                 <label for="category_id" class="form-label">
@@ -195,9 +205,6 @@
                 longitudine = response.data.results[0].position.lon;
                 document.getElementById("lat").value = latitudine;
                 document.getElementById("long").value = longitudine;
-
-                console.log(latitudine)
-                console.log(longitudine)
                 createButton();
             });
         };
