@@ -35,7 +35,7 @@ class CheckoutController extends Controller
 		]);
 		$intent = $payment_intent->client_secret;
 
-		return view('host.credit-card',compact('intent'));
+		return view('host.credit-card',compact('intent', 'sponsorchosen'));
 
     }
 

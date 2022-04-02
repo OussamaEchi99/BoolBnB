@@ -17,7 +17,7 @@
         <div class="row justify-content-center">
             <div class="col-md-12">
                 <div class="">
-                    <span></span>
+                    <span>Importo da pagare: <strong>{{ $sponsorchosen->price }}€</strong></span>
                 </div>
                 <div class="card">
                     <form action="{{route('host.credit-card')}}"  method="post" id="payment-form">

@@ -49,7 +49,7 @@
             <div>
                 <h4>Sponsorizza la tua location:</h4>
                 @foreach ($sponsors as $sponsor)
-                <a class="subscription" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}"></a>
+                <a class="subscription" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}">{{ $sponsor->subscription }}</a>
                 @endforeach
             </div>
 
