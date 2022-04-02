@@ -62,4 +62,8 @@ class Location extends Model
 
         return $slug;
     }
+
+    public function activeSponsor(){
+        return $this->belongsToMany('App\Sponsor');
+    }
 }
