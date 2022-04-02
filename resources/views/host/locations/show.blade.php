@@ -49,7 +49,7 @@
             <div>
                 <h4>Sponsorizza la tua location:</h4>
                 @foreach ($sponsors as $sponsor)
-                <button class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button>
+                <a class="subscription" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}"></a>
                 @endforeach
             </div>
 
@@ -66,38 +66,55 @@
                 </form>
             </div>
 
-            <payament-section><payament-section/>
-
-            <location-map :lng="{{ $location -> long }}" :lat="{{ $location -> lat }}"></location-map>
-
+            {{-- <location-map :lng="{{ $location -> long }}" :lat="{{ $location -> lat }}"></location-map> --}}
         </div>
+
+
     </section>
 @endsection
 
-{{-- <script>
-    var button = document.querySelector('#submit-button');
+<style>
+    html, body {
+        background-color: #fff;
+        color: #636b6f;
+        font-family: 'Nunito', sans-serif;
+        font-weight: 200;
+        height: 100vh;
+        margin: 0;
+    }
+    .full-height {
+        height: 100vh;
+    }
+    .flex-center {
+        align-items: center;
+        display: flex;
+        justify-content: center;
+    }
+    .position-ref {
+        position: relative;
+    }
+    .top-right {
+        position: absolute;
+        right: 10px;
+        top: 18px;
+    }
+    .content {
+        text-align: center;
+    }
+    .title {
+        font-size: 84px;
+    }
+    .links > a {
+        color: #636b6f;
+        padding: 0 25px;
+        font-size: 13px;
+        font-weight: 600;
+        letter-spacing: .1rem;
+        text-decoration: none;
+        text-transform: uppercase;
+    }
+    .m-b-md {
+        margin-bottom: 30px;
+    }
+</style>
 
-<<<<<<< HEAD
-braintree.dropin.create({
-  authorization: 'sandbox_g42y39zw_348pk9cgf3bgyw2b',
-  selector: '#dropin-container'
-}, function (err, instance) {
-  button.addEventListener('click', function () {
-    instance.requestPaymentMethod(function (err, payload) {
-      // Submit payload.nonce to your server
-    });
-  })
-});
-</script> --}}
-=======
-    function saveSponsor(locationId, sponsorId) {
-
-        // Mando i dati nel controller per salvarli nel db
-        axios.post('/api/sponsors/store', {
-            location_id: locationId,
-            sponsor_id: sponsorId
-        });
-    };
-
-</script>
->>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b
