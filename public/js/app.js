@@ -1927,6 +1927,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('Component mounted.');
+    console.log('prova matteo');
   }
 });
 
@@ -2000,6 +2001,22 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2011,13 +2028,33 @@ __webpack_require__.r(__webpack_exports__);
       searchLat: 0,
       searchLon: 0,
       deg: 0,
-      distance: 20 // pageSearchText: "",
+      distance: 20,
+      search: 0,
+      activeSponsor: [] // pageSearchText: "",
       // currentPage: 1,
       // lastPage: false
 
     };
   },
   methods: {
+    initializeMap: function initializeMap(cen_lat, cen_long) {
+      this.search = 1;
+      var map = tt.map({
+        key: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+        container: 'map',
+        zoom: 9,
+        center: [cen_lat, cen_long]
+      }); // aggiunta controlli mappa
+
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
+
+      for (var i = 0; i < this.locations.length; i++) {
+        new tt.Marker({
+          name: this.locations[i].name
+        }).setLngLat([this.locations[i]["long"], this.locations[i].lat]).addTo(map);
+      }
+    },
     getLocationsAndCategories: function getLocationsAndCategories() {
       var _this = this;
 
@@ -2027,7 +2064,9 @@ __webpack_require__.r(__webpack_exports__);
         // }
       }).then(function (response) {
         _this.locations = response.data.results.locations;
-        _this.categories = response.data.results.categories; // this.currentPage = response.data.results.current_page;
+        _this.categories = response.data.results.categories;
+        _this.activeSponsor = response.data.results.activeSponsor;
+        console.log(_this.locations[0]); // this.currentPage = response.data.results.current_page;
         // this.lastPage = response.data.results.last_page;
       });
     },
@@ -2051,6 +2090,8 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           _this2.searchLat = response.data.results[0].position.lat;
           _this2.searchLon = response.data.results[0].position.lon;
+
+          _this2.initializeMap(_this2.searchLon, _this2.searchLat);
 
           for (var i = 0; i < _this2.locations.length; i++) {
             var single_location = _this2.locations[i];
@@ -7063,7 +7104,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.single_element[data-v-bb962f12] {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  border-radius: 20px;\n}\n.single_element .title[data-v-bb962f12] {\n  font-size: 30px;\n}\n.single_element .main_img[data-v-bb962f12] {\n  width: 100%;\n  height: 300px;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n.single_element .description[data-v-bb962f12] {\n  margin: 20px 0;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
+exports.push([module.i, ".found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 50% !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map .mapboxgl-canvas[data-v-bb962f12] {\n  width: 100% !important;\n  height: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 45%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -39217,6 +39258,15 @@ var render = function () {
         attrs: { type: "text", placeholder: "Cerca una città" },
         domProps: { value: _vm.searchText },
         on: {
+          keyup: function ($event) {
+            if (
+              !$event.type.indexOf("key") &&
+              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+            ) {
+              return null
+            }
+            return _vm.getCoordinates()
+          },
           input: function ($event) {
             if ($event.target.composing) {
               return
@@ -39247,87 +39297,117 @@ var render = function () {
         },
         domProps: { value: _vm.distance },
         on: {
+          change: function ($event) {
+            return _vm.getCoordinates()
+          },
           __r: function ($event) {
             _vm.distance = $event.target.value
           },
         },
       }),
-      _vm._v("\n        " + _vm._s(_vm.distance) + "\n\n        "),
-      _c(
-        "button",
-        {
-          on: {
-            click: function ($event) {
-              return _vm.getCoordinates()
-            },
-          },
-        },
-        [_vm._v("Trova la casa più adatta a te")]
+      _vm._v(
+        "\n            " +
+          _vm._s(_vm.distance) +
+          "Km\n            \n            "
       ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "element row my-4" },
-        _vm._l(_vm.locations, function (location) {
-          return _c(
-            "div",
-            {
-              key: location.id,
-              staticClass: "col-12 col-md-6 single-location",
-              class:
-                location.category_id != _vm.tmpCategory && _vm.tmpCategory != 0
-                  ? "hide"
-                  : "show",
-              attrs: { id: location.id },
-            },
-            [
-              _c(
-                "router-link",
-                {
-                  staticClass: "no-style",
-                  attrs: {
-                    to: {
-                      name: "location-details",
-                      params: { slug: location.slug },
+      _c("div", { staticClass: "found_elements" }, [
+        _c("div", {
+          staticClass: "map",
+          class: _vm.search == 0 ? "d-none" : "show",
+          attrs: { id: "map" },
+        }),
+        _vm._v(" "),
+        _c(
+          "div",
+          {
+            staticClass: "searched",
+            class: _vm.search == 0 ? "entire" : "half",
+          },
+          _vm._l(_vm.locations, function (location) {
+            return _c(
+              "div",
+              {
+                key: location.id,
+                staticClass: "single-location mb-3",
+                class:
+                  location.category_id != _vm.tmpCategory &&
+                  _vm.tmpCategory != 0
+                    ? "hide"
+                    : "show",
+                attrs: { id: location.id },
+              },
+              [
+                _c(
+                  "router-link",
+                  {
+                    staticClass: "no-style",
+                    attrs: {
+                      to: {
+                        name: "location-details",
+                        params: { slug: location.slug },
+                      },
                     },
                   },
-                },
-                [
-                  _c("div", { staticClass: "single_element" }, [
-                    _c("strong", { staticClass: "title" }, [
-                      _vm._v(_vm._s(location.name)),
-                    ]),
-                    _vm._v(" "),
-                    _c("img", {
-                      staticClass: "main_img",
-                      attrs: {
-                        src: location.photo.includes("https:")
-                          ? location.photo
-                          : "http://127.0.0.1:8000/storage/" + location.photo,
-                        alt: "location.name",
-                      },
-                    }),
-                    _vm._v(" "),
-                    location.description
-                      ? _c("p", { staticClass: "description" }, [
-                          _vm._v(
-                            _vm._s(_vm.truncateText(location.description, 150))
+                  [
+                    _c("div", { staticClass: "card" }, [
+                      _c("h3", { staticClass: "card-header" }, [
+                        _vm._v(_vm._s(location.name)),
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("div", { staticClass: "top" }, [
+                          _c("img", {
+                            staticClass: "main_img",
+                            attrs: {
+                              src: location.photo.includes("https:")
+                                ? location.photo
+                                : "http://127.0.0.1:8000/storage/" +
+                                  location.photo,
+                              alt: "location.name",
+                            },
+                          }),
+                          _vm._v(" "),
+                          _c("span", [
+                            _vm._v(
+                              _vm._s(
+                                _vm.truncateText(location.description, 300)
+                              )
+                            ),
+                          ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "bot my-2" }, [
+                          _c(
+                            "span",
+                            [
+                              _vm._v("Servizi:"),
+                              _vm._l(
+                                location.features,
+                                function (element, index) {
+                                  return _c("span", { key: index }, [
+                                    _vm._v(_vm._s(element.name) + " "),
+                                  ])
+                                }
+                              ),
+                            ],
+                            2
                           ),
-                        ])
-                      : _vm._e(),
-                    _vm._v(" "),
-                    _c("span", { staticClass: "price" }, [
-                      _vm._v(_vm._s(location.price) + "€ a notte"),
+                          _vm._v(" "),
+                          _c("span", { staticClass: "card-text" }, [
+                            _vm._v(_vm._s(location.price) + "€ a notte"),
+                          ]),
+                        ]),
+                      ]),
                     ]),
-                  ]),
-                ]
-              ),
-            ],
-            1
-          )
-        }),
-        0
-      ),
+                  ]
+                ),
+              ],
+              1
+            )
+          }),
+          0
+        ),
+      ]),
     ]),
   ])
 }
@@ -55487,8 +55567,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Navbar', _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Index', _components_Index_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Location', _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Hostapp', _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('payament-section', __webpack_require__(/*! ./components/Payament.vue */ "./resources/js/components/Payament.vue")["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Hostapp', _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__["default"]); // Vue.component('payament-section', require('./components/Payament.vue').default);
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('map-component', __webpack_require__(/*! ./components/Map.vue */ "./resources/js/components/Map.vue")["default"]); // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 /**
@@ -55968,17 +56048,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Navbar_vue_vue_type_template_id_6dde423b_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
-
-/***/ }),
-
-/***/ "./resources/js/components/Payament.vue":
-/*!**********************************************!*\
-  !*** ./resources/js/components/Payament.vue ***!
-  \**********************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-throw new Error("Module build failed (from ./node_modules/vue-loader/lib/index.js):\nError: ENOENT: no such file or directory, open 'C:\\Users\\Alber\\Desktop\\Boolean\\Progetto.finale\\BoolBnB\\resources\\js\\components\\Payament.vue'");
 
 /***/ }),
 

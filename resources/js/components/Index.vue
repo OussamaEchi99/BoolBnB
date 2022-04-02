@@ -12,28 +12,46 @@
             <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
 
             <label for="vol">Range ricerca</label>
-            <input value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
+            <input @change="getCoordinates()" value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
             {{distance}}Km
-                
-            <div class="element row my-4">
-                <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" class="col-12 col-md-6 single-location" v-for="location in locations" :key="location.id">
-                            
-                    <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
-                        <div class="single_element">
-                            <strong class="title">{{location.name}}</strong>
-                            <img class="main_img" :src="location.photo.includes(`https:`) ?  location.photo : `http://127.0.0.1:8000/storage/` + location.photo" alt="location.name">
-                            <p v-if="location.description" class="description">{{truncateText(location.description, 150)}}</p>
-                            <span class="price">{{location.price}}€ a notte</span>
-                        </div>
-                    </router-link>
+            
+            <div class="found_elements">
+                <div id="map" class="map" :class=" search == 0 ? 'd-none' : 'show' "></div>
 
+                <div class="searched" :class="search == 0 ? 'entire' : 'half'">
+                    <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" class="single-location mb-3" v-for="location in locations" :key="location.id">
+                                
+                        <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
+                            <div class="card">
+                                <h3 class="card-header">{{location.name}}</h3>
+                                <div class="card-body">
+                                    <div class="top">
+                                        <img class="main_img" :src="location.photo.includes(`https:`) ?  location.photo : `http://127.0.0.1:8000/storage/` + location.photo" alt="location.name">
+                                        <span>{{truncateText(location.description, 300)}}</span>
+                                    </div>
+                                   
+                                    <div class="bot my-2">
+                                        <span>Servizi:<span v-for="(element,index) in location.features" :key="index">{{element.name}} </span></span>
+                                        <span class="card-text">{{location.price}}€ a notte</span>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                                <!-- <strong class="title">{{location.name}}</strong>
+                                <img class="main_img" :src="location.photo.includes(`https:`) ?  location.photo : `http://127.0.0.1:8000/storage/` + location.photo" alt="location.name">
+                                <p v-if="location.description" class="description">{{truncateText(location.description, 150)}}</p>
+                                <span class="price">{{location.price}}€ a notte</span> -->
+                        </router-link>
+
+                    </div>
                 </div>
             </div>
+            
 
 
             <!-- PAGINATION -->
-
-            <!-- <nav>
+<!-- 
+             <nav>
                 <ul class="pagination">
                     <li class="page-item" :class="{ 'disabled': currentPage == 1 }">
                         <a @click="getLocations(currentPage - 1)" class="page-link" href="#">Previous</a>
@@ -49,7 +67,7 @@
                     </li>
                 </ul>
             </nav> -->
-
+            <!-- {{activeSponsor}} -->
 
         </div>
     </section>
@@ -68,12 +86,30 @@ export default {
             searchLon: 0,
             deg: 0,
             distance: 20,
+            search: 0,
+            activeSponsor:[],
             // pageSearchText: "",
             // currentPage: 1,
             // lastPage: false
         };
     },
     methods: {
+        initializeMap: function(cen_lat,cen_long) {
+            this.search = 1;
+            const map = tt.map({
+            key: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+            container: 'map',
+            zoom: 9,
+            center: [cen_lat, cen_long],
+            });
+             // aggiunta controlli mappa
+            map.addControl(new tt.FullscreenControl());
+            map.addControl(new tt.NavigationControl());
+
+            for (let i = 0; i < this.locations.length; i++) {
+                new tt.Marker({name: this.locations[i].name}).setLngLat([this.locations[i].long, this.locations[i].lat]).addTo(map);
+            }
+        },
         getLocationsAndCategories: function() {
             axios.get('http://127.0.0.1:8000/api/locations', {
                 // params: {
@@ -84,6 +120,8 @@ export default {
             .then((response) => {
                 this.locations = response.data.results.locations;
                 this.categories = response.data.results.categories;
+                this.activeSponsor = response.data.results.activeSponsor;
+                console.log(this.locations[0])
                 // this.currentPage = response.data.results.current_page;
                 // this.lastPage = response.data.results.last_page;
             });
@@ -106,6 +144,7 @@ export default {
                 .then((response) => {
                     this.searchLat = response.data.results[0].position.lat;
                     this.searchLon = response.data.results[0].position.lon;
+                    this.initializeMap(this.searchLon,this.searchLat);
                     for (let i = 0; i < this.locations.length; i++) {
                         let single_location = this.locations[i];
                         var el = document.getElementById(single_location.id);
@@ -156,32 +195,52 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    .found_elements{
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    #map{
+        width: 50% !important;
+        margin-right: 20px ;
+    }
+    .map{
+        overflow: hidden;
+        position: relative;
+        
+        .mapboxgl-canvas{
+            width: 100% !important;
+            height: auto;
+        };
+    }
+
+    .top{
+        display: flex;
+
+         .main_img{
+            width: 200px;
+            height: auto;
+            border-radius: 20px;
+            object-fit: cover;
+            margin-right: 20px;
+        }
+    }
     .no-style{
         color: black;
         cursor: pointer;
         text-decoration: none;
     }
-    .single_element{
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        border-radius: 20px;
 
-        .title{
-            font-size: 30px;
-        }
-
-        .main_img{
-            width: 100%;
-            height: 300px;
-            border-radius: 20px;
-            object-fit: cover;
-        }
-
-        .description{
-            margin: 20px 0;
-        }
+    .entire{
+        width: 100%;
     }
+
+    .half{
+        width: 45%;
+    }
+       
 
     .hide{
         display: none;
