@@ -10,6 +10,7 @@ use App\Location;
 
 class CheckoutController extends Controller
 {
+
     public function checkout(Request $request)
     {   
         // Enter Your Stripe Secret
@@ -21,6 +22,7 @@ class CheckoutController extends Controller
             if($sponsor->id == $data['sponsor'])
                 $sponsorchosen = $sponsor;
         }
+        $location = $data['location'];
         		
 		$amount = $sponsorchosen->price;
 		$amount *= 100;
@@ -35,16 +37,44 @@ class CheckoutController extends Controller
 		]);
 		$intent = $payment_intent->client_secret;
 
-		return view('host.credit-card',compact('intent', 'sponsorchosen'));
+		return view('host.credit-card',compact('intent', 'sponsorchosen','location'));
 
     }
 
-    public function afterPayment()
-    {
+    public function afterPayment(Request $request)
+    {   
         $locations_filtered = Location::where('user_id','=',Auth::id())->get();
+        $dataIn = $request->all();
+        $sponsor = $dataIn['sponsor'];
+        $location = $dataIn['location']; 
+
+        $new_sponsor = new Sponsor();
+        $new_sponsor->location_id = $location;
+        $new_sponsor->sponsor_id = $sponsor;
+        $new_sponsor->start = date('Y-m-d H:i:s');
+
+        // Prendo lo sponsor con "id" ugule a "sponsor_id"
+        $sponsor = Sponsor::where('id', '=', $sponsor)->first();
+
+        // Prendo la durata in ore dello sponsor
+        $sponsor_duration = $sponsor->duration;
+
+        // Aggiungo le ore dello sponsor alla data attuale
+        $new_sponsor->end = date('Y-m-d H:i:s', strtotime('+' . $sponsor_duration . 'hours'));
+        
+        $location = new Location();
+
+        // Salvo i dati nella tabella pivot
+        $location->sponsors()->attach($new_sponsor, [
+            'location_id' => $new_sponsor->location_id,
+            'sponsor_id' => $new_sponsor->sponsor_id,
+            'start' => $new_sponsor->start,
+            'end' => $new_sponsor->end
+        ]);
+
         $data = [
             'payment' => true,
-            'locations' => $locations_filtered
+            'locations' => $locations_filtered,
         ];
 
         return view('host.locations.index', $data);
