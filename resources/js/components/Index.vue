@@ -4,7 +4,7 @@
 
             <!-- Select -->
             <select class="form-select" aria-label="Default select example" v-model="tmpCategory">
-                <option :value="0" selected>Tutte</option>
+                <option :value="0" selected="0">Tutte</option>
                 <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
             </select>
 

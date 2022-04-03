@@ -21,7 +21,30 @@ export default {
     data: function() {
         return {
             searchText: '',
+            activeSponsor: [],
         }
+    },
+    methods: {
+        getLocationsAndCategories: function() {
+            axios.get('http://127.0.0.1:8000/api/locations', {
+            })
+            .then((response) => {
+                this.activeSponsor = response.data.results.activeSponsor;
+            });
+        },
+    },
+    created: function(){
+        this.getLocationsAndCategories();
     }
 }
 </script>
+
+<style lang="scss" scoped>
+.carousel-item{
+    width: auto;
+    height: 60%vh
+}
+.carousel_img{
+    width: 100%;
+}
+</style>
