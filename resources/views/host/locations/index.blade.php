@@ -17,15 +17,30 @@
 
 
                         <div class="card-body">
-                        <h5 class="card-title">{{ $location->name }}</h5>
-                        <p class="card-text">{{ Str::substr($location->description, 0, 70) }}...</p>
-                        <a href="{{ route('host.locations.show', ['location' => $location->id]) }}" class="btn btn-primary">Vai alla location</a>
+                            <h5 class="card-title">{{ $location->name }}</h5>
+                            <p class="card-text">{{ Str::substr($location->description, 0, 70) }}...</p>
+                            <a href="{{ route('host.locations.show', ['location' => $location->id]) }}" class="btn btn-primary">Vai alla location</a>
                         </div>
+
+                        {{-- @if ($payment)
+                            {{-- {{ saveSponsor($location->id, sponsorId) }} --}}
+                            {{-- <h1>pagamento avvenuto con successo!</h1> --}}
+                        {{-- @endif --}}
+
                     </div>
                 </div>
             @endforeach
+
         @else
             <span>Non hai ancora nessun annuncio</span>
+        @endif
+
+
+        {{-- Payment success message --}}
+        @if (isset($payment) && $payment)
+            
+            <checkout-message><checkout-message/>
+
         @endif
         
     </div>

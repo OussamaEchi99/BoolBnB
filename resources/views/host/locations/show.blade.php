@@ -49,7 +49,7 @@
             <div>
                 <h4>Sponsorizza la tua location:</h4>
                 @foreach ($sponsors as $sponsor)
-                <button class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button>
+                <a class="subscription" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}">{{ $sponsor->subscription }}</a>
                 @endforeach
             </div>
 
@@ -66,32 +66,7 @@
                 </form>
             </div>
 
-            <location-map :lng="{{ $location -> long }}" :lat="{{ $location -> lat }}"></location-map>
-
-
-
-
-
-            <div class="content">
-                <form method="post" id="payment-form" action="{{ url('/checkout') }}">
-                    @csrf
-                    <section>
-                        <label for="amount">
-                            <span class="input-label">Amount</span>
-                            <div class="input-wrapper amount-wrapper">
-                                <input id="amount" name="amount" type="tel" min="1" placeholder="Amount" value="10">
-                            </div>
-                        </label>
-
-                        <div class="bt-drop-in-wrapper">
-                            <div id="bt-dropin"></div>
-                        </div>
-                    </section>
-
-                    <input id="nonce" name="payment_method_nonce" type="hidden" />
-                    <button class="button" type="submit"><span>Test Transaction</span></button>
-                </form>
-            </div>
+            {{-- <location-map :lng="{{ $location -> long }}" :lat="{{ $location -> lat }}"></location-map> --}}
         </div>
 
 
