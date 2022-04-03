@@ -85,7 +85,7 @@ export default {
             locations: [],
             tmpCategory: 0,
             categories: [],
-            searchText: '',
+            searchText: this.$route.params.homeSearch,
             searchLat: 0,
             searchLon: 0,
             deg: 0,
@@ -117,6 +117,22 @@ export default {
 
             for (let i = 0; i < this.locations.length; i++) {
                 new tt.Marker({name: this.locations[i].name}).setLngLat([this.locations[i].long, this.locations[i].lat]).addTo(map);
+                var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+                var popupOffsets = {
+                    'top': [0, 0],
+                    'top-left': [0,0],
+                    'top-right': [0,0],
+                    'bottom': [0, -markerHeight],
+                    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                    'left': [markerRadius, (markerHeight - markerRadius) * -1],
+                    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+                    };
+                var popup = new tt.Popup({offset: popupOffsets, className: 'my-class'})
+                    .setLngLat([this.locations[i].long, this.locations[i].lat])
+                    .setHTML(this.locations[i].name)
+                    .addTo(map);
+                
             }
         },
         getLocationsAndCategories: function() {
@@ -207,6 +223,10 @@ export default {
     },
     created: function() {
         this.getLocationsAndCategories();
+        this.initializeMap(0,0);
+        if(this.$route.params != ''){
+            this.getCoordinates();
+        }
     }
 }
 </script>
@@ -237,7 +257,7 @@ export default {
     }
 
     #map{
-        width: 50% !important;
+        width: 45% !important;
         margin-right: 20px ;
     }
     .map{
@@ -277,7 +297,7 @@ export default {
     }
 
     .half{
-        width: 45%;
+        width: 50%;
     }
        
 

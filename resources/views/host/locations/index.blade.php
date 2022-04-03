@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="mb-3">Le mie location</h1>
-    <div class="row row-cols-3">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3">
         @if (!$locations->isEmpty())
             @foreach ($locations as $location)
                 <div class="col">
