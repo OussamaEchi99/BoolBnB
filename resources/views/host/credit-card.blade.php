@@ -10,9 +10,6 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-    @php
-        $stripe_key = 'put your publishable key here';
-    @endphp
     <div class="container" style="margin-top:10%;margin-bottom:10%">
         <div class="row justify-content-center">
             <div class="col-md-12">
@@ -20,7 +17,7 @@
                     <span>Importo da pagare: <strong>{{ $sponsorchosen->price }}€</strong></span>
                 </div>
                 <div class="card">
-                    <form action="{{route('host.credit-card')}}"  method="post" id="payment-form">
+                    <form action="{{route('host.credit-card',['location' => $location, 'sponsor' => $sponsorchosen])}}"  method="post" id="payment-form">
                         @csrf                    
                         <div class="form-group">
                             <div class="card-header">

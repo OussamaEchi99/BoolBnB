@@ -2044,11 +2044,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2062,13 +2057,17 @@ __webpack_require__.r(__webpack_exports__);
       deg: 0,
       distance: 20,
       search: 0,
-      activeSponsor: [] // pageSearchText: "",
-      // currentPage: 1,
-      // lastPage: false
-
+      activeSponsor: []
     };
   },
   methods: {
+    sponsored: function sponsored(id) {
+      for (var i = 0; i < this.activeSponsor.length; i++) {
+        if (id == this.activeSponsor[i].id) {
+          return false;
+        }
+      }
+    },
     initializeMap: function initializeMap(cen_lat, cen_long) {
       this.search = 1;
       var map = tt.map({
@@ -2090,16 +2089,10 @@ __webpack_require__.r(__webpack_exports__);
     getLocationsAndCategories: function getLocationsAndCategories() {
       var _this = this;
 
-      axios.get('http://127.0.0.1:8000/api/locations', {// params: {
-        //     // page: pageNumber,
-        //     category: this.locationId
-        // }
-      }).then(function (response) {
+      axios.get('http://127.0.0.1:8000/api/locations', {}).then(function (response) {
         _this.locations = response.data.results.locations;
         _this.categories = response.data.results.categories;
         _this.activeSponsor = response.data.results.activeSponsor;
-        console.log(_this.locations[0]); // this.currentPage = response.data.results.current_page;
-        // this.lastPage = response.data.results.last_page;
       });
     },
     truncateText: function truncateText(text, maxCharsNumber) {
@@ -2133,10 +2126,35 @@ __webpack_require__.r(__webpack_exports__);
 
           ;
 
-          var _loop = function _loop(_i) {
-            var single_location = _this2.locations[_i];
+          for (var _i = 0; _i < _this2.activeSponsor.length; _i++) {
+            var _single_location = _this2.activeSponsor[_i];
+            var el = document.getElementById('sponsor' + _single_location.id);
+            el.classList.remove("hide");
+          }
 
-            if (_this2.getDistanceFromLatLonInKm(_this2.locations[_i].lat, _this2.locations[_i]["long"], _this2.searchLat, _this2.searchLon) > _this2.distance) {
+          ;
+
+          var _loop = function _loop(_i2) {
+            var single_location = _this2.activeSponsor[_i2];
+
+            if (_this2.getDistanceFromLatLonInKm(_this2.activeSponsor[_i2].lat, _this2.activeSponsor[_i2]["long"], _this2.searchLat, _this2.searchLon) > _this2.distance) {
+              var addClass = function addClass() {
+                var el = document.getElementById('sponsor' + single_location.id);
+                el.classList.add("hide");
+              };
+
+              addClass();
+            }
+          };
+
+          for (var _i2 = 0; _i2 < _this2.activeSponsor.length; _i2++) {
+            _loop(_i2);
+          }
+
+          var _loop2 = function _loop2(_i3) {
+            var single_location = _this2.locations[_i3];
+
+            if (_this2.getDistanceFromLatLonInKm(_this2.locations[_i3].lat, _this2.locations[_i3]["long"], _this2.searchLat, _this2.searchLon) > _this2.distance) {
               var addClass = function addClass() {
                 var el = document.getElementById(single_location.id);
                 el.classList.add("hide");
@@ -2146,8 +2164,8 @@ __webpack_require__.r(__webpack_exports__);
             }
           };
 
-          for (var _i = 0; _i < _this2.locations.length; _i++) {
-            _loop(_i);
+          for (var _i3 = 0; _i3 < _this2.locations.length; _i3++) {
+            _loop2(_i3);
           }
         });
       } else {
@@ -2160,7 +2178,6 @@ __webpack_require__.r(__webpack_exports__);
         ;
       }
     },
-    // getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
     getDistanceFromLatLonInKm: function getDistanceFromLatLonInKm(lat1, lon1, lat2, lon2) {
       function deg2rad(deg) {
         return deg * (Math.PI / 180);
@@ -7155,7 +7172,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 50% !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map .mapboxgl-canvas[data-v-bb962f12] {\n  width: 100% !important;\n  height: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 45%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
+exports.push([module.i, ".sponsorized .card-header[data-v-bb962f12] {\n  background-color: gold;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 50% !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas[data-v-bb962f12] {\n  min-width: 600px !important;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 45%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -39412,11 +39429,7 @@ var render = function () {
           },
         },
       }),
-      _vm._v(
-        "\n            " +
-          _vm._s(_vm.distance) +
-          "Km\n            \n            "
-      ),
+      _vm._v("\n        " + _vm._s(_vm.distance) + "Km\n        \n        "),
       _c("div", { staticClass: "found_elements" }, [
         _c("div", {
           staticClass: "map",
@@ -39430,89 +39443,180 @@ var render = function () {
             staticClass: "searched",
             class: _vm.search == 0 ? "entire" : "half",
           },
-          _vm._l(_vm.locations, function (location) {
-            return _c(
-              "div",
-              {
-                key: location.id,
-                staticClass: "single-location mb-3",
-                class:
-                  location.category_id != _vm.tmpCategory &&
-                  _vm.tmpCategory != 0
-                    ? "hide"
-                    : "show",
-                attrs: { id: location.id },
-              },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "no-style",
-                    attrs: {
-                      to: {
-                        name: "location-details",
-                        params: { slug: location.slug },
+          [
+            _vm._l(_vm.activeSponsor, function (location, index) {
+              return _c(
+                "div",
+                {
+                  key: "sponsor" + index,
+                  staticClass: "single-location mb-3 sponsorized",
+                  class:
+                    location.category_id != _vm.tmpCategory &&
+                    _vm.tmpCategory != 0
+                      ? "hide"
+                      : "show",
+                  attrs: { id: "sponsor" + location.id },
+                },
+                [
+                  _c(
+                    "router-link",
+                    {
+                      staticClass: "no-style",
+                      attrs: {
+                        to: {
+                          name: "location-details",
+                          params: { slug: location.slug },
+                        },
                       },
                     },
-                  },
-                  [
-                    _c("div", { staticClass: "card" }, [
-                      _c("h3", { staticClass: "card-header" }, [
-                        _vm._v(_vm._s(location.name)),
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "card-body" }, [
-                        _c("div", { staticClass: "top" }, [
-                          _c("img", {
-                            staticClass: "main_img",
-                            attrs: {
-                              src: location.photo.includes("https:")
-                                ? location.photo
-                                : "http://127.0.0.1:8000/storage/" +
-                                  location.photo,
-                              alt: "location.name",
-                            },
-                          }),
-                          _vm._v(" "),
-                          _c("span", [
-                            _vm._v(
-                              _vm._s(
-                                _vm.truncateText(location.description, 300)
-                              )
-                            ),
-                          ]),
+                    [
+                      _c("div", { staticClass: "card" }, [
+                        _c("h3", { staticClass: "card-header" }, [
+                          _vm._v(_vm._s(location.name)),
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "bot my-2" }, [
-                          _c(
-                            "span",
-                            [
-                              _vm._v("Servizi:"),
-                              _vm._l(
-                                location.features,
-                                function (element, index) {
-                                  return _c("span", { key: index }, [
-                                    _vm._v(_vm._s(element.name) + " "),
-                                  ])
-                                }
+                        _c("div", { staticClass: "card-body" }, [
+                          _c("div", { staticClass: "top" }, [
+                            _c("img", {
+                              staticClass: "main_img",
+                              attrs: {
+                                src: location.photo.includes("https:")
+                                  ? location.photo
+                                  : "http://127.0.0.1:8000/storage/" +
+                                    location.photo,
+                                alt: "location.name",
+                              },
+                            }),
+                            _vm._v(" "),
+                            _c("span", [
+                              _vm._v(
+                                _vm._s(
+                                  _vm.truncateText(location.description, 300)
+                                )
                               ),
-                            ],
-                            2
-                          ),
+                            ]),
+                          ]),
                           _vm._v(" "),
-                          _c("span", { staticClass: "card-text" }, [
-                            _vm._v(_vm._s(location.price) + "€ a notte"),
+                          _c("div", { staticClass: "bot my-2" }, [
+                            _c(
+                              "span",
+                              [
+                                _vm._v("Servizi:"),
+                                _vm._l(
+                                  location.features,
+                                  function (element, ind) {
+                                    return _c("span", { key: ind }, [
+                                      _vm._v(_vm._s(element.name) + " "),
+                                    ])
+                                  }
+                                ),
+                              ],
+                              2
+                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "card-text" }, [
+                              _vm._v(_vm._s(location.price) + "€ a notte"),
+                            ]),
                           ]),
                         ]),
                       ]),
-                    ]),
-                  ]
-                ),
-              ],
-              1
-            )
-          }),
-          0
+                    ]
+                  ),
+                ],
+                1
+              )
+            }),
+            _vm._v(" "),
+            _vm._l(_vm.locations, function (location) {
+              return _c(
+                "div",
+                {
+                  key: location.id,
+                  staticClass: "single-location mb-3 all",
+                  class:
+                    location.category_id != _vm.tmpCategory &&
+                    _vm.tmpCategory != 0 &&
+                    _vm.sponsored(location.id) == false
+                      ? "hide"
+                      : "show",
+                  attrs: { id: location.id },
+                },
+                [
+                  _vm.sponsored(location.id) != false
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "no-style",
+                          attrs: {
+                            to: {
+                              name: "location-details",
+                              params: { slug: location.slug },
+                            },
+                          },
+                        },
+                        [
+                          _c("div", { staticClass: "card" }, [
+                            _c("h3", { staticClass: "card-header" }, [
+                              _vm._v(_vm._s(location.name)),
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "card-body" }, [
+                              _c("div", { staticClass: "top" }, [
+                                _c("img", {
+                                  staticClass: "main_img",
+                                  attrs: {
+                                    src: location.photo.includes("https:")
+                                      ? location.photo
+                                      : "http://127.0.0.1:8000/storage/" +
+                                        location.photo,
+                                    alt: "location.name",
+                                  },
+                                }),
+                                _vm._v(" "),
+                                _c("span", [
+                                  _vm._v(
+                                    _vm._s(
+                                      _vm.truncateText(
+                                        location.description,
+                                        300
+                                      )
+                                    )
+                                  ),
+                                ]),
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "bot my-2" }, [
+                                _c(
+                                  "span",
+                                  [
+                                    _vm._v("Servizi:"),
+                                    _vm._l(
+                                      location.features,
+                                      function (element, index) {
+                                        return _c("span", { key: index }, [
+                                          _vm._v(_vm._s(element.name) + " "),
+                                        ])
+                                      }
+                                    ),
+                                  ],
+                                  2
+                                ),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "card-text" }, [
+                                  _vm._v(_vm._s(location.price) + "€ a notte"),
+                                ]),
+                              ]),
+                            ]),
+                          ]),
+                        ]
+                      )
+                    : _vm._e(),
+                ],
+                1
+              )
+            }),
+          ],
+          2
         ),
       ]),
     ]),
@@ -55747,15 +55851,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!*****************************************************!*\
   !*** ./resources/js/components/CheckoutMessage.vue ***!
   \*****************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CheckoutMessage_vue_vue_type_template_id_4da923c6_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CheckoutMessage.vue?vue&type=template&id=4da923c6&scoped=true& */ "./resources/js/components/CheckoutMessage.vue?vue&type=template&id=4da923c6&scoped=true&");
 /* harmony import */ var _CheckoutMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CheckoutMessage.vue?vue&type=script&lang=js& */ "./resources/js/components/CheckoutMessage.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CheckoutMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CheckoutMessage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _CheckoutMessage_vue_vue_type_style_index_0_id_4da923c6_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CheckoutMessage.vue?vue&type=style&index=0&id=4da923c6&lang=scss&scoped=true& */ "./resources/js/components/CheckoutMessage.vue?vue&type=style&index=0&id=4da923c6&lang=scss&scoped=true&");
+/* empty/unused harmony star reexport *//* harmony import */ var _CheckoutMessage_vue_vue_type_style_index_0_id_4da923c6_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./CheckoutMessage.vue?vue&type=style&index=0&id=4da923c6&lang=scss&scoped=true& */ "./resources/js/components/CheckoutMessage.vue?vue&type=style&index=0&id=4da923c6&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -55787,7 +55890,7 @@ component.options.__file = "resources/js/components/CheckoutMessage.vue"
 /*!******************************************************************************!*\
   !*** ./resources/js/components/CheckoutMessage.vue?vue&type=script&lang=js& ***!
   \******************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -56896,8 +56999,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
