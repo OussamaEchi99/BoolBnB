@@ -11,7 +11,7 @@
             <!-- Featurs Select -->
             <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
             <ul class="dropdown-menu">
-                <li v-for="feature in features" :key="feature.id">
+                <li class="dropdown-item" v-for="feature in features" :key="feature.id">
                     <input @change="filterMedia()" :id="'check-' + feature.name.toLowerCase()" type="checkbox">
                     <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
                 </li>
@@ -83,7 +83,7 @@ export default {
     data: function() {
         return {
             locations: [],
-            tmpCategory: '',
+            tmpCategory: 0,
             categories: [],
             searchText: '',
             searchLat: 0,

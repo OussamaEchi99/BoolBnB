@@ -1992,7 +1992,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       locations: [],
-      tmpCategory: '',
+      tmpCategory: 0,
       categories: [],
       searchText: '',
       searchLat: 0,
@@ -3957,7 +3957,7 @@ var render = function () {
         "ul",
         { staticClass: "dropdown-menu" },
         _vm._l(_vm.features, function (feature) {
-          return _c("li", { key: feature.id }, [
+          return _c("li", { key: feature.id, staticClass: "dropdown-item" }, [
             _c("input", {
               attrs: {
                 id: "check-" + feature.name.toLowerCase(),
