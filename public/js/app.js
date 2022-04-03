@@ -2044,6 +2044,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2057,7 +2066,8 @@ __webpack_require__.r(__webpack_exports__);
       deg: 0,
       distance: 20,
       search: 0,
-      activeSponsor: []
+      activeSponsor: [],
+      features: []
     };
   },
   methods: {
@@ -2093,6 +2103,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.locations = response.data.results.locations;
         _this.categories = response.data.results.categories;
         _this.activeSponsor = response.data.results.activeSponsor;
+        _this.features = response.data.results.features;
       });
     },
     truncateText: function truncateText(text, maxCharsNumber) {
@@ -7172,7 +7183,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".sponsorized .card-header[data-v-bb962f12] {\n  background-color: gold;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 50% !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas[data-v-bb962f12] {\n  min-width: 600px !important;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 45%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
+exports.push([module.i, "button.dropdown-toggle[data-v-bb962f12] {\n  background-color: white;\n  border: 1px solid #767676;\n}\nbutton.dropdown-toggle ul.dropdown-menu[data-v-bb962f12] {\n  padding: 0 10px;\n}\n.sponsorized .card-header[data-v-bb962f12] {\n  background-color: gold;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 50% !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas[data-v-bb962f12] {\n  min-width: 600px !important;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 45%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -39370,6 +39381,38 @@ var render = function () {
         2
       ),
       _vm._v(" "),
+      _vm._m(0),
+      _vm._v(" "),
+      _c(
+        "ul",
+        { staticClass: "dropdown-menu" },
+        _vm._l(_vm.features, function (feature) {
+          return _c("li", { key: feature.id }, [
+            _c("input", {
+              attrs: {
+                id: "check-" + feature.name.toLowerCase(),
+                type: "checkbox",
+              },
+              on: {
+                change: function ($event) {
+                  return _vm.filterMedia()
+                },
+              },
+            }),
+            _vm._v(" "),
+            _c(
+              "label",
+              {
+                staticClass: "checkbox",
+                attrs: { for: "check-" + feature.name.toLowerCase() },
+              },
+              [_vm._v(_vm._s(feature.name))]
+            ),
+          ])
+        }),
+        0
+      ),
+      _vm._v(" "),
       _c("input", {
         directives: [
           {
@@ -39622,7 +39665,18 @@ var render = function () {
     ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "button",
+      { staticClass: "dropdown-toggle", attrs: { "data-toggle": "dropdown" } },
+      [_vm._v("Features"), _c("b", { staticClass: "caret" })]
+    )
+  },
+]
 render._withStripped = true
 
 
@@ -56999,8 +57053,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

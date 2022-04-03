@@ -8,6 +8,15 @@
                 <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
             </select>
 
+            <!-- Featurs Select -->
+            <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
+            <ul class="dropdown-menu">
+                <li v-for="feature in features" :key="feature.id">
+                    <input @change="filterMedia()" :id="'check-' + feature.name.toLowerCase()" type="checkbox">
+                    <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
+                </li>
+            </ul>
+
             <!-- Search -->
             <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
 
@@ -83,6 +92,7 @@ export default {
             distance: 20,
             search: 0,
             activeSponsor:[],
+            features: []
         };
     },
     methods: {
@@ -116,6 +126,7 @@ export default {
                 this.locations = response.data.results.locations;
                 this.categories = response.data.results.categories;
                 this.activeSponsor = response.data.results.activeSponsor;
+                this.features = response.data.results.features;
             });
         },
         truncateText: function(text, maxCharsNumber) {
@@ -140,7 +151,7 @@ export default {
                     for (let i = 0; i < this.locations.length; i++) {
                         let single_location = this.locations[i];
                         var el = document.getElementById(single_location.id);
-                        el.classList.remove("hide");   
+                        el.classList.remove("hide");
                     };
                     for (let i = 0; i < this.activeSponsor.length; i++) {
                         let single_location = this.activeSponsor[i];
@@ -201,6 +212,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+    button.dropdown-toggle {
+        background-color: white;
+        border: 1px solid rgb(118, 118, 118);
+
+        ul.dropdown-menu {
+
+            padding: 0 10px;
+        }
+    }
 
     .sponsorized{
 

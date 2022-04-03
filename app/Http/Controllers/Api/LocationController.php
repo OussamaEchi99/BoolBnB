@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Location;
 use App\Category;
+use App\Feature;
 
 class LocationController extends Controller
 {
@@ -13,6 +14,7 @@ class LocationController extends Controller
 
         $locations = Location::all();
         $categories = Category::all();
+        $features = Feature::all();
         $active_sponsor = [];
 
         foreach($locations as $location){
@@ -28,7 +30,8 @@ class LocationController extends Controller
                 'results' => [
                     'locations' => $locations,
                     'categories' => $categories,
-                    'activeSponsor' => $active_sponsor
+                    'activeSponsor' => $active_sponsor,
+                    'features' => $features
                 ]
             ]);
         } else {
