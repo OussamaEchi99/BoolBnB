@@ -2031,7 +2031,6 @@ __webpack_require__.r(__webpack_exports__);
             var single_location = _this2.locations[_i];
 
             if (_this2.getDistanceFromLatLonInKm(_this2.locations[_i].lat, _this2.locations[_i]["long"], _this2.searchLat, _this2.searchLon) > _this2.distance) {
-              // console.log(this.locations[i].lat , this.locations[i].long, this.searchLat, this.searchLon)
               var addClass = function addClass() {
                 var el = document.getElementById(single_location.id);
                 el.classList.add("hide");
@@ -2069,7 +2068,6 @@ __webpack_require__.r(__webpack_exports__);
       var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var d = R * c; // Distance in km
-      // console.log(d)
 
       return d;
     }
@@ -20851,7 +20849,6 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\front.js */"./resources/js/front.js");
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\front.js */"./resources/js/front.js");
 
 
 /***/ })

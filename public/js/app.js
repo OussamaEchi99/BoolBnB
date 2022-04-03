@@ -2064,7 +2064,6 @@ __webpack_require__.r(__webpack_exports__);
             var single_location = _this2.locations[_i];
 
             if (_this2.getDistanceFromLatLonInKm(_this2.locations[_i].lat, _this2.locations[_i]["long"], _this2.searchLat, _this2.searchLon) > _this2.distance) {
-              // console.log(this.locations[i].lat , this.locations[i].long, this.searchLat, this.searchLon)
               var addClass = function addClass() {
                 var el = document.getElementById(single_location.id);
                 el.classList.add("hide");
@@ -2102,7 +2101,6 @@ __webpack_require__.r(__webpack_exports__);
       var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
       var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
       var d = R * c; // Distance in km
-      // console.log(d)
 
       return d;
     }
@@ -2168,15 +2166,10 @@ __webpack_require__.r(__webpack_exports__);
         key: 'jRVJgpmxvidkjvJmEfhDb7On6Yp71S6p',
         position: marker.getLngLat()
       }).then(function (result) {
-        console.log(result.addresses[0].address.freeformAddress);
         popup.setHTML(result.addresses[0].address.freeformAddress);
       });
     }
-  } // mounted() {
-  //     console.log('map mounted');
-  //     this.getMap();
-  // }
-
+  }
 });
 
 /***/ }),
@@ -55494,7 +55487,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('example-component', __webp
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Navbar', _components_Navbar_vue__WEBPACK_IMPORTED_MODULE_1__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Index', _components_Index_vue__WEBPACK_IMPORTED_MODULE_3__["default"]);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Location', _pages_Location_vue__WEBPACK_IMPORTED_MODULE_4__["default"]);
-vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Hostapp', _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Hostapp', _views_Hostapp_vue__WEBPACK_IMPORTED_MODULE_5__["default"]); // Vue.component('payament-section', require('./components/Payament.vue').default);
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('map-component', __webpack_require__(/*! ./components/Map.vue */ "./resources/js/components/Map.vue")["default"]); // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 /**
@@ -55510,11 +55504,13 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   //     'Navbar' : require('./components/Navbar.vue'),
   // }
 
-});
+}); // const checkout = require('../routes/checkout');
+// app.use('/checkout', checkout);
 
-var checkout = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module '../routes/checkout'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+/***/ }),
 
-app.use('/checkout', checkout);
+/***/ "./resources/js/bootstrap.js":
+/*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
   \***********************************/
 /*! no static exports found */
@@ -56623,8 +56619,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
