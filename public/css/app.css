@@ -4642,6 +4642,10 @@ a {
   font-size: 17px;
 }
 
+.header .btn-menu .burger-icon i {
+  color: black;
+}
+
 .header .btn-menu .circle {
   border: 1px solid black;
   width: 30px;

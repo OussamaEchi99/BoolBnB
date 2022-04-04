@@ -2066,7 +2066,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
 //
 //
 //
@@ -2083,8 +2082,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-=======
->>>>>>> b04f9f376ec598d2715f85ae82ab001e24dd1437
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2258,8 +2256,6 @@ __webpack_require__.r(__webpack_exports__);
       var d = R * c; // Distance in km
 
       return d;
-<<<<<<< HEAD
-=======
     },
     locationFilter: function locationFilter(location) {
       var _this3 = this;
@@ -2281,7 +2277,6 @@ __webpack_require__.r(__webpack_exports__);
 
         console.log(locationFeatures);
       });
->>>>>>> b04f9f376ec598d2715f85ae82ab001e24dd1437
     }
   },
   created: function created() {
@@ -39857,18 +39852,6 @@ var render = function () {
                 {
                   key: "sponsor" + index,
                   staticClass: "single-location mb-3 sponsorized",
-<<<<<<< HEAD
-                  class:
-                    location.category_id != _vm.tmpCategory &&
-                    _vm.tmpCategory != 0 &&
-                    _vm.tmpRooms != 0 &&
-                    location.rooms < _vm.tmpRooms &&
-                    _vm.tmpBeds != 0 &&
-                    location.beds < _vm.tmpBeds
-                      ? "hide"
-                      : "show",
-=======
->>>>>>> b04f9f376ec598d2715f85ae82ab001e24dd1437
                   attrs: { id: "sponsor" + location.id },
                 },
                 [
