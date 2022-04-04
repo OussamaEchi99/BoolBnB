@@ -2083,6 +2083,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
@@ -2091,6 +2092,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+=======
+>>>>>>> 23da6802c7bf82271fa15a7e4253b6f938c574bd
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -57622,8 +57625,13 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
+<<<<<<< HEAD
+__webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+=======
 __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
 module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+>>>>>>> 4268df12faa2056957f0838410cfa09096c102fd
 
 
 /***/ })
