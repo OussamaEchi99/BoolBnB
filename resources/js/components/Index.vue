@@ -19,21 +19,29 @@
                 </ul>
 
                 <!-- stanze -->
-                <select class="form-select" aria-label="Default select example" v-model="tmpRooms">
-                    <option value="0">Qualsiasi</option>
-                    <option  value="1">1</option>
-                    <option  value="2">2</option>
-                    <option  value="3">3+</option>
-                </select>
+                <div>
+                    Camere:
+                    <select id="rooms" @change="locationFilter()" class="form-select" aria-label="Default select example" v-model="tmpRooms">
+                        <option value="0">Qualsiasi</option>
+                        <option  value="1">1</option>
+                        <option  value="2">2</option>
+                        <option  value="3">3+</option>
+                    </select>
+                </div>
+            
 
                 <!-- posti letto -->
-                <select class="form-select" aria-label="Default select example" v-model="tmpBeds">
-                    <option value="0">Qualsiasi</option>
-                    <option  value="1">1</option>
-                    <option  value="2">2</option>
-                    <option  value="3">3</option>
-                    <option  value="4">4+</option>
-                </select>
+                <div>
+                    Posti letto:
+                    <select id="bed" @change="locationFilter()" class="form-select" aria-label="Default select example" v-model="tmpBeds">
+                        <option value="0">Qualsiasi</option>
+                        <option  value="1">1</option>
+                        <option  value="2">2</option>
+                        <option  value="3">3</option>
+                        <option  value="4">4+</option>
+                    </select>
+                </div>
+                
 
                 <!-- Search -->
                 <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
@@ -79,7 +87,7 @@
                         </router-link>
 
                     </div>
-                    <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) && (sponsored(location.id) == false) && (( location.rooms < tmpRooms)) && ((tmpBeds!= 0) && (location.beds < tmpBeds))  ? 'hide' : 'show'" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
+                    <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) && (sponsored(location.id) == false) ? 'hide' : 'show'" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
                                 
                         <router-link v-if="sponsored(location.id) != false" class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
                             <div class="card">
@@ -256,27 +264,40 @@ export default {
             var d = R * c; // Distance in km
             return d;
         },
-        locationFilter(location) {
+        locationFilter() {
             this.locations.forEach(location => {
+                
+                var sponsorClasses = document.getElementById('sponsor' + location.id);
+                var apartmentClasses = document.getElementById( location.id);
+                apartmentClasses.classList.remove('hide');
 
+                if((location.category != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
+                    sponsorClasses.classList.add('hide');
+                    apartmentClasses.classList.add('hide');
+                } else if(this.tmpCategory == 0){
+                    apartmentsponsorClassesClasses.classList.remove('hide');
+                    apartmentClasses.classList.remove('hide');
+                } else {
+                    sponsorClasses.classList.remove('hide');
+                    apartmentClasses.classList.remove('hide');
+                };
+                
                 let locationFeatures = [];
-
-                location.features.forEach(feature => {
-                    locationFeatures.push(feature.id)
+                    location.features.forEach(feature => {
+                        locationFeatures.push(feature.id)
                 });
 
-                
-                var apartmentClasses = document.getElementById('sponsor' + location.id);
-
-                if(location.category == this.tmpCategory && tmpCategory != 0 && locationFeatures.include(chooseFeaturesArray)) {
-                    // apartmentClasses.classList.remove('hide');
-                    apartmentClasses.classList.add('show');
-                } else {
-                    // apartmentClasses.classList.remove('show');
-                    apartmentClasses.classList.add('hide');
+                for (let i = 0; i < this.chooseFeaturesArray.length; i++) {
+                    for (let j = 0; j < locationFeatures.length; j++) {
+                       
+                        if(locationFeatures.includes(this.chooseFeaturesArray[i])){
+                        
+                        }else{
+                            sponsorClasses.classList.add('hide');
+                            apartmentClasses.classList.add('hide');
+                        }
+                    }
                 }
-                console.log(locationFeatures)
-
             });
         }
     },

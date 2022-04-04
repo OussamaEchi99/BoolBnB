@@ -2017,6 +2017,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2191,25 +2199,39 @@ __webpack_require__.r(__webpack_exports__);
 
       return d;
     },
-    locationFilter: function locationFilter(location) {
+    locationFilter: function locationFilter() {
       var _this3 = this;
 
       this.locations.forEach(function (location) {
+        var sponsorClasses = document.getElementById('sponsor' + location.id);
+        var apartmentClasses = document.getElementById(location.id);
+        apartmentClasses.classList.remove('hide');
+
+        if (location.category != _this3.tmpCategory && _this3.tmpCategory != 0 || location.beds < _this3.tmpBeds || location.rooms < _this3.tmpRooms) {
+          sponsorClasses.classList.add('hide');
+          apartmentClasses.classList.add('hide');
+        } else if (_this3.tmpCategory == 0) {
+          apartmentsponsorClassesClasses.classList.remove('hide');
+          apartmentClasses.classList.remove('hide');
+        } else {
+          sponsorClasses.classList.remove('hide');
+          apartmentClasses.classList.remove('hide');
+        }
+
+        ;
         var locationFeatures = [];
         location.features.forEach(function (feature) {
           locationFeatures.push(feature.id);
         });
-        var apartmentClasses = document.getElementById('sponsor' + location.id);
 
-        if (location.category == _this3.tmpCategory && tmpCategory != 0 && locationFeatures.include(chooseFeaturesArray)) {
-          // apartmentClasses.classList.remove('hide');
-          apartmentClasses.classList.add('show');
-        } else {
-          // apartmentClasses.classList.remove('show');
-          apartmentClasses.classList.add('hide');
+        for (var i = 0; i < _this3.chooseFeaturesArray.length; i++) {
+          for (var j = 0; j < locationFeatures.length; j++) {
+            if (locationFeatures.includes(_this3.chooseFeaturesArray[i])) {} else {
+              sponsorClasses.classList.add('hide');
+              apartmentClasses.classList.add('hide');
+            }
+          }
         }
-
-        console.log(locationFeatures);
       });
     }
   },
@@ -4254,87 +4276,103 @@ var render = function () {
           0
         ),
         _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.tmpRooms,
-                expression: "tmpRooms",
-              },
-            ],
-            staticClass: "form-select",
-            attrs: { "aria-label": "Default select example" },
-            on: {
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.tmpRooms = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
+        _c("div", [
+          _vm._v("\n                Camere:\n                "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tmpRooms,
+                  expression: "tmpRooms",
+                },
+              ],
+              staticClass: "form-select",
+              attrs: { id: "rooms", "aria-label": "Default select example" },
+              on: {
+                change: [
+                  function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.tmpRooms = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function ($event) {
+                    return _vm.locationFilter()
+                  },
+                ],
               },
             },
-          },
-          [
-            _c("option", { attrs: { value: "0" } }, [_vm._v("Qualsiasi")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "3" } }, [_vm._v("3+")]),
-          ]
-        ),
+            [
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Qualsiasi")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("3+")]),
+            ]
+          ),
+        ]),
         _vm._v(" "),
-        _c(
-          "select",
-          {
-            directives: [
-              {
-                name: "model",
-                rawName: "v-model",
-                value: _vm.tmpBeds,
-                expression: "tmpBeds",
-              },
-            ],
-            staticClass: "form-select",
-            attrs: { "aria-label": "Default select example" },
-            on: {
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.tmpBeds = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
+        _c("div", [
+          _vm._v("\n                Posti letto:\n                "),
+          _c(
+            "select",
+            {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.tmpBeds,
+                  expression: "tmpBeds",
+                },
+              ],
+              staticClass: "form-select",
+              attrs: { id: "bed", "aria-label": "Default select example" },
+              on: {
+                change: [
+                  function ($event) {
+                    var $$selectedVal = Array.prototype.filter
+                      .call($event.target.options, function (o) {
+                        return o.selected
+                      })
+                      .map(function (o) {
+                        var val = "_value" in o ? o._value : o.value
+                        return val
+                      })
+                    _vm.tmpBeds = $event.target.multiple
+                      ? $$selectedVal
+                      : $$selectedVal[0]
+                  },
+                  function ($event) {
+                    return _vm.locationFilter()
+                  },
+                ],
               },
             },
-          },
-          [
-            _c("option", { attrs: { value: "0" } }, [_vm._v("Qualsiasi")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "4" } }, [_vm._v("4+")]),
-          ]
-        ),
+            [
+              _c("option", { attrs: { value: "0" } }, [_vm._v("Qualsiasi")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "4" } }, [_vm._v("4+")]),
+            ]
+          ),
+        ]),
         _vm._v(" "),
         _c("input", {
           directives: [
@@ -4503,10 +4541,7 @@ var render = function () {
                   class:
                     location.category_id != _vm.tmpCategory &&
                     _vm.tmpCategory != 0 &&
-                    _vm.sponsored(location.id) == false &&
-                    location.rooms < _vm.tmpRooms &&
-                    _vm.tmpBeds != 0 &&
-                    location.beds < _vm.tmpBeds
+                    _vm.sponsored(location.id) == false
                       ? "hide"
                       : "show",
                   attrs: { id: location.id },
