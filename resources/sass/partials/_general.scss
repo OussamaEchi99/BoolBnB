@@ -10,3 +10,15 @@ a {
 .my_d_none {
     display: none;
 }
+
+// Sponsor Button
+.subscription {
+    // border: 1px solid lightgray;
+    box-shadow: rgba(33, 35, 38, 0.1) 0px 10px 10px -10px;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background-color: rgba(199, 235, 247, 0.466);
+}
