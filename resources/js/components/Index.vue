@@ -12,7 +12,7 @@
             <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
             <ul class="dropdown-menu">
                 <li class="dropdown-item" v-for="feature in features" :key="feature.id">
-                    <input :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
+                    <input @change="featureCheck()" :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
                     <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
                 </li>
             </ul>
@@ -30,7 +30,7 @@
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
                     <div 
                         :id="'sponsor' + location.id" 
-                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'"  
+                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) && featureCheck() ? 'hide' : 'show'"  
                         class="single-location mb-3 sponsorized" 
                         v-for="(location, index) in activeSponsor" 
                         :key="'sponsor' + index"
@@ -230,20 +230,19 @@ export default {
             var d = R * c; // Distance in km
             return d;
         },
-        // locationFilter(location) {
-        //     console.log(location);
-        //     if( (location.category_id != this.tmpCategory) && (this.tmpCategory != '') ) {
-        //         let tmpLocation= location;
-        //         for (let i = 0; i < this.chooseFeaturesArray.length; i++ ) {
-        //             if (!tmpLocation.features.includes(this.chooseFeaturesArray[i])) {
-        //                 return false;
-        //             }
-        //         }
-        //         return true;
-        //     } else {
-        //         return false
-        //     }
-        // }
+        featureCheck() {
+            console.log(this.locations)
+            for ( let i = 0; i < this.locations.length; i++) {
+                let tmpLocation = this.locations[i];
+                for (let i = 0; i < this.chooseFeaturesArray.length; i++ ) {
+                    if (!tmpLocation.features.includes(this.chooseFeaturesArray[i])) {
+                        return false;
+                    } else {
+                        return true;
+                    }
+                }    
+            }    
+        }
     },
     created: function() {
         this.getLocationsAndCategories();

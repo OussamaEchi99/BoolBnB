@@ -2230,21 +2230,22 @@ __webpack_require__.r(__webpack_exports__);
       var d = R * c; // Distance in km
 
       return d;
-    } // locationFilter(location) {
-    //     console.log(location);
-    //     if( (location.category_id != this.tmpCategory) && (this.tmpCategory != '') ) {
-    //         let tmpLocation= location;
-    //         for (let i = 0; i < this.chooseFeaturesArray.length; i++ ) {
-    //             if (!tmpLocation.features.includes(this.chooseFeaturesArray[i])) {
-    //                 return false;
-    //             }
-    //         }
-    //         return true;
-    //     } else {
-    //         return false
-    //     }
-    // }
+    },
+    featureCheck: function featureCheck() {
+      console.log(this.locations);
 
+      for (var i = 0; i < this.locations.length; i++) {
+        var tmpLocation = this.locations[i];
+
+        for (var _i4 = 0; _i4 < this.chooseFeaturesArray.length; _i4++) {
+          if (!tmpLocation.features.includes(this.chooseFeaturesArray[_i4])) {
+            return false;
+          } else {
+            return true;
+          }
+        }
+      }
+    }
   },
   created: function created() {
     this.getLocationsAndCategories();
@@ -39585,25 +39586,30 @@ var render = function () {
                   : _vm.chooseFeaturesArray,
               },
               on: {
-                change: function ($event) {
-                  var $$a = _vm.chooseFeaturesArray,
-                    $$el = $event.target,
-                    $$c = $$el.checked ? true : false
-                  if (Array.isArray($$a)) {
-                    var $$v = feature.id,
-                      $$i = _vm._i($$a, $$v)
-                    if ($$el.checked) {
-                      $$i < 0 && (_vm.chooseFeaturesArray = $$a.concat([$$v]))
+                change: [
+                  function ($event) {
+                    var $$a = _vm.chooseFeaturesArray,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = feature.id,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.chooseFeaturesArray = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.chooseFeaturesArray = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
                     } else {
-                      $$i > -1 &&
-                        (_vm.chooseFeaturesArray = $$a
-                          .slice(0, $$i)
-                          .concat($$a.slice($$i + 1)))
+                      _vm.chooseFeaturesArray = $$c
                     }
-                  } else {
-                    _vm.chooseFeaturesArray = $$c
-                  }
-                },
+                  },
+                  function ($event) {
+                    return _vm.featureCheck()
+                  },
+                ],
               },
             }),
             _vm._v(" "),
@@ -39702,7 +39708,8 @@ var render = function () {
                   staticClass: "single-location mb-3 sponsorized",
                   class:
                     location.category_id != _vm.tmpCategory &&
-                    _vm.tmpCategory != 0
+                    _vm.tmpCategory != 0 &&
+                    _vm.featureCheck()
                       ? "hide"
                       : "show",
                   attrs: { id: "sponsor" + location.id },
