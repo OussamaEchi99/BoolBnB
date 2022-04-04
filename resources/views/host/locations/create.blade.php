@@ -108,12 +108,12 @@
 
                 {{-- LAT --}}
                 <div class="mb-3">
-                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="">
                 </div>
 
                 {{-- LONG --}}
                 <div class="mb-3">
-                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
+                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="">
                 </div>
 
                 {{-- Services --}}
