@@ -30,7 +30,7 @@
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
                     <div 
                         :id="'sponsor' + location.id" 
-                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" 
+                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'"  
                         class="single-location mb-3 sponsorized" 
                         v-for="(location, index) in activeSponsor" 
                         :key="'sponsor' + index"
@@ -98,8 +98,8 @@ export default {
             distance: 20,
             search: 0,
             activeSponsor:[],
-            filteredLocations: [],
-            features: []
+            features: [],
+            chooseFeaturesArray: [],
         };
     },
     methods: {
@@ -151,10 +151,9 @@ export default {
                 this.categories = response.data.results.categories;
                 this.activeSponsor = response.data.results.activeSponsor;
                 this.features = response.data.results.features;
-                // this.locationsFeatures = response.data.results.locationsFeatures;
-                console.log(this.locations);
-
+            
             });
+          
         },
         truncateText: function(text, maxCharsNumber) {
             if(text.length > maxCharsNumber) {
@@ -231,8 +230,15 @@ export default {
             var d = R * c; // Distance in km
             return d;
         },
-        // locationFilter() {
-        //     if( (this.location.category_id != this.tmpCategory) && (this.tmpCategory != 0) &&  ) {
+        // locationFilter(location) {
+        //     console.log(location);
+        //     if( (location.category_id != this.tmpCategory) && (this.tmpCategory != '') ) {
+        //         let tmpLocation= location;
+        //         for (let i = 0; i < this.chooseFeaturesArray.length; i++ ) {
+        //             if (!tmpLocation.features.includes(this.chooseFeaturesArray[i])) {
+        //                 return false;
+        //             }
+        //         }
         //         return true;
         //     } else {
         //         return false
