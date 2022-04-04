@@ -4,7 +4,7 @@
 
             <div class="inputs">
                 <!-- Select -->
-                <select class="form-select" aria-label="Default select example" v-model="tmpCategory">
+                <select class="form-select" aria-label="Default select example" v-model="tmpCategory" @change="locationFilter()">
                     <option :value="0" selected="0">Tutte</option>
                     <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
                 </select>
@@ -13,7 +13,7 @@
                 <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item" v-for="feature in features" :key="feature.id">
-                        <input :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
+                        <input @change="locationFilter()" :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
                         <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
                     </li>
                 </ul>
@@ -28,6 +28,8 @@
                 </div>
             </div>
 
+            <!-- :class=" prova ? 'hide' : 'show'" -->
+
            
             
             <div class="found_elements my-3">
@@ -36,9 +38,8 @@
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
                     <div 
                         :id="'sponsor' + location.id" 
-                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'"  
-                        class="single-location mb-3 sponsorized" 
-                        v-for="(location, index) in activeSponsor" 
+                        class="single-location mb-3 sponsorized"
+                        v-for="(location, index) in activeSponsor"
                         :key="'sponsor' + index"
                     >
                                 
@@ -236,20 +237,29 @@ export default {
             var d = R * c; // Distance in km
             return d;
         },
-        // locationFilter(location) {
-        //     console.log(location);
-        //     if( (location.category_id != this.tmpCategory) && (this.tmpCategory != '') ) {
-        //         let tmpLocation= location;
-        //         for (let i = 0; i < this.chooseFeaturesArray.length; i++ ) {
-        //             if (!tmpLocation.features.includes(this.chooseFeaturesArray[i])) {
-        //                 return false;
-        //             }
-        //         }
-        //         return true;
-        //     } else {
-        //         return false
-        //     }
-        // }
+        locationFilter(location) {
+            this.locations.forEach(location => {
+
+                let locationFeatures = [];
+
+                location.features.forEach(feature => {
+                    locationFeatures.push(feature.id)
+                });
+
+                
+                var apartmentClasses = document.getElementById('sponsor' + location.id);
+
+                if(location.category == this.tmpCategory && tmpCategory != 0 && locationFeatures.include(chooseFeaturesArray)) {
+                    // apartmentClasses.classList.remove('hide');
+                    apartmentClasses.classList.add('show');
+                } else {
+                    // apartmentClasses.classList.remove('show');
+                    apartmentClasses.classList.add('hide');
+                }
+                console.log(locationFeatures)
+
+            });
+        }
     },
     created: function() {
         this.getLocationsAndCategories();

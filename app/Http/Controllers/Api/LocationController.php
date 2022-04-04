@@ -12,7 +12,7 @@ class LocationController extends Controller
 {
     public function index(Request $request) {
 
-        $locations = Location::with('features', 'category')->get();
+        $locations = Location::where('visible', '=', 1)->with('features', 'category')->get();
 
         $categories = Category::all();
         $features = Feature::all();
