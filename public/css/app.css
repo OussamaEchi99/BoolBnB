@@ -4640,7 +4640,7 @@ a {
 }
 
 .header .btn-menu .circle {
-  border: 1px solid black;
+  border: 2px solid black;
   width: 30px;
   height: 30px;
   border-radius: 50%;

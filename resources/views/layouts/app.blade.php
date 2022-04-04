@@ -112,7 +112,7 @@
                                                 <i class="fas fa-bars"></i>
                                             </div>
                                             <div class="circle">
-
+                                                <i class="fas fa-user"></i>
                                             </div>
 
                                         </button>
