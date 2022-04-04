@@ -1993,6 +1993,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2165,20 +2173,26 @@ __webpack_require__.r(__webpack_exports__);
 
       return d;
     },
-    featureCheck: function featureCheck() {
-      console.log(this.locations);
+    locationFilter: function locationFilter(location) {
+      var _this3 = this;
 
-      for (var i = 0; i < this.locations.length; i++) {
-        var tmpLocation = this.locations[i];
+      this.locations.forEach(function (location) {
+        var locationFeatures = [];
+        location.features.forEach(function (feature) {
+          locationFeatures.push(feature.id);
+        });
+        var apartmentClasses = document.getElementById('sponsor' + location.id);
 
-        for (var _i4 = 0; _i4 < this.chooseFeaturesArray.length; _i4++) {
-          if (!tmpLocation.features.includes(this.chooseFeaturesArray[_i4])) {
-            return false;
-          } else {
-            return true;
-          }
+        if (location.category == _this3.tmpCategory && tmpCategory != 0 && locationFeatures.include(chooseFeaturesArray)) {
+          // apartmentClasses.classList.remove('hide');
+          apartmentClasses.classList.add('show');
+        } else {
+          // apartmentClasses.classList.remove('show');
+          apartmentClasses.classList.add('hide');
         }
-      }
+
+        console.log(locationFeatures);
+      });
     }
   },
   created: function created() {
@@ -2450,13 +2464,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   data: function data() {
     return {
       searchText: '',
       activeSponsor: [],
-      activeLocation: 0
+      activeLocation: 0,
+      locations: []
     };
   },
   methods: {
@@ -2465,16 +2495,17 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('http://127.0.0.1:8000/api/locations', {}).then(function (response) {
         _this.activeSponsor = response.data.results.activeSponsor;
-        _this.location = response.data.results.locations;
+        _this.locations = response.data.results.locations;
+
+        _this.initializeMap();
       });
     },
-    initializeMap: function initializeMap(cen_lat, cen_long) {
-      this.search = 1;
+    initializeMap: function initializeMap() {
       var map = tt.map({
         key: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
         container: 'map',
-        zoom: 6,
-        center: [cen_lat, cen_long]
+        zoom: 4,
+        center: [12.495673, 42.001585]
       }); // aggiunta controlli mappa
 
       map.addControl(new tt.FullscreenControl());
@@ -2518,10 +2549,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     }
   },
-  created: function created() {
+  created: function created() {},
+  mounted: function mounted() {
     this.getLocationsAndCategories();
-    this.initializeMap(12.495673, 42.001585);
-    this.initializeMap(12.495673, 42.001585);
   }
 });
 
@@ -2712,6 +2742,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Search',
@@ -2770,7 +2803,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "button.dropdown-toggle[data-v-bb962f12] {\n  background-color: white;\n  border: 1px solid #767676;\n}\nbutton.dropdown-toggle ul.dropdown-menu[data-v-bb962f12] {\n  padding: 0 10px;\n}\n.sponsorized .card-header[data-v-bb962f12] {\n  background-color: gold;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 500px !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas .mapboxgl-canvas[data-v-bb962f12] {\n  width: 100%;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 50%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
+exports.push([module.i, ".inputs[data-v-bb962f12] {\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n}\nbutton.dropdown-toggle[data-v-bb962f12] {\n  background-color: white;\n  border: 1px solid #767676;\n}\nbutton.dropdown-toggle ul.dropdown-menu[data-v-bb962f12] {\n  padding: 0 10px;\n}\n.sponsorized .card-header[data-v-bb962f12] {\n  background-color: #ffed4a;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 500px !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas .mapboxgl-canvas[data-v-bb962f12] {\n  width: 100%;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 50%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -2827,7 +2860,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#carouselExampleControls[data-v-b3c5cf30] {\n  width: 60%;\n  margin: auto;\n}\n#carouselExampleControls .text[data-v-b3c5cf30] {\n  display: block;\n  text-align: center;\n  font-size: 25px;\n  text-decoration: none;\n}\n#carouselExampleControls img[data-v-b3c5cf30] {\n  width: 100%;\n  height: 60vh;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n#map[data-v-b3c5cf30] {\n  width: 500px !important;\n  margin-right: 20px;\n}\n.map[data-v-b3c5cf30] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas .mapboxgl-canvas[data-v-b3c5cf30] {\n  width: 100%;\n  height: auto;\n}", ""]);
+exports.push([module.i, ".advice[data-v-b3c5cf30] {\n  font-size: 30px;\n}\n.all_page[data-v-b3c5cf30] {\n  height: 80vh;\n  overflow-y: auto;\n}\n.research[data-v-b3c5cf30] {\n  width: 60%;\n  margin: auto;\n  display: flex;\n  justify-content: center;\n  position: relative;\n  bottom: 50px;\n}\n.research input[data-v-b3c5cf30] {\n  border-top-left-radius: 25px;\n  border-bottom-left-radius: 25px;\n  border: 1px solid #add8e6;\n  border-right: none;\n  width: 300px;\n  padding-left: 20px;\n  outline: none;\n}\n.research .search_button[data-v-b3c5cf30] {\n  border-radius: 50px;\n  height: 50px;\n  position: relative;\n  right: 50px;\n  border: 3px solid #add8e6;\n  background-color: #add8e6;\n}\n.research .search_button .color_link[data-v-b3c5cf30] {\n  color: white;\n  text-decoration: none;\n}\n.centered[data-v-b3c5cf30] {\n  display: flex;\n  justify-content: center;\n}\n.map_text[data-v-b3c5cf30] {\n  display: block;\n  font-size: 25px;\n}\n#carouselExampleControls[data-v-b3c5cf30] {\n  width: 100%;\n  margin: auto;\n}\n#carouselExampleControls .text[data-v-b3c5cf30] {\n  display: inline-block;\n  text-align: center;\n  font-size: 25px;\n  text-decoration: none;\n  position: relative;\n  bottom: 35px;\n  background-color: #F8FAFC;\n  padding: 5px 20px;\n  border-top-left-radius: 20px;\n  border-top-right-radius: 20px;\n}\n#carouselExampleControls img[data-v-b3c5cf30] {\n  width: 100%;\n  height: 50vh;\n  -o-object-fit: cover;\n     object-fit: cover;\n  border-radius: 20px;\n}\n#map[data-v-b3c5cf30] {\n  width: 100% !important;\n}\n.map[data-v-b3c5cf30] {\n  overflow: hidden;\n  position: relative;\n  margin: auto;\n  border-radius: 20px;\n}\n.map canvas .mapboxgl-canvas[data-v-b3c5cf30] {\n  width: 100%;\n  height: auto;\n}\n.back[data-v-b3c5cf30], .next[data-v-b3c5cf30] {\n  color: white;\n}", ""]);
 
 // exports
 
@@ -4084,179 +4117,192 @@ var render = function () {
   var _c = _vm._self._c || _h
   return _c("section", [
     _c("div", { staticClass: "container" }, [
-      _c(
-        "select",
-        {
+      _c("div", { staticClass: "inputs" }, [
+        _c(
+          "select",
+          {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.tmpCategory,
+                expression: "tmpCategory",
+              },
+            ],
+            staticClass: "form-select",
+            attrs: { "aria-label": "Default select example" },
+            on: {
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.tmpCategory = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function ($event) {
+                  return _vm.locationFilter()
+                },
+              ],
+            },
+          },
+          [
+            _c("option", { attrs: { selected: "0" }, domProps: { value: 0 } }, [
+              _vm._v("Tutte"),
+            ]),
+            _vm._v(" "),
+            _vm._l(_vm.categories, function (category) {
+              return _c(
+                "option",
+                { key: category.id, domProps: { value: category.id } },
+                [_vm._v(_vm._s(category.name))]
+              )
+            }),
+          ],
+          2
+        ),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c(
+          "ul",
+          { staticClass: "dropdown-menu" },
+          _vm._l(_vm.features, function (feature) {
+            return _c("li", { key: feature.id, staticClass: "dropdown-item" }, [
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.chooseFeaturesArray,
+                    expression: "chooseFeaturesArray",
+                  },
+                ],
+                attrs: {
+                  id: "check-" + feature.name.toLowerCase(),
+                  type: "checkbox",
+                },
+                domProps: {
+                  value: feature.id,
+                  checked: Array.isArray(_vm.chooseFeaturesArray)
+                    ? _vm._i(_vm.chooseFeaturesArray, feature.id) > -1
+                    : _vm.chooseFeaturesArray,
+                },
+                on: {
+                  change: [
+                    function ($event) {
+                      var $$a = _vm.chooseFeaturesArray,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = feature.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.chooseFeaturesArray = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.chooseFeaturesArray = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
+                      } else {
+                        _vm.chooseFeaturesArray = $$c
+                      }
+                    },
+                    function ($event) {
+                      return _vm.locationFilter()
+                    },
+                  ],
+                },
+              }),
+              _vm._v(" "),
+              _c(
+                "label",
+                {
+                  staticClass: "checkbox",
+                  attrs: { for: "check-" + feature.name.toLowerCase() },
+                },
+                [_vm._v(_vm._s(feature.name))]
+              ),
+            ])
+          }),
+          0
+        ),
+        _vm._v(" "),
+        _c("input", {
           directives: [
             {
               name: "model",
               rawName: "v-model",
-              value: _vm.tmpCategory,
-              expression: "tmpCategory",
+              value: _vm.searchText,
+              expression: "searchText",
             },
           ],
-          staticClass: "form-select",
-          attrs: { "aria-label": "Default select example" },
+          attrs: { type: "text", placeholder: "Cerca una città" },
+          domProps: { value: _vm.searchText },
           on: {
-            change: function ($event) {
-              var $$selectedVal = Array.prototype.filter
-                .call($event.target.options, function (o) {
-                  return o.selected
-                })
-                .map(function (o) {
-                  var val = "_value" in o ? o._value : o.value
-                  return val
-                })
-              _vm.tmpCategory = $event.target.multiple
-                ? $$selectedVal
-                : $$selectedVal[0]
+            keyup: function ($event) {
+              if (
+                !$event.type.indexOf("key") &&
+                _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
+              ) {
+                return null
+              }
+              return _vm.getCoordinates()
+            },
+            input: function ($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.searchText = $event.target.value
             },
           },
-        },
-        [
-          _c("option", { attrs: { selected: "0" }, domProps: { value: 0 } }, [
-            _vm._v("Tutte"),
-          ]),
-          _vm._v(" "),
-          _vm._l(_vm.categories, function (category) {
-            return _c(
-              "option",
-              { key: category.id, domProps: { value: category.id } },
-              [_vm._v(_vm._s(category.name))]
-            )
-          }),
-        ],
-        2
-      ),
-      _vm._v(" "),
-      _vm._m(0),
-      _vm._v(" "),
-      _c(
-        "ul",
-        { staticClass: "dropdown-menu" },
-        _vm._l(_vm.features, function (feature) {
-          return _c("li", { key: feature.id, staticClass: "dropdown-item" }, [
-            _c("input", {
-              directives: [
-                {
-                  name: "model",
-                  rawName: "v-model",
-                  value: _vm.chooseFeaturesArray,
-                  expression: "chooseFeaturesArray",
-                },
-              ],
-              attrs: {
-                id: "check-" + feature.name.toLowerCase(),
-                type: "checkbox",
-              },
-              domProps: {
-                value: feature.id,
-                checked: Array.isArray(_vm.chooseFeaturesArray)
-                  ? _vm._i(_vm.chooseFeaturesArray, feature.id) > -1
-                  : _vm.chooseFeaturesArray,
-              },
-              on: {
-                change: [
-                  function ($event) {
-                    var $$a = _vm.chooseFeaturesArray,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = feature.id,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.chooseFeaturesArray = $$a.concat([$$v]))
-                      } else {
-                        $$i > -1 &&
-                          (_vm.chooseFeaturesArray = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
-                      }
-                    } else {
-                      _vm.chooseFeaturesArray = $$c
-                    }
-                  },
-                  function ($event) {
-                    return _vm.featureCheck()
-                  },
-                ],
-              },
-            }),
-            _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "checkbox",
-                attrs: { for: "check-" + feature.name.toLowerCase() },
-              },
-              [_vm._v(_vm._s(feature.name))]
-            ),
-          ])
         }),
-        0
-      ),
+        _vm._v(" "),
+        _c("div", { staticClass: "distance" }, [
+          _c("label", { attrs: { for: "vol" } }, [_vm._v("Range ricerca")]),
+          _vm._v(" "),
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.distance,
+                expression: "distance",
+              },
+            ],
+            attrs: {
+              value: "20",
+              type: "range",
+              id: "range",
+              name: "range",
+              min: "10",
+              max: "50",
+            },
+            domProps: { value: _vm.distance },
+            on: {
+              change: function ($event) {
+                return _vm.getCoordinates()
+              },
+              __r: function ($event) {
+                _vm.distance = $event.target.value
+              },
+            },
+          }),
+          _vm._v(
+            "\n                " + _vm._s(_vm.distance) + "Km\n            "
+          ),
+        ]),
+      ]),
       _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.searchText,
-            expression: "searchText",
-          },
-        ],
-        attrs: { type: "text", placeholder: "Cerca una città" },
-        domProps: { value: _vm.searchText },
-        on: {
-          keyup: function ($event) {
-            if (
-              !$event.type.indexOf("key") &&
-              _vm._k($event.keyCode, "enter", 13, $event.key, "Enter")
-            ) {
-              return null
-            }
-            return _vm.getCoordinates()
-          },
-          input: function ($event) {
-            if ($event.target.composing) {
-              return
-            }
-            _vm.searchText = $event.target.value
-          },
-        },
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "vol" } }, [_vm._v("Range ricerca")]),
-      _vm._v(" "),
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.distance,
-            expression: "distance",
-          },
-        ],
-        attrs: {
-          value: "20",
-          type: "range",
-          id: "range",
-          name: "range",
-          min: "10",
-          max: "50",
-        },
-        domProps: { value: _vm.distance },
-        on: {
-          change: function ($event) {
-            return _vm.getCoordinates()
-          },
-          __r: function ($event) {
-            _vm.distance = $event.target.value
-          },
-        },
-      }),
-      _vm._v("\n        " + _vm._s(_vm.distance) + "Km\n        \n        "),
-      _c("div", { staticClass: "found_elements" }, [
+      _c("div", { staticClass: "found_elements my-3" }, [
         _c("div", {
           staticClass: "map",
           class: _vm.search == 0 ? "d-none" : "show",
@@ -4823,152 +4869,197 @@ var render = function () {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", [
-    _c("h1", [_vm._v("Home")]),
-    _vm._v(" "),
-    _c("input", {
-      directives: [
-        {
-          name: "model",
-          rawName: "v-model",
-          value: _vm.searchText,
-          expression: "searchText",
-        },
-      ],
-      attrs: { type: "text" },
-      domProps: { value: _vm.searchText },
-      on: {
-        input: function ($event) {
-          if ($event.target.composing) {
-            return
-          }
-          _vm.searchText = $event.target.value
-        },
-      },
-    }),
-    _vm._v(" "),
-    _c(
-      "button",
-      [
-        _c(
-          "router-link",
+    _c("div", { staticClass: "research" }, [
+      _c("input", {
+        directives: [
           {
-            attrs: {
-              to: { name: "search", params: { homeSearch: _vm.searchText } },
-            },
+            name: "model",
+            rawName: "v-model",
+            value: _vm.searchText,
+            expression: "searchText",
           },
-          [_vm._v("\n            Cerca un appartamento\n        ")]
-        ),
-      ],
-      1
-    ),
+        ],
+        staticClass: "inputText",
+        attrs: { type: "text" },
+        domProps: { value: _vm.searchText },
+        on: {
+          input: function ($event) {
+            if ($event.target.composing) {
+              return
+            }
+            _vm.searchText = $event.target.value
+          },
+        },
+      }),
+      _vm._v(" "),
+      _c(
+        "button",
+        { staticClass: "search_button" },
+        [
+          _c(
+            "router-link",
+            {
+              staticClass: "color_link",
+              attrs: {
+                to: { name: "search", params: { homeSearch: _vm.searchText } },
+              },
+            },
+            [_vm._v("\n                Cerca un appartamento\n            ")]
+          ),
+        ],
+        1
+      ),
+    ]),
     _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "carousel slide my-4",
-        attrs: { id: "carouselExampleControls", "data-bs-ride": "carousel" },
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "carousel-inner" },
-          _vm._l(_vm.activeSponsor, function (location, index) {
-            return _c(
+    _c("div", { staticClass: "all_page" }, [
+      _c("div", { staticClass: "main_page container" }, [
+        _vm.activeSponsor && _vm.activeSponsor.length
+          ? _c(
               "div",
               {
-                key: index,
-                staticClass: "carousel-item",
-                class: index == _vm.activeLocation ? "active" : "none",
+                staticClass: "carousel slide my-4",
+                attrs: {
+                  id: "carouselExampleControls",
+                  "data-bs-ride": "carousel",
+                },
               },
               [
-                _c("img", {
-                  staticClass: "d-block",
-                  attrs: {
-                    src: location.photo.includes("https:")
-                      ? location.photo
-                      : "http://127.0.0.1:8000/storage/" + location.photo,
-                    alt: location.name,
-                  },
-                }),
+                _c("span", { staticClass: "advice" }, [
+                  _vm._v("BoolBnB ti consiglia:"),
+                ]),
                 _vm._v(" "),
                 _c(
-                  "router-link",
+                  "div",
+                  { staticClass: "carousel-inner" },
+                  _vm._l(_vm.activeSponsor, function (location, index) {
+                    return _c(
+                      "div",
+                      {
+                        key: index,
+                        staticClass: "carousel-item",
+                        class: index == _vm.activeLocation ? "active" : "none",
+                      },
+                      [
+                        _c("img", {
+                          staticClass: "d-block img_carousel",
+                          attrs: {
+                            src: location.photo.includes("https:")
+                              ? location.photo
+                              : "http://127.0.0.1:8000/storage/" +
+                                location.photo,
+                            alt: location.name,
+                          },
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "centered" },
+                          [
+                            _c(
+                              "router-link",
+                              {
+                                staticClass: "text",
+                                attrs: {
+                                  to: {
+                                    name: "location-details",
+                                    params: { slug: location.slug },
+                                  },
+                                },
+                              },
+                              [
+                                _vm._v(
+                                  "Vedi nel dettaglio: " +
+                                    _vm._s(location.name) +
+                                    " a " +
+                                    _vm._s(location.city)
+                                ),
+                              ]
+                            ),
+                          ],
+                          1
+                        ),
+                      ]
+                    )
+                  }),
+                  0
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
                   {
-                    staticClass: "text",
+                    staticClass: "back carousel-control-prev",
                     attrs: {
-                      to: {
-                        name: "location-details",
-                        params: { slug: location.slug },
+                      type: "button",
+                      "data-bs-target": "#carouselExampleControls",
+                      "data-bs-slide": "prev",
+                    },
+                    on: {
+                      click: function ($event) {
+                        return _vm.back()
                       },
                     },
                   },
-                  [_vm._v(_vm._s(location.city) + ": " + _vm._s(location.name))]
+                  [
+                    _c("span", {
+                      staticClass: "carousel-control-prev-icon",
+                      attrs: { "aria-hidden": "true" },
+                    }),
+                    _vm._v(" "),
+                    _c("span", { staticClass: "visually-hidden" }, [
+                      _vm._v("Previous"),
+                    ]),
+                  ]
                 ),
-              ],
-              1
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: " next carousel-control-next",
+                    attrs: {
+                      type: "button",
+                      "data-bs-target": "#carouselExampleControls",
+                      "data-bs-slide": "next",
+                    },
+                    on: {
+                      click: function ($event) {
+                        return _vm.next()
+                      },
+                    },
+                  },
+                  [
+                    _c("span", { staticClass: "visually-hidden" }, [
+                      _vm._v("Next"),
+                    ]),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "carousel-control-next-icon",
+                      attrs: { "aria-hidden": "true" },
+                    }),
+                  ]
+                ),
+              ]
             )
-          }),
-          0
-        ),
+          : _vm._e(),
         _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "carousel-control-prev",
-            attrs: {
-              type: "button",
-              "data-bs-target": "#carouselExampleControls",
-              "data-bs-slide": "prev",
-            },
-            on: {
-              click: function ($event) {
-                return _vm.back()
-              },
-            },
-          },
-          [
-            _c("span", {
-              staticClass: "carousel-control-prev-icon",
-              attrs: { "aria-hidden": "true" },
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "visually-hidden" }, [
-              _vm._v("Previous"),
-            ]),
-          ]
-        ),
-        _vm._v(" "),
-        _c(
-          "button",
-          {
-            staticClass: "carousel-control-next",
-            attrs: {
-              type: "button",
-              "data-bs-target": "#carouselExampleControls",
-              "data-bs-slide": "next",
-            },
-            on: {
-              click: function ($event) {
-                return _vm.next()
-              },
-            },
-          },
-          [
-            _c("span", {
-              staticClass: "carousel-control-next-icon",
-              attrs: { "aria-hidden": "true" },
-            }),
-            _vm._v(" "),
-            _c("span", { staticClass: "visually-hidden" }, [_vm._v("Next")]),
-          ]
-        ),
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "map", attrs: { id: "map" } }),
+        _vm._m(0),
+      ]),
+    ]),
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "map_container" }, [
+      _c("span", { staticClass: "map_text" }, [
+        _vm._v("Esplora tutte le nostre Locations:"),
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "map", attrs: { id: "map" } }),
+    ])
+  },
+]
 render._withStripped = true
 
 
@@ -5161,14 +5252,23 @@ var render = function () {
   return _c(
     "section",
     [
-      _c("h1", [_vm._v("Pagina di ricerca")]),
+      _vm._m(0),
       _vm._v(" "),
       _c("Index", { attrs: { searchText: _vm.homeSearch } }),
     ],
     1
   )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "container" }, [
+      _c("h1", [_vm._v("Pagina di ricerca")]),
+    ])
+  },
+]
 render._withStripped = true
 
 
