@@ -90,16 +90,6 @@
                 <input type="number"  required min="0" class="form-control" id="price" name="price" value="{{ old('price', $location->price) }}">
             </div>
 
-            {{-- LAT --}}
-            <div class="mb-3">
-                <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="">
-            </div>
-
-            {{-- LONG --}}
-            <div class="mb-3">
-                <input readonly type="number" class="form-control d-none" id="long" name="long" value="">
-            </div>
-
             {{-- Category --}}
             <div class="mb-3">
                 <label for="category_id" class="form-label">
@@ -113,6 +103,16 @@
                         @endforeach
                     </select>
                 </div>
+            </div>
+
+            {{-- LAT --}}
+            <div class="mb-3">
+                <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+            </div>
+
+            {{-- LONG --}}
+            <div class="mb-3">
+                <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
             </div>
 
             {{-- Services --}}
@@ -160,16 +160,6 @@
             <div class="mb-3">
                 <label for="description" class="form-label">Descrizione:</label>
                 <textarea class="form-control" maxlength="60000" name="description" id="description" cols="30" rows="10">{{ old('description', $location->description) }}</textarea>
-            </div>
-
-            {{-- LAT --}}
-            <div class="mb-3">
-                <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="">
-            </div>
-
-            {{-- LONG --}}
-            <div class="mb-3">
-                <input readonly type="number" class="form-control d-none" id="long" name="long" value="">
             </div>
 
             {{-- Edit Button --}}
