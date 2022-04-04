@@ -53,15 +53,15 @@
                 </div>
 
                 {{-- Visible --}}
-                <div class="mb-3">
+                {{-- <div class="mb-3">
                     <label for="visible" class="form-label">Visible:</label>
                     <input type="number" required class="form-control" id="visible" name="visible" value="{{ old('visible') }}">
-                </div>
-
-                {{-- <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="visible">
-                    <label class="custom-control-label" for="visible" name="visible" value="1">Toggle this switch element</label>
                 </div> --}}
+
+                <div class="custom-control custom-switch mb-3">
+                    <input type="checkbox" required class="custom-control-input" id="visible" name="visible" value="{{old('visible')}}">
+                    <label class="custom-control-label form-label" for="visible" name="visible" value="">Visible:</label>
+                </div>
 
                 {{-- Rooms Number --}}
                 <div class="mb-3">
@@ -117,6 +117,16 @@
                             </label>
                         </div>
                     @endforeach
+                </div>
+
+                {{-- LAT --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="lat" name="lat" value="{{ old('lat') }}">
+                </div>
+
+                {{-- LONG --}}
+                <div class="mb-3">
+                    <input readonly type="number" class="form-control d-none" id="long" name="long" value="{{ old('long') }}">
                 </div>
 
                 {{-- Location Photo --}}
