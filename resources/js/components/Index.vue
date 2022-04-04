@@ -18,6 +18,23 @@
                     </li>
                 </ul>
 
+                <!-- stanze -->
+                <select class="form-select" aria-label="Default select example" v-model="tmpRooms">
+                    <option value="0">Qualsiasi</option>
+                    <option  value="1">1</option>
+                    <option  value="2">2</option>
+                    <option  value="3">3+</option>
+                </select>
+
+                <!-- posti letto -->
+                <select class="form-select" aria-label="Default select example" v-model="tmpBeds">
+                    <option value="0">Qualsiasi</option>
+                    <option  value="1">1</option>
+                    <option  value="2">2</option>
+                    <option  value="3">3</option>
+                    <option  value="4">4+</option>
+                </select>
+
                 <!-- Search -->
                 <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
 
@@ -62,7 +79,7 @@
                         </router-link>
 
                     </div>
-                    <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) && (sponsored(location.id) == false) ? 'hide' : 'show'" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
+                    <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) && (sponsored(location.id) == false) && (( location.rooms < tmpRooms)) && ((tmpBeds!= 0) && (location.beds < tmpBeds))  ? 'hide' : 'show'" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
                                 
                         <router-link v-if="sponsored(location.id) != false" class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
                             <div class="card">
@@ -107,6 +124,8 @@ export default {
             activeSponsor:[],
             features: [],
             chooseFeaturesArray: [],
+            tmpRooms: 0,
+            tmpBeds: 0
         };
     },
     methods: {
