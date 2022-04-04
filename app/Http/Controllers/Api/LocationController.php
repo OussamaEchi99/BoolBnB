@@ -16,7 +16,6 @@ class LocationController extends Controller
         $categories = Category::all();
         $features = Feature::all();
         $active_sponsor = [];
-        $locationsFeatures = $locations->features();
 
         foreach($locations as $location){
 
@@ -33,7 +32,6 @@ class LocationController extends Controller
                     'categories' => $categories,
                     'activeSponsor' => $active_sponsor,
                     'features' => $features,
-                    // 'locationsFeatures' => $locationsFeatures
                 ]
             ]);
         } else {

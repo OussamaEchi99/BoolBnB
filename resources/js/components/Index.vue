@@ -2,29 +2,35 @@
     <section>
         <div class="container">
 
-            <!-- Select -->
-            <select class="form-select" aria-label="Default select example" v-model="tmpCategory">
-                <option :value="0" selected="0">Tutte</option>
-                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-            </select>
+            <div class="inputs">
+                <!-- Select -->
+                <select class="form-select" aria-label="Default select example" v-model="tmpCategory">
+                    <option :value="0" selected="0">Tutte</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                </select>
 
-            <!-- Featurs Select -->
-            <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
-            <ul class="dropdown-menu">
-                <li class="dropdown-item" v-for="feature in features" :key="feature.id">
-                    <input :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
-                    <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
-                </li>
-            </ul>
+                <!-- Featurs Select -->
+                <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item" v-for="feature in features" :key="feature.id">
+                        <input :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
+                        <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
+                    </li>
+                </ul>
 
-            <!-- Search -->
-            <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
+                <!-- Search -->
+                <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
 
-            <label for="vol">Range ricerca</label>
-            <input @change="getCoordinates()" value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
-            {{distance}}Km
+                <div class="distance">
+                    <label for="vol">Range ricerca</label>
+                    <input @change="getCoordinates()" value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
+                    {{distance}}Km
+                </div>
+            </div>
+
+           
             
-            <div class="found_elements">
+            <div class="found_elements my-3">
                 <div id="map" class="map" :class=" search == 0 ? 'd-none' : 'show' "></div>
 
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
@@ -250,6 +256,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.inputs{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
 
     button.dropdown-toggle {
         background-color: white;
@@ -264,7 +275,7 @@ export default {
     .sponsorized{
 
         .card-header{
-            background-color: gold;
+            background-color: #ffed4a;
         }
     }
 
