@@ -2007,9 +2007,14 @@ __webpack_require__.r(__webpack_exports__);
       distance: 20,
       search: 0,
       activeSponsor: [],
+<<<<<<< HEAD
       features: [],
       chooseFeaturesArray: [],
       locationsFeatures: []
+=======
+      filteredLocations: [],
+      features: []
+>>>>>>> 120f73e4a209c3281c58fd2f1b47c8cc72dfed66
     };
   },
   methods: {
@@ -2033,26 +2038,28 @@ __webpack_require__.r(__webpack_exports__);
       map.addControl(new tt.NavigationControl());
 
       for (var i = 0; i < this.locations.length; i++) {
-        new tt.Marker({
-          name: this.locations[i].name
-        }).setLngLat([this.locations[i]["long"], this.locations[i].lat]).addTo(map);
-        var markerHeight = 50,
-            markerRadius = 10,
-            linearOffset = 25;
-        var popupOffsets = {
-          'top': [0, 0],
-          'top-left': [0, 0],
-          'top-right': [0, 0],
-          'bottom': [0, -markerHeight],
-          'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-          'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-          'left': [markerRadius, (markerHeight - markerRadius) * -1],
-          'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-        };
-        var popup = new tt.Popup({
-          offset: popupOffsets,
-          className: 'my-class'
-        }).setLngLat([this.locations[i]["long"], this.locations[i].lat]).setHTML(this.locations[i].name).addTo(map);
+        if (this.getDistanceFromLatLonInKm(this.locations[i].lat, this.locations[i]["long"], this.searchLat, this.searchLon) < this.distance) {
+          new tt.Marker({
+            name: this.locations[i].name
+          }).setLngLat([this.locations[i]["long"], this.locations[i].lat]).addTo(map);
+          var markerHeight = 50,
+              markerRadius = 10,
+              linearOffset = 25;
+          var popupOffsets = {
+            'top': [0, 0],
+            'top-left': [0, 0],
+            'top-right': [0, 0],
+            'bottom': [0, -markerHeight],
+            'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+            'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+            'left': [markerRadius, (markerHeight - markerRadius) * -1],
+            'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+          };
+          var popup = new tt.Popup({
+            offset: popupOffsets,
+            className: 'my-class'
+          }).setLngLat([this.locations[i]["long"], this.locations[i].lat]).setHTML(this.locations[i].name).addTo(map);
+        }
       }
     },
     getLocationsAndCategories: function getLocationsAndCategories() {
@@ -2176,11 +2183,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getLocationsAndCategories();
-    this.initializeMap(0, 0);
 
     if (this.$route.params != '') {
       this.getCoordinates();
     }
+
+    this.initializeMap();
   }
 });
 
@@ -2440,6 +2448,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Home',
   data: function data() {
@@ -2455,7 +2465,43 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get('http://127.0.0.1:8000/api/locations', {}).then(function (response) {
         _this.activeSponsor = response.data.results.activeSponsor;
+        _this.location = response.data.results.locations;
       });
+    },
+    initializeMap: function initializeMap(cen_lat, cen_long) {
+      this.search = 1;
+      var map = tt.map({
+        key: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+        container: 'map',
+        zoom: 6,
+        center: [cen_lat, cen_long]
+      }); // aggiunta controlli mappa
+
+      map.addControl(new tt.FullscreenControl());
+      map.addControl(new tt.NavigationControl());
+
+      for (var i = 0; i < this.locations.length; i++) {
+        new tt.Marker({
+          name: this.locations[i].name
+        }).setLngLat([this.locations[i]["long"], this.locations[i].lat]).addTo(map);
+        var markerHeight = 50,
+            markerRadius = 10,
+            linearOffset = 25;
+        var popupOffsets = {
+          'top': [0, 0],
+          'top-left': [0, 0],
+          'top-right': [0, 0],
+          'bottom': [0, -markerHeight],
+          'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+          'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+          'left': [markerRadius, (markerHeight - markerRadius) * -1],
+          'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+        };
+        var popup = new tt.Popup({
+          offset: popupOffsets,
+          className: 'my-class'
+        }).setLngLat([this.locations[i]["long"], this.locations[i].lat]).setHTML(this.locations[i].name).addTo(map);
+      }
     },
     next: function next() {
       if (this.activeLocation < this.activeSponsor.length - 1) {
@@ -2474,6 +2520,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.getLocationsAndCategories();
+    this.initializeMap(12.495673, 42.001585);
+    this.initializeMap(12.495673, 42.001585);
   }
 });
 
@@ -2722,7 +2770,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "button.dropdown-toggle[data-v-bb962f12] {\n  background-color: white;\n  border: 1px solid #767676;\n}\nbutton.dropdown-toggle ul.dropdown-menu[data-v-bb962f12] {\n  padding: 0 10px;\n}\n.sponsorized .card-header[data-v-bb962f12] {\n  background-color: gold;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 45% !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas[data-v-bb962f12] {\n  min-width: 600px !important;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 50%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
+exports.push([module.i, "button.dropdown-toggle[data-v-bb962f12] {\n  background-color: white;\n  border: 1px solid #767676;\n}\nbutton.dropdown-toggle ul.dropdown-menu[data-v-bb962f12] {\n  padding: 0 10px;\n}\n.sponsorized .card-header[data-v-bb962f12] {\n  background-color: gold;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 500px !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas .mapboxgl-canvas[data-v-bb962f12] {\n  width: 100%;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 50%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -2779,7 +2827,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "#carouselExampleControls[data-v-b3c5cf30] {\n  width: 60%;\n  margin: auto;\n}\n#carouselExampleControls .text[data-v-b3c5cf30] {\n  display: block;\n  text-align: center;\n  font-size: 25px;\n  text-decoration: none;\n}\n#carouselExampleControls img[data-v-b3c5cf30] {\n  width: 100%;\n  height: 60vh;\n  -o-object-fit: cover;\n     object-fit: cover;\n}", ""]);
+exports.push([module.i, "#carouselExampleControls[data-v-b3c5cf30] {\n  width: 60%;\n  margin: auto;\n}\n#carouselExampleControls .text[data-v-b3c5cf30] {\n  display: block;\n  text-align: center;\n  font-size: 25px;\n  text-decoration: none;\n}\n#carouselExampleControls img[data-v-b3c5cf30] {\n  width: 100%;\n  height: 60vh;\n  -o-object-fit: cover;\n     object-fit: cover;\n}\n#map[data-v-b3c5cf30] {\n  width: 500px !important;\n  margin-right: 20px;\n}\n.map[data-v-b3c5cf30] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas .mapboxgl-canvas[data-v-b3c5cf30] {\n  width: 100%;\n  height: auto;\n}", ""]);
 
 // exports
 
@@ -4910,6 +4958,8 @@ var render = function () {
         ),
       ]
     ),
+    _vm._v(" "),
+    _c("div", { staticClass: "map", attrs: { id: "map" } }),
   ])
 }
 var staticRenderFns = []
