@@ -12,7 +12,7 @@
             <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
             <ul class="dropdown-menu">
                 <li class="dropdown-item" v-for="feature in features" :key="feature.id">
-                    <input @change="filterMedia()" :id="'check-' + feature.name.toLowerCase()" type="checkbox">
+                    <input :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
                     <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
                 </li>
             </ul>
@@ -28,7 +28,13 @@
                 <div id="map" class="map" :class=" search == 0 ? 'd-none' : 'show' "></div>
 
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
-                    <div :id="'sponsor' + location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" class="single-location mb-3 sponsorized" v-for="(location, index) in activeSponsor" :key="'sponsor' + index">
+                    <div 
+                        :id="'sponsor' + location.id" 
+                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" 
+                        class="single-location mb-3 sponsorized" 
+                        v-for="(location, index) in activeSponsor" 
+                        :key="'sponsor' + index"
+                    >
                                 
                         <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
                             <div class="card">
@@ -92,7 +98,9 @@ export default {
             distance: 20,
             search: 0,
             activeSponsor:[],
-            features: []
+            features: [],
+            chooseFeaturesArray: [],
+            locationsFeatures: []
         };
     },
     methods: {
@@ -143,6 +151,9 @@ export default {
                 this.categories = response.data.results.categories;
                 this.activeSponsor = response.data.results.activeSponsor;
                 this.features = response.data.results.features;
+                // this.locationsFeatures = response.data.results.locationsFeatures;
+                console.log(this.locations);
+
             });
         },
         truncateText: function(text, maxCharsNumber) {
@@ -219,7 +230,14 @@ export default {
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
             var d = R * c; // Distance in km
             return d;
-        }
+        },
+        // locationFilter() {
+        //     if( (this.location.category_id != this.tmpCategory) && (this.tmpCategory != 0) &&  ) {
+        //         return true;
+        //     } else {
+        //         return false
+        //     }
+        // }
     },
     created: function() {
         this.getLocationsAndCategories();

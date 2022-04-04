@@ -2053,6 +2053,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2067,7 +2073,9 @@ __webpack_require__.r(__webpack_exports__);
       distance: 20,
       search: 0,
       activeSponsor: [],
-      features: []
+      features: [],
+      chooseFeaturesArray: [],
+      locationsFeatures: []
     };
   },
   methods: {
@@ -2120,7 +2128,9 @@ __webpack_require__.r(__webpack_exports__);
         _this.locations = response.data.results.locations;
         _this.categories = response.data.results.categories;
         _this.activeSponsor = response.data.results.activeSponsor;
-        _this.features = response.data.results.features;
+        _this.features = response.data.results.features; // this.locationsFeatures = response.data.results.locationsFeatures;
+
+        console.log(_this.locations);
       });
     },
     truncateText: function truncateText(text, maxCharsNumber) {
@@ -2221,7 +2231,14 @@ __webpack_require__.r(__webpack_exports__);
       var d = R * c; // Distance in km
 
       return d;
-    }
+    } // locationFilter() {
+    //     if( (this.location.category_id != this.tmpCategory) && (this.tmpCategory != 0) &&  ) {
+    //         return true;
+    //     } else {
+    //         return false
+    //     }
+    // }
+
   },
   created: function created() {
     this.getLocationsAndCategories();
@@ -39502,13 +39519,43 @@ var render = function () {
         _vm._l(_vm.features, function (feature) {
           return _c("li", { key: feature.id, staticClass: "dropdown-item" }, [
             _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model",
+                  value: _vm.chooseFeaturesArray,
+                  expression: "chooseFeaturesArray",
+                },
+              ],
               attrs: {
                 id: "check-" + feature.name.toLowerCase(),
                 type: "checkbox",
               },
+              domProps: {
+                value: feature.id,
+                checked: Array.isArray(_vm.chooseFeaturesArray)
+                  ? _vm._i(_vm.chooseFeaturesArray, feature.id) > -1
+                  : _vm.chooseFeaturesArray,
+              },
               on: {
                 change: function ($event) {
-                  return _vm.filterMedia()
+                  var $$a = _vm.chooseFeaturesArray,
+                    $$el = $event.target,
+                    $$c = $$el.checked ? true : false
+                  if (Array.isArray($$a)) {
+                    var $$v = feature.id,
+                      $$i = _vm._i($$a, $$v)
+                    if ($$el.checked) {
+                      $$i < 0 && (_vm.chooseFeaturesArray = $$a.concat([$$v]))
+                    } else {
+                      $$i > -1 &&
+                        (_vm.chooseFeaturesArray = $$a
+                          .slice(0, $$i)
+                          .concat($$a.slice($$i + 1)))
+                    }
+                  } else {
+                    _vm.chooseFeaturesArray = $$c
+                  }
                 },
               },
             }),
@@ -56277,14 +56324,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************************!*\
   !*** ./resources/js/components/Index.vue ***!
   \*******************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Index_vue_vue_type_template_id_bb962f12_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Index.vue?vue&type=template&id=bb962f12&scoped=true& */ "./resources/js/components/Index.vue?vue&type=template&id=bb962f12&scoped=true&");
 /* harmony import */ var _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index.vue?vue&type=script&lang=js& */ "./resources/js/components/Index.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Index_vue_vue_type_style_index_0_id_bb962f12_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Index.vue?vue&type=style&index=0&id=bb962f12&lang=scss&scoped=true& */ "./resources/js/components/Index.vue?vue&type=style&index=0&id=bb962f12&lang=scss&scoped=true&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _Index_vue_vue_type_style_index_0_id_bb962f12_lang_scss_scoped_true___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Index.vue?vue&type=style&index=0&id=bb962f12&lang=scss&scoped=true& */ "./resources/js/components/Index.vue?vue&type=style&index=0&id=bb962f12&lang=scss&scoped=true&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -56316,7 +56364,7 @@ component.options.__file = "resources/js/components/Index.vue"
 /*!********************************************************************!*\
   !*** ./resources/js/components/Index.vue?vue&type=script&lang=js& ***!
   \********************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -57287,8 +57335,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Giuseppe\Classe#48\repository\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
