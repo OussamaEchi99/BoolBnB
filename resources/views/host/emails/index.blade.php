@@ -20,7 +20,7 @@
             
                 <a href="{{ route('host.location_emails', ['location' => $location->id]) }}">
                     <li class="list-group-item d-flex justify-content-between align-items-center">
-                        {{$location->name}}<span class="badge badge-primary badge-pill">esempio: 2</span>
+                        {{$location->name}}
                     </li>
                 </a>
             

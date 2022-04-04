@@ -14,26 +14,11 @@ use Illuminate\Support\Facades\Auth;
 class LeadController extends Controller
 {   
     public function take(){
-
-        // $usertmp = User::all();
         $usernow = Auth::id();
-
         return response()->json([
             'success' => true,
             'results' => $usernow
         ]);
-        // foreach($usertmp as $usersingle){
-        //     if($usersingle->id){
-        //         return response()->json([
-        //             'success' => true,
-        //             'results' => $usernow
-        //         ]);
-        //     } 
-        // }
-        // return response()->json([
-        //     'success' => false,
-        //     'results' => []
-        // ]);
             
     }
 
