@@ -12,11 +12,13 @@ class HomeController extends Controller
 {
     public function index() {
         $user = Auth::user();
-
+        $locations_filtered = Location::where('user_id','=',Auth::id())->get();
+    
         $data = [
             'user' => $user,
+            'locations' => $locations_filtered
         ];
 
-        return view('host.dashboard.index');
+        return view('host.dashboard.index', $data);
     }
 }

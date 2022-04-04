@@ -2013,8 +2013,8 @@ __webpack_require__.r(__webpack_exports__);
       distance: 20,
       search: 0,
       activeSponsor: [],
-      filteredLocations: [],
-      features: []
+      features: [],
+      chooseFeaturesArray: []
     };
   },
   methods: {
@@ -2069,9 +2069,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.locations = response.data.results.locations;
         _this.categories = response.data.results.categories;
         _this.activeSponsor = response.data.results.activeSponsor;
-        _this.features = response.data.results.features; // this.locationsFeatures = response.data.results.locationsFeatures;
-
-        console.log(_this.locations);
+        _this.features = response.data.results.features;
       });
     },
     truncateText: function truncateText(text, maxCharsNumber) {
@@ -2172,8 +2170,15 @@ __webpack_require__.r(__webpack_exports__);
       var d = R * c; // Distance in km
 
       return d;
-    } // locationFilter() {
-    //     if( (this.location.category_id != this.tmpCategory) && (this.tmpCategory != 0) &&  ) {
+    } // locationFilter(location) {
+    //     console.log(location);
+    //     if( (location.category_id != this.tmpCategory) && (this.tmpCategory != '') ) {
+    //         let tmpLocation= location;
+    //         for (let i = 0; i < this.chooseFeaturesArray.length; i++ ) {
+    //             if (!tmpLocation.features.includes(this.chooseFeaturesArray[i])) {
+    //                 return false;
+    //             }
+    //         }
     //         return true;
     //     } else {
     //         return false
