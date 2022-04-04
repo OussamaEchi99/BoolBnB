@@ -10,8 +10,11 @@ a {
 // Sponsor Button
 .subscription {
     border: 1px solid lightgray;
-    padding: 6px 15px;
+    padding: 20px 15px;
     border-radius: 25px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
 }
 
 .my_d_none {
