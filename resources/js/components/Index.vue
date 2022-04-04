@@ -30,7 +30,7 @@
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
                     <div 
                         :id="'sponsor' + location.id" 
-                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" 
+                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'"  
                         class="single-location mb-3 sponsorized" 
                         v-for="(location, index) in activeSponsor" 
                         :key="'sponsor' + index"
@@ -100,7 +100,6 @@ export default {
             activeSponsor:[],
             features: [],
             chooseFeaturesArray: [],
-            locationsFeatures: []
         };
     },
     methods: {
@@ -124,23 +123,24 @@ export default {
             map.addControl(new tt.NavigationControl());
 
             for (let i = 0; i < this.locations.length; i++) {
-                new tt.Marker({name: this.locations[i].name}).setLngLat([this.locations[i].long, this.locations[i].lat]).addTo(map);
-                var markerHeight = 50, markerRadius = 10, linearOffset = 25;
-                var popupOffsets = {
-                    'top': [0, 0],
-                    'top-left': [0,0],
-                    'top-right': [0,0],
-                    'bottom': [0, -markerHeight],
-                    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-                    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
-                    'left': [markerRadius, (markerHeight - markerRadius) * -1],
-                    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
-                    };
-                var popup = new tt.Popup({offset: popupOffsets, className: 'my-class'})
-                    .setLngLat([this.locations[i].long, this.locations[i].lat])
-                    .setHTML(this.locations[i].name)
-                    .addTo(map);
-                
+                if(this.getDistanceFromLatLonInKm(this.locations[i].lat,this.locations[i].long,this.searchLat,this.searchLon) < this.distance){
+                    new tt.Marker({name: this.locations[i].name}).setLngLat([this.locations[i].long, this.locations[i].lat]).addTo(map);
+                    var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+                    var popupOffsets = {
+                        'top': [0, 0],
+                        'top-left': [0,0],
+                        'top-right': [0,0],
+                        'bottom': [0, -markerHeight],
+                        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                        'left': [markerRadius, (markerHeight - markerRadius) * -1],
+                        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+                        };
+                    var popup = new tt.Popup({offset: popupOffsets, className: 'my-class'})
+                        .setLngLat([this.locations[i].long, this.locations[i].lat])
+                        .setHTML(this.locations[i].name)
+                        .addTo(map);
+                }
             }
         },
         getLocationsAndCategories: function() {
@@ -151,10 +151,9 @@ export default {
                 this.categories = response.data.results.categories;
                 this.activeSponsor = response.data.results.activeSponsor;
                 this.features = response.data.results.features;
-                // this.locationsFeatures = response.data.results.locationsFeatures;
-                console.log(this.locations);
-
+            
             });
+          
         },
         truncateText: function(text, maxCharsNumber) {
             if(text.length > maxCharsNumber) {
@@ -231,8 +230,15 @@ export default {
             var d = R * c; // Distance in km
             return d;
         },
-        // locationFilter() {
-        //     if( (this.location.category_id != this.tmpCategory) && (this.tmpCategory != 0) &&  ) {
+        // locationFilter(location) {
+        //     console.log(location);
+        //     if( (location.category_id != this.tmpCategory) && (this.tmpCategory != '') ) {
+        //         let tmpLocation= location;
+        //         for (let i = 0; i < this.chooseFeaturesArray.length; i++ ) {
+        //             if (!tmpLocation.features.includes(this.chooseFeaturesArray[i])) {
+        //                 return false;
+        //             }
+        //         }
         //         return true;
         //     } else {
         //         return false
@@ -241,10 +247,10 @@ export default {
     },
     created: function() {
         this.getLocationsAndCategories();
-        this.initializeMap(0,0);
         if(this.$route.params != ''){
             this.getCoordinates();
         }
+        this.initializeMap();
     }
 }
 </script>
@@ -275,15 +281,15 @@ export default {
     }
 
     #map{
-        width: 45% !important;
+        width: 500px !important;
         margin-right: 20px ;
     }
     .map{
         overflow: hidden;
         position: relative;
         
-        canvas{
-            min-width: 600px !important;
+        canvas .mapboxgl-canvas{
+            width: 100%;
             height: auto;
         };
     }
