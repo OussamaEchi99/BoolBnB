@@ -55797,7 +55797,11 @@ var app = new vue__WEBPACK_IMPORTED_MODULE_0___default.a({
   //     'Navbar' : require('./components/Navbar.vue'),
   // }
 
+}); // const checkout = require('./routes/checkout');
+// app.use('/checkout', checkout);
+
 /***/ }),
+
 /***/ "./resources/js/bootstrap.js":
 /*!***********************************!*\
   !*** ./resources/js/bootstrap.js ***!
