@@ -39754,8 +39754,7 @@ var render = function () {
                   staticClass: "single-location mb-3 sponsorized",
                   class:
                     location.category_id != _vm.tmpCategory &&
-                    _vm.tmpCategory != 0 &&
-                    _vm.featureCheck()
+                    _vm.tmpCategory != 0
                       ? "hide"
                       : "show",
                   attrs: { id: "sponsor" + location.id },
