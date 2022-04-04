@@ -4,9 +4,18 @@
 
             <!-- Select -->
             <select class="form-select" aria-label="Default select example" v-model="tmpCategory">
-                <option :value="0" selected>Tutte</option>
+                <option :value="0" selected="0">Tutte</option>
                 <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
             </select>
+
+            <!-- Featurs Select -->
+            <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
+            <ul class="dropdown-menu">
+                <li class="dropdown-item" v-for="feature in features" :key="feature.id">
+                    <input :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
+                    <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
+                </li>
+            </ul>
 
             <!-- Search -->
             <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
@@ -19,7 +28,13 @@
                 <div id="map" class="map" :class=" search == 0 ? 'd-none' : 'show' "></div>
 
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
-                    <div :id="'sponsor' + location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" class="single-location mb-3 sponsorized" v-for="(location, index) in activeSponsor" :key="'sponsor' + index">
+                    <div 
+                        :id="'sponsor' + location.id" 
+                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" 
+                        class="single-location mb-3 sponsorized" 
+                        v-for="(location, index) in activeSponsor" 
+                        :key="'sponsor' + index"
+                    >
                                 
                         <router-link class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
                             <div class="card">
@@ -74,15 +89,18 @@ export default {
     data: function() {
         return {
             locations: [],
-            tmpCategory: '',
+            tmpCategory: 0,
             categories: [],
-            searchText: '',
+            searchText: this.$route.params.homeSearch,
             searchLat: 0,
             searchLon: 0,
             deg: 0,
             distance: 20,
             search: 0,
             activeSponsor:[],
+            features: [],
+            chooseFeaturesArray: [],
+            locationsFeatures: []
         };
     },
     methods: {
@@ -107,6 +125,22 @@ export default {
 
             for (let i = 0; i < this.locations.length; i++) {
                 new tt.Marker({name: this.locations[i].name}).setLngLat([this.locations[i].long, this.locations[i].lat]).addTo(map);
+                var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+                var popupOffsets = {
+                    'top': [0, 0],
+                    'top-left': [0,0],
+                    'top-right': [0,0],
+                    'bottom': [0, -markerHeight],
+                    'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                    'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                    'left': [markerRadius, (markerHeight - markerRadius) * -1],
+                    'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+                    };
+                var popup = new tt.Popup({offset: popupOffsets, className: 'my-class'})
+                    .setLngLat([this.locations[i].long, this.locations[i].lat])
+                    .setHTML(this.locations[i].name)
+                    .addTo(map);
+                
             }
         },
         getLocationsAndCategories: function() {
@@ -116,6 +150,10 @@ export default {
                 this.locations = response.data.results.locations;
                 this.categories = response.data.results.categories;
                 this.activeSponsor = response.data.results.activeSponsor;
+                this.features = response.data.results.features;
+                // this.locationsFeatures = response.data.results.locationsFeatures;
+                console.log(this.locations);
+
             });
         },
         truncateText: function(text, maxCharsNumber) {
@@ -140,7 +178,7 @@ export default {
                     for (let i = 0; i < this.locations.length; i++) {
                         let single_location = this.locations[i];
                         var el = document.getElementById(single_location.id);
-                        el.classList.remove("hide");   
+                        el.classList.remove("hide");
                     };
                     for (let i = 0; i < this.activeSponsor.length; i++) {
                         let single_location = this.activeSponsor[i];
@@ -192,15 +230,36 @@ export default {
             var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
             var d = R * c; // Distance in km
             return d;
-        }
+        },
+        // locationFilter() {
+        //     if( (this.location.category_id != this.tmpCategory) && (this.tmpCategory != 0) &&  ) {
+        //         return true;
+        //     } else {
+        //         return false
+        //     }
+        // }
     },
     created: function() {
         this.getLocationsAndCategories();
+        this.initializeMap(0,0);
+        if(this.$route.params != ''){
+            this.getCoordinates();
+        }
     }
 }
 </script>
 
 <style lang="scss" scoped>
+
+    button.dropdown-toggle {
+        background-color: white;
+        border: 1px solid rgb(118, 118, 118);
+
+        ul.dropdown-menu {
+
+            padding: 0 10px;
+        }
+    }
 
     .sponsorized{
 
@@ -216,7 +275,7 @@ export default {
     }
 
     #map{
-        width: 50% !important;
+        width: 45% !important;
         margin-right: 20px ;
     }
     .map{
@@ -256,7 +315,7 @@ export default {
     }
 
     .half{
-        width: 45%;
+        width: 50%;
     }
        
 

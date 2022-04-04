@@ -15,7 +15,8 @@
                             @foreach ($sponsors as $sponsor)
                                 <div class="mx-4">
                                     {{-- <a id="sponsor" class="subscription" href="#">{{ $sponsor->subscription }}</a> --}}
-                                    <button type="button" class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button>
+                                    {{-- <button type="button" class="subscription" onclick="saveSponsor({{ $location->id }}, {{ $sponsor->id }})">{{ $sponsor->subscription }}</button> --}}
+                                    <a class="subscription" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}">{{ $sponsor->subscription }}</a>
                                 </div>
                             @endforeach
                         </div>
@@ -32,13 +33,13 @@
 {{-- SCRIPT --}}
 <script>
 
-    function saveSponsor(locationId, sponsorId) {
+    // function saveSponsor(locationId, sponsorId) {
 
-        // Mando i dati nel controller per salvarli nel db
-        axios.post('/api/sponsors/store', {
-            location_id: locationId,
-            sponsor_id: sponsorId
-        });
-    };
+    //     // Mando i dati nel controller per salvarli nel db
+    //     axios.post('/api/sponsors/store', {
+    //         location_id: locationId,
+    //         sponsor_id: sponsorId
+    //     });
+    // };
 
 </script>
