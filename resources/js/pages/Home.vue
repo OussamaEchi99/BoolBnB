@@ -25,6 +25,8 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
+
+        <div id="map" class="map"></div>
     </div>
 
 </template>
@@ -45,7 +47,39 @@ export default {
                 })
                 .then((response) => {
                     this.activeSponsor = response.data.results.activeSponsor;
+                    this.location = response.data.results.locations;
             });
+        },
+        initializeMap: function(cen_lat,cen_long) {
+            this.search = 1;
+            const map = tt.map({
+            key: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
+            container: 'map',
+            zoom: 6,
+            center: [cen_lat, cen_long],
+            });
+             // aggiunta controlli mappa
+            map.addControl(new tt.FullscreenControl());
+            map.addControl(new tt.NavigationControl());
+
+            for (let i = 0; i < this.locations.length; i++) {
+                    new tt.Marker({name: this.locations[i].name}).setLngLat([this.locations[i].long, this.locations[i].lat]).addTo(map);
+                    var markerHeight = 50, markerRadius = 10, linearOffset = 25;
+                    var popupOffsets = {
+                        'top': [0, 0],
+                        'top-left': [0,0],
+                        'top-right': [0,0],
+                        'bottom': [0, -markerHeight],
+                        'bottom-left': [linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                        'bottom-right': [-linearOffset, (markerHeight - markerRadius + linearOffset) * -1],
+                        'left': [markerRadius, (markerHeight - markerRadius) * -1],
+                        'right': [-markerRadius, (markerHeight - markerRadius) * -1]
+                        };
+                    var popup = new tt.Popup({offset: popupOffsets, className: 'my-class'})
+                        .setLngLat([this.locations[i].long, this.locations[i].lat])
+                        .setHTML(this.locations[i].name)
+                        .addTo(map);
+            }
         },
         next:function(){
             if(this.activeLocation < (this.activeSponsor.length - 1)){
@@ -63,7 +97,9 @@ export default {
         },
     },
     created: function(){
-        this.getLocationsAndCategories();       
+        this.getLocationsAndCategories();     
+        this.initializeMap(12.495673,42.001585);
+        this.initializeMap(12.495673,42.001585);
     }
 }
 </script>
@@ -86,4 +122,18 @@ export default {
         object-fit: cover;
     }
 }
+
+#map{
+        width: 500px !important;
+        margin-right: 20px ;
+    }
+    .map{
+        overflow: hidden;
+        position: relative;
+        
+        canvas .mapboxgl-canvas{
+            width: 100%;
+            height: auto;
+        };
+    }
 </style>

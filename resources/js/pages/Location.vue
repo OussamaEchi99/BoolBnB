@@ -96,7 +96,6 @@ export default {
 
         sendIpAddressToBackend() {
             axios.post('/api/visuals/store', {
-
                 ip: this.userIpAddress,
                 location_id: this.locationId
             })
