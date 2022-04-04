@@ -2066,6 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+<<<<<<< HEAD
 //
 //
 //
@@ -2082,6 +2083,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+=======
+>>>>>>> b04f9f376ec598d2715f85ae82ab001e24dd1437
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2255,6 +2258,30 @@ __webpack_require__.r(__webpack_exports__);
       var d = R * c; // Distance in km
 
       return d;
+<<<<<<< HEAD
+=======
+    },
+    locationFilter: function locationFilter(location) {
+      var _this3 = this;
+
+      this.locations.forEach(function (location) {
+        var locationFeatures = [];
+        location.features.forEach(function (feature) {
+          locationFeatures.push(feature.id);
+        });
+        var apartmentClasses = document.getElementById('sponsor' + location.id);
+
+        if (location.category == _this3.tmpCategory && tmpCategory != 0 && locationFeatures.include(chooseFeaturesArray)) {
+          // apartmentClasses.classList.remove('hide');
+          apartmentClasses.classList.add('show');
+        } else {
+          // apartmentClasses.classList.remove('show');
+          apartmentClasses.classList.add('hide');
+        }
+
+        console.log(locationFeatures);
+      });
+>>>>>>> b04f9f376ec598d2715f85ae82ab001e24dd1437
     }
   },
   created: function created() {
@@ -39558,19 +39585,24 @@ var render = function () {
             staticClass: "form-select",
             attrs: { "aria-label": "Default select example" },
             on: {
-              change: function ($event) {
-                var $$selectedVal = Array.prototype.filter
-                  .call($event.target.options, function (o) {
-                    return o.selected
-                  })
-                  .map(function (o) {
-                    var val = "_value" in o ? o._value : o.value
-                    return val
-                  })
-                _vm.tmpCategory = $event.target.multiple
-                  ? $$selectedVal
-                  : $$selectedVal[0]
-              },
+              change: [
+                function ($event) {
+                  var $$selectedVal = Array.prototype.filter
+                    .call($event.target.options, function (o) {
+                      return o.selected
+                    })
+                    .map(function (o) {
+                      var val = "_value" in o ? o._value : o.value
+                      return val
+                    })
+                  _vm.tmpCategory = $event.target.multiple
+                    ? $$selectedVal
+                    : $$selectedVal[0]
+                },
+                function ($event) {
+                  return _vm.locationFilter()
+                },
+              ],
             },
           },
           [
@@ -39616,25 +39648,31 @@ var render = function () {
                     : _vm.chooseFeaturesArray,
                 },
                 on: {
-                  change: function ($event) {
-                    var $$a = _vm.chooseFeaturesArray,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = feature.id,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.chooseFeaturesArray = $$a.concat([$$v]))
+                  change: [
+                    function ($event) {
+                      var $$a = _vm.chooseFeaturesArray,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = feature.id,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            (_vm.chooseFeaturesArray = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.chooseFeaturesArray = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
                       } else {
-                        $$i > -1 &&
-                          (_vm.chooseFeaturesArray = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
+                        _vm.chooseFeaturesArray = $$c
                       }
-                    } else {
-                      _vm.chooseFeaturesArray = $$c
-                    }
-                  },
+                    },
+                    function ($event) {
+                      return _vm.locationFilter()
+                    },
+                  ],
                 },
               }),
               _vm._v(" "),
@@ -39819,6 +39857,7 @@ var render = function () {
                 {
                   key: "sponsor" + index,
                   staticClass: "single-location mb-3 sponsorized",
+<<<<<<< HEAD
                   class:
                     location.category_id != _vm.tmpCategory &&
                     _vm.tmpCategory != 0 &&
@@ -39828,6 +39867,8 @@ var render = function () {
                     location.beds < _vm.tmpBeds
                       ? "hide"
                       : "show",
+=======
+>>>>>>> b04f9f376ec598d2715f85ae82ab001e24dd1437
                   attrs: { id: "sponsor" + location.id },
                 },
                 [

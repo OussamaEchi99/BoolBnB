@@ -52,17 +52,6 @@
                     <input type="text" required min="1" max="15000" class="form-control" id="number" name="number" value="{{ old('number') }}">
                 </div>
 
-                {{-- Visible --}}
-                {{-- <div class="mb-3">
-                    <label for="visible" class="form-label">Visible:</label>
-                    <input type="number" required class="form-control" id="visible" name="visible" value="{{ old('visible') }}">
-                </div> --}}
-
-                <div class="custom-control custom-switch mb-3">
-                    <input type="checkbox" required class="custom-control-input" id="visible" name="visible" value="{{old('visible')}}">
-                    <label class="custom-control-label form-label" for="visible" name="visible" value="">Visible:</label>
-                </div>
-
                 {{-- Rooms Number --}}
                 <div class="mb-3">
                     <label for="rooms" class="form-label">N. Stanze:</label>
@@ -143,11 +132,18 @@
                     <textarea class="form-control" maxlength="60000" name="description" id="description" cols="30" rows="10">{{ old('description') }}</textarea>
                 </div>
 
+                {{-- Visible --}}
+                <div>
+                    <input type="hidden" name="visible" value="0" />
+                    <input type="checkbox" name="visible" value="1" />
+                    <label for="visible" name="visible" class="font-weight-bold text-uppercase mt-4">Rendi visibile il tuo appartamento</label>
+                </div>
+
                 {{-- Create Button --}}
-                <button id="send" style="display: none" type="submit" class="btn btn-primary">Crea</button>
+                <button id="send" style="display: none" type="submit" class="btn btn-primary mb-5">Crea</button>
 
             </form>
-            <button onclick="getApi()" class="btn btn-primary">Crea</button>
+            <button onclick="getApi()" class="btn btn-primary mb-5">Crea</button>
         </div>
     </section>
 @endsection

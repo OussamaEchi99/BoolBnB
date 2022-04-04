@@ -144,6 +144,7 @@ class LocationController extends Controller
         $form_data = $request->all();
 
         // dd($form_data);
+        
         $request->validate($this->getValidationRules());
 
         $location = Location::findOrFail($id);
