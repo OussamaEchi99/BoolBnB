@@ -70,6 +70,7 @@
                 <div class="container-fluid my-container">
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{-- {{ config('app.name', 'Laravel') }} --}}
+                        {{-- <img src="{{ asset('storage/logo-boolbnb.svg') }}" class="" alt=""> --}}
                         BoolBnB
                     </a>
 
@@ -101,6 +102,11 @@
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto flex-grow-0">
                             @guest
+                            {{-- <div class="fixed_element">
+                                <a class="" href="{{ route('host.home') }}">
+                                    <i class="fas fa-border-all dropdown-icon"></i>
+                                </a>
+                            </div> --}}
                                 {{-- menu utente non loggato --}}
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -112,7 +118,7 @@
                                                 <i class="fas fa-bars"></i>
                                             </div>
                                             <div class="circle">
-
+                                                <i class="fas fa-user"></i>
                                             </div>
 
                                         </button>
@@ -136,6 +142,7 @@
                                         </div>
                                 @endif
                                 @else
+                                
                                 {{-- menu utete loggato --}}
                                 <li class="nav-item dropdown">
                                     <a class="nav-link" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -197,6 +204,11 @@
                                     </div>
                                 </li>
                             @endguest
+                            {{-- <div class="fixed_element">
+                                <a class="" href="{{ route('host.home') }}">
+                                    <i class="fas fa-border-all dropdown-icon"></i>
+                                </a>
+                            </div> --}}
                         </ul>
                     </div>
                 </div>
@@ -208,9 +220,48 @@
             @yield('content')
         </main>
 
+        {{-- @if (Route::has('register'))
+
+            <div class="fixed_element d-none">
+                <a class="" href="{{ route('host.home') }}">
+                    <i class="fas fa-border-all dropdown-icon"></i>
+                </a>
+            </div>
+        @endif   
+        @else
+        <div class="fixed_element">
+            <a class="" href="{{ route('host.home') }}">
+                <i class="fas fa-border-all dropdown-icon"></i>
+            </a>
+        </div> --}}
+            
+        
+
+
+        
+
+
 
     </div>
 </body>
 </html>
+
+<style>
+    .fixed_element {
+        position: fixed;
+        bottom: 40px;
+        right:40px;
+        font-size: 25px;
+    }
+    .fixed_element a {
+        text-decoration: none;
+        color: inherit;
+    }
+
+    .fixed_element a:hover {
+        color: cadetblue;
+    }
+
+</style>
 
 
