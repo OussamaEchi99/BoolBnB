@@ -89,7 +89,7 @@
                         </router-link>
 
                     </div>
-                    <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) && (sponsored(location.id) == false) ? 'hide' : 'show'" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
+                    <div :id="location.id" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
                                 
                         <router-link v-if="sponsored(location.id) != false" class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
                             <div class="card">
@@ -269,18 +269,14 @@ export default {
         locationFilter() {
             this.locations.forEach(location => {
                 
-                var sponsorClasses = document.getElementById('sponsor' + location.id);
-                var apartmentClasses = document.getElementById( location.id);
+                let apartmentClasses = document.getElementById( location.id);
                 apartmentClasses.classList.remove('hide');
 
-                if((location.category != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
-                    sponsorClasses.classList.add('hide');
+                if((location.category_id != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
                     apartmentClasses.classList.add('hide');
                 } else if(this.tmpCategory == 0){
-                    sponsorClasses.classList.remove('hide');
                     apartmentClasses.classList.remove('hide');
                 } else {
-                    sponsorClasses.classList.remove('hide');
                     apartmentClasses.classList.remove('hide');
                 };
                 
@@ -295,8 +291,39 @@ export default {
                         if(locationFeatures.includes(this.chooseFeaturesArray[i])){
                         
                         }else{
-                            sponsorClasses.classList.add('hide');
                             apartmentClasses.classList.add('hide');
+                        }
+                    }
+                }
+                this.sponsorFilter();
+            });
+        },
+        sponsorFilter() {
+            this.activeSponsor.forEach(location => {
+                
+                let sponsorClasses = document.getElementById('sponsor' + location.id);
+                sponsorClasses.classList.remove('hide');
+
+                if((location.category_id != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
+                    sponsorClasses.classList.add('hide');
+                } else if(this.tmpCategory == 0){
+                    sponsorClasses.classList.remove('hide');
+                } else {
+                    sponsorClasses.classList.remove('hide');
+                };
+                
+                let locationFeatures = [];
+                    location.features.forEach(feature => {
+                        locationFeatures.push(feature.id)
+                });
+
+                for (let i = 0; i < this.chooseFeaturesArray.length; i++) {
+                    for (let j = 0; j < locationFeatures.length; j++) {
+                       
+                        if(locationFeatures.includes(this.chooseFeaturesArray[i])){
+                        
+                        }else{
+                            sponsorClasses.classList.add('hide');
                         }
                     }
                 }

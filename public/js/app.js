@@ -2271,18 +2271,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       this.locations.forEach(function (location) {
-        var sponsorClasses = document.getElementById('sponsor' + location.id);
         var apartmentClasses = document.getElementById(location.id);
         apartmentClasses.classList.remove('hide');
 
-        if (location.category != _this3.tmpCategory && _this3.tmpCategory != 0 || location.beds < _this3.tmpBeds || location.rooms < _this3.tmpRooms) {
-          sponsorClasses.classList.add('hide');
+        if (location.category_id != _this3.tmpCategory && _this3.tmpCategory != 0 || location.beds < _this3.tmpBeds || location.rooms < _this3.tmpRooms) {
           apartmentClasses.classList.add('hide');
         } else if (_this3.tmpCategory == 0) {
-          sponsorClasses.classList.remove('hide');
           apartmentClasses.classList.remove('hide');
         } else {
-          sponsorClasses.classList.remove('hide');
           apartmentClasses.classList.remove('hide');
         }
 
@@ -2295,8 +2291,39 @@ __webpack_require__.r(__webpack_exports__);
         for (var i = 0; i < _this3.chooseFeaturesArray.length; i++) {
           for (var j = 0; j < locationFeatures.length; j++) {
             if (locationFeatures.includes(_this3.chooseFeaturesArray[i])) {} else {
-              sponsorClasses.classList.add('hide');
               apartmentClasses.classList.add('hide');
+            }
+          }
+        }
+
+        _this3.sponsorFilter();
+      });
+    },
+    sponsorFilter: function sponsorFilter() {
+      var _this4 = this;
+
+      this.activeSponsor.forEach(function (location) {
+        var sponsorClasses = document.getElementById('sponsor' + location.id);
+        sponsorClasses.classList.remove('hide');
+
+        if (location.category_id != _this4.tmpCategory && _this4.tmpCategory != 0 || location.beds < _this4.tmpBeds || location.rooms < _this4.tmpRooms) {
+          sponsorClasses.classList.add('hide');
+        } else if (_this4.tmpCategory == 0) {
+          sponsorClasses.classList.remove('hide');
+        } else {
+          sponsorClasses.classList.remove('hide');
+        }
+
+        ;
+        var locationFeatures = [];
+        location.features.forEach(function (feature) {
+          locationFeatures.push(feature.id);
+        });
+
+        for (var i = 0; i < _this4.chooseFeaturesArray.length; i++) {
+          for (var j = 0; j < locationFeatures.length; j++) {
+            if (locationFeatures.includes(_this4.chooseFeaturesArray[i])) {} else {
+              sponsorClasses.classList.add('hide');
             }
           }
         }
@@ -39976,12 +40003,6 @@ var render = function () {
                 {
                   key: location.id,
                   staticClass: "single-location mb-3 all",
-                  class:
-                    location.category_id != _vm.tmpCategory &&
-                    _vm.tmpCategory != 0 &&
-                    _vm.sponsored(location.id) == false
-                      ? "hide"
-                      : "show",
                   attrs: { id: location.id },
                 },
                 [
@@ -57633,8 +57654,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\MAMP\htdocs\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\Alber\Desktop\Boolean\Progetto.finale\BoolBnB\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
