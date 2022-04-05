@@ -10,6 +10,9 @@
             <section class="dashboard-internal-section">
                 
 
+                
+                @if (!$locations->isEmpty())
+
                 <div class="row row-cols-1 row-cols-sm-1 row-cols-lg-2 row-cols-xl-2">
                     {{-- <div class="col my-3">
                         <a class="fast-actions-btn" href="{{ route('host.locations.index') }}">
@@ -37,7 +40,6 @@
                         </a>
                     </div>
                 </div>
-                @if (!$locations->isEmpty())
                 <h2 class="sub-title-dashboard">Le tue Location:</h2>
                 <div class="row row-cols-3 row-cols-sm-1 row-cols-lg-3 row-cols-xl-4">
                     
@@ -68,7 +70,6 @@
                     </div>
                
                 @endforeach
-            </iv>
 
                 @else
                     <div class="col my-3">
@@ -138,7 +139,7 @@
     }
 
     .sub-title-dashboard {
-        margin-bottom: 25px;
+        margin-bottom: px;
         margin-top: 30px;
         font-size: 30px
     }

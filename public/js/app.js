@@ -2094,11 +2094,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-<<<<<<< HEAD
-=======
 //
 //
->>>>>>> c798aa74af0f5ca35d5c9040ce657c74ca8357c1
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
