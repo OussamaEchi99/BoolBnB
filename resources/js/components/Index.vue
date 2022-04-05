@@ -2,37 +2,70 @@
     <section>
         <div class="container">
 
-            <!-- Select -->
-            <select class="form-select" aria-label="Default select example" v-model="tmpCategory">
-                <option :value="0" selected="0">Tutte</option>
-                <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-            </select>
+            <div class="inputs">
+                <!-- Select -->
+                <select class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpCategory" @change="locationFilter()">
+                    <option :value="0" selected="0">Tutte</option>
+                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                </select>
 
-            <!-- Featurs Select -->
-            <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
-            <ul class="dropdown-menu">
-                <li class="dropdown-item" v-for="feature in features" :key="feature.id">
-                    <input :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
-                    <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
-                </li>
-            </ul>
+                <!-- Featurs Select -->
+                <button data-toggle="dropdown" class="dropdown-toggle mx-1 mb-3 index-input">Features<b class="caret"></b></button>
+                <ul class="dropdown-menu">
+                    <li class="dropdown-item" v-for="feature in features" :key="feature.id">
+                        <input @change="locationFilter()" :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
+                        <label :for="'check-' + feature.name.toLowerCase()" class="checkbox">{{ feature.name }}</label>
+                    </li>
+                </ul>
 
-            <!-- Search -->
-            <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
-
-            <label for="vol">Range ricerca</label>
-            <input @change="getCoordinates()" value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
-            {{distance}}Km
+                <!-- stanze -->
+                <div>
+                    Camere:
+                    <select id="rooms" @change="locationFilter()" class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpRooms">
+                        <option value="0">Qualsiasi</option>
+                        <option  value="1">1</option>
+                        <option  value="2">2</option>
+                        <option  value="3">3+</option>
+                    </select>
+                </div>
             
-            <div class="found_elements">
+
+                <!-- posti letto -->
+                <div>
+                    Posti letto:
+                    <select id="bed" @change="locationFilter()" class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpBeds">
+                        <option value="0">Qualsiasi</option>
+                        <option  value="1">1</option>
+                        <option  value="2">2</option>
+                        <option  value="3">3</option>
+                        <option  value="4">4+</option>
+                    </select>
+                </div>
+                
+
+                <!-- Search -->
+                <input class="mx-1 mb-3 index-input" @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
+
+                <!-- Distance -->
+                <div class="distance mx-1 mb-3 pt-2">
+                    <label for="vol">Range ricerca</label>
+                    <input style="vertical-align:sub;" @change="getCoordinates()" value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
+                    {{distance}}Km
+                </div>
+            </div>
+
+            <!-- :class=" prova ? 'hide' : 'show'" -->
+
+           
+            
+            <div class="found_elements my-3">
                 <div id="map" class="map" :class=" search == 0 ? 'd-none' : 'show' "></div>
 
                 <div class="searched" :class="search == 0 ? 'entire' : 'half'">
                     <div 
                         :id="'sponsor' + location.id" 
-                        :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) ? 'hide' : 'show'" 
-                        class="single-location mb-3 sponsorized" 
-                        v-for="(location, index) in activeSponsor" 
+                        class="single-location mb-3 sponsorized"
+                        v-for="(location, index) in activeSponsor"
                         :key="'sponsor' + index"
                     >
                                 
@@ -51,11 +84,12 @@
                                     </div>
                                     
                                 </div>
+                                <span class="star-icon"><i class="fas fa-star"></i></span>
                             </div>
                         </router-link>
 
                     </div>
-                    <div :id="location.id" :class=" (location.category_id != tmpCategory) && (tmpCategory != 0) && (sponsored(location.id) == false) ? 'hide' : 'show'" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
+                    <div :id="location.id" class="single-location mb-3 all" v-for="location in locations" :key="location.id">
                                 
                         <router-link v-if="sponsored(location.id) != false" class="no-style" :to="{ name: 'location-details', params: { slug: location.slug }}">
                             <div class="card">
@@ -98,8 +132,10 @@ export default {
             distance: 20,
             search: 0,
             activeSponsor:[],
-            filteredLocations: [],
-            features: []
+            features: [],
+            chooseFeaturesArray: [],
+            tmpRooms: 0,
+            tmpBeds: 0
         };
     },
     methods: {
@@ -151,10 +187,9 @@ export default {
                 this.categories = response.data.results.categories;
                 this.activeSponsor = response.data.results.activeSponsor;
                 this.features = response.data.results.features;
-                // this.locationsFeatures = response.data.results.locationsFeatures;
-                console.log(this.locations);
-
+            
             });
+          
         },
         truncateText: function(text, maxCharsNumber) {
             if(text.length > maxCharsNumber) {
@@ -231,13 +266,69 @@ export default {
             var d = R * c; // Distance in km
             return d;
         },
-        // locationFilter() {
-        //     if( (this.location.category_id != this.tmpCategory) && (this.tmpCategory != 0) &&  ) {
-        //         return true;
-        //     } else {
-        //         return false
-        //     }
-        // }
+        locationFilter() {
+            this.locations.forEach(location => {
+                
+                let apartmentClasses = document.getElementById( location.id);
+                apartmentClasses.classList.remove('hide');
+
+                if((location.category_id != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
+                    apartmentClasses.classList.add('hide');
+                } else if(this.tmpCategory == 0){
+                    apartmentClasses.classList.remove('hide');
+                } else {
+                    apartmentClasses.classList.remove('hide');
+                };
+                
+                let locationFeatures = [];
+                    location.features.forEach(feature => {
+                        locationFeatures.push(feature.id)
+                });
+
+                for (let i = 0; i < this.chooseFeaturesArray.length; i++) {
+                    for (let j = 0; j < locationFeatures.length; j++) {
+                       
+                        if(locationFeatures.includes(this.chooseFeaturesArray[i])){
+                        
+                        }else{
+                            apartmentClasses.classList.add('hide');
+                        }
+                    }
+                }
+                this.sponsorFilter();
+            });
+        },
+        sponsorFilter() {
+            this.activeSponsor.forEach(location => {
+                
+                let sponsorClasses = document.getElementById('sponsor' + location.id);
+                sponsorClasses.classList.remove('hide');
+
+                if((location.category_id != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
+                    sponsorClasses.classList.add('hide');
+                } else if(this.tmpCategory == 0){
+                    sponsorClasses.classList.remove('hide');
+                } else {
+                    sponsorClasses.classList.remove('hide');
+                };
+                
+                let locationFeatures = [];
+                    location.features.forEach(feature => {
+                        locationFeatures.push(feature.id)
+                });
+
+                for (let i = 0; i < this.chooseFeaturesArray.length; i++) {
+                    for (let j = 0; j < locationFeatures.length; j++) {
+                       
+                        if(locationFeatures.includes(this.chooseFeaturesArray[i])){
+                        
+                        }else{
+                            sponsorClasses.classList.add('hide');
+                        }
+                    }
+                }
+            });
+        }
     },
     created: function() {
         this.getLocationsAndCategories();
@@ -250,6 +341,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.inputs{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    .index-input {
+        padding: 5px;
+        border-radius: 50px;
+        border: 1px solid lightblue;
+
+        &:focus-visible {
+            border-color: lightblue;
+        }
+    }
+}
 
     button.dropdown-toggle {
         background-color: white;
@@ -264,7 +371,7 @@ export default {
     .sponsorized{
 
         .card-header{
-            background-color: gold;
+            background-color: rgb(224, 247, 255);
         }
     }
 
@@ -291,6 +398,14 @@ export default {
     .searched{
         height: 70vh;
         overflow-y: auto ;
+
+        .star-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: orange;
+            font-size: 23px;
+        }
     }
 
     .top{

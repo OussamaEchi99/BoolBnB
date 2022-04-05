@@ -12,12 +12,11 @@ class LocationController extends Controller
 {
     public function index(Request $request) {
 
-        $locations = Location::all();
+        $locations = Location::where('visible', '=', 1)->with('features', 'category')->get();
+
         $categories = Category::all();
         $features = Feature::all();
         $active_sponsor = [];
-        $locationsFeatures = $locations->features();
-
         foreach($locations as $location){
 
             if($location->sponsors()->where('end','>', date('Y-m-d H:i:s'))->count()){
@@ -33,7 +32,6 @@ class LocationController extends Controller
                     'categories' => $categories,
                     'activeSponsor' => $active_sponsor,
                     'features' => $features,
-                    // 'locationsFeatures' => $locationsFeatures
                 ]
             ]);
         } else {
@@ -46,6 +44,7 @@ class LocationController extends Controller
     }
 
     public function show($slug) {
+
         $location = Location::where('slug', '=', $slug)->with(['category', 'features'])->first();
 
         if(str_contains($location->photo, 'location_photos')){

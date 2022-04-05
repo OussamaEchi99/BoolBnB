@@ -17,7 +17,38 @@
 
             <div class="mb-2"><strong>Servizi:</strong>
                 @forelse ($location->features as $feature)
-                    {{ $feature->name }}{{ $loop->last ? '' : ', ' }}
+                    
+                    @if ($feature->name)
+                        {{-- @if ($feature->name == 'Wifi' )
+                            {{ $feature->name }} <i class="fas fa-wifi"></i> {{ $loop->last ? '' : ', ' }}   
+                        @else
+                            {{ $feature->name }}{{ $loop->last ? '' : ', ' }}
+                        @endif --}}
+                        @if ($feature->name == 'Wifi')
+                            {{ $feature->name }} <i class="fas fa-wifi"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Piscina')
+                            {{ $feature->name }} <i class="fas fa-swimming-pool"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Cucina')
+                            {{ $feature->name }} <i class="fas fa-oven"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Garage')
+                            {{ $feature->name }} <i class="fas fa-garage-car"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Veranda')
+                            {{ $feature->name }} <i class="fab fa-accusoft"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Aria condizionata')
+                            {{ $feature->name }} <i class="fas fa-air-conditioner"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Barbecue')
+                            {{ $feature->name }} <i class="fas fa-chimney"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Ricarica per macchina elettrica')
+                            {{ $feature->name }} <i class="fas fa-charging-station"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                    @endif
                 @empty
                     nessuno
                 @endforelse
@@ -27,38 +58,51 @@
                 <strong>Indirizzo:</strong> {{$location->country}} {{$location->city}} {{$location->address}}, {{$location->number}}
             </div>
 
-            <div class="mb-2">
-                <strong>N. Stanze:</strong> {{$location->rooms}}
-            </div>
-            <div class="mb-2">
-                <strong>N. Letti:</strong> {{$location->beds}}
-            </div>
-            <div class="mb-2">
-                <strong>N. Bagni:</strong> {{$location->bathrooms}}
-            </div>
-            <div class="mb-2">
-                <strong>Metri Quadri:</strong> {{$location->square_meters}}
-            </div>
-            <div class="mb-2">
-                <strong>Prezzo (per notte):</strong> {{$location->price}} €
-            </div>
+            <section class="rooms_section">
+                <div class="mb-2">
+                    <strong>N. Stanze:</strong> <span>{{$location->rooms}} <i class="fas fa-door-closed"></i></span>
+                </div>
+                <div class="mb-2">
+                    <strong>N. Letti:</strong> <span>{{$location->beds}} <i class="fas fa-bed"></i></span>
+                </div>
+                <div class="mb-2">
+                    <strong>N. Bagni:</strong> <span>{{$location->bathrooms}} <i class="fas fa-bath"></i></span>
+                </div>
+                <div class="mb-2">
+                    <strong>Metri Quadri:</strong> <span>{{$location->square_meters}} <i class="fas fa-ruler"></i></span>
+                </div>
+                <div class="mb-2">
+                    <strong>Prezzo (per notte):</strong> <span>{{$location->price}} € <i class="fas fa-money-bill"></i></span>
+                </div>
+            </section>
 
-            <p>{{ $location->description }}</p>
+            <section class="description">
+                <p>{{ $location->description }}</p>
+            </section>
 
             {{-- Sponsors Buttons --}}
-            <div>
+            <div class="sponsors">
                 <h4>Sponsorizza la tua location:</h4>
-                @foreach ($sponsors as $sponsor)
-                <a class="subscription" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}">{{ $sponsor->subscription }}</a>
-                @endforeach
+                <div class="sponsor">
+                    @foreach ($sponsors as $sponsor)
+                        {{-- <a class="subscription" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}">{{ $sponsor->subscription }}</a> --}}
+                        <div id="{{ $sponsor->subscription }}" class="subscription">
+                            <h3>{{ $sponsor->subscription }}</h3>
+                            <p>{{ $sponsor->description }}</p>
+                            <div>
+                                <a class="btn btn-dark" href="{{route('host.credit-card',['sponsor' => $sponsor->id , 'location' => $location->id])}}">Aquista</a>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
             </div>
 
-            <div>
-                <a href="{{ route('host.locations.edit', ['location' => $location->id]) }}">Modifica location</a>
+            <div class="modify">
+                <a class="btn btn-primary" href="{{ route('host.locations.edit', ['location' => $location->id]) }}">Modifica</a>
             </div>
 
-            <div class="mt-3">
-                <form action="{{ route('host.locations.destroy', ['location' => $location->id]) }}" method="post">
+            <div class="mt-3 delete_form">
+                <form id="delete" action="{{ route('host.locations.destroy', ['location' => $location->id]) }}" method="post">
                     @csrf
                     @method('DELETE')
 
@@ -116,5 +160,91 @@
     .m-b-md {
         margin-bottom: 30px;
     }
+
+    /* SPONSOR */
+    .sponsors{
+        border: 1px solid lightgray;
+        padding: 30px 15px;
+        border-radius: 25px;
+        margin: 30px 0;
+    }
+
+    .sponsor {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+
+    .sunscription{
+        padding: 20px 15px;
+    }
+
+    .btn-sponsor{
+        border: 1px solid lightgray;
+        padding: 6px 15px;
+        border-radius: 25px;
+        /* display: flex;
+        flex-direction: column;
+        text-align: center; */
+    }
+    
+    #delete {
+        display: inline;
+    }
+
+    .modify, .delete, .delete_form{
+        display: inline;
+    }
+
+    .rooms_section{
+        border-top: 1px solid lightgrey;
+        border-bottom: 1px solid lightgrey;
+        padding: 15px 0;
+        margin: 20px 0;
+    }
+
+    .rooms_section div{
+        width: 50%;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    #gold{
+        background-color: #D4AF37;
+    }
+
+    #silver{
+        background-color: #C0C0C0;
+    }
+
+    #bronze{
+        background-color: #CD7F32;
+    }
+
+    i{
+        color: lightblue;
+    }
+
+    img{
+        border-radius: 20px;
+    }
+
+    .description {
+        border-bottom: 1px solid lightgrey;
+        padding-bottom: 20px;
+    }
+
 </style>
 
+{{-- </script> --}}
+    {{-- function saveSponsor(locationId, sponsorId) {
+
+        // Mando i dati nel controller per salvarli nel db
+        axios.post('/api/sponsors/store', {
+            location_id: locationId,
+            sponsor_id: sponsorId
+        });
+    }; --}}
+
+{{-- </script> --}}

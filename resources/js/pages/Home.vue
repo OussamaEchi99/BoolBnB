@@ -1,32 +1,47 @@
 <template>
-    <div>
-        <h1>Home</h1>
-        <input type="text" v-model="searchText">
-        
-        <button>
-            <router-link :to="{ name: 'search', params: {homeSearch: searchText }}">
-                Cerca un appartamento
-            </router-link>
-        </button>
 
-        <div id="carouselExampleControls" class="carousel slide my-4" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div v-for="(location,index) in activeSponsor" :key="index" class="carousel-item" :class="index == activeLocation ? 'active' : 'none' ">
-                    <img class="d-block" :src="location.photo.includes(`https:`) ?  location.photo : `http://127.0.0.1:8000/storage/` + location.photo" :alt="location.name">
-                    <router-link class="text" :to="{ name: 'location-details', params: { slug: location.slug }}">{{location.city}}: {{location.name}}</router-link>      
-                </div>
-            </div>
-            <button @click="back()" class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Previous</span>
-            </button>
-            <button  @click="next()" class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Next</span>
+    <div>
+
+        <div class="research">
+            <input class="inputText" type="text" v-model="searchText">
+            
+            <button class="search_button">
+                <router-link class="color_link" :to="{ name: 'search', params: {homeSearch: searchText }}">
+                    Cerca un appartamento
+                </router-link>
             </button>
         </div>
 
-        <div id="map" class="map"></div>
+        <div class="all_page">
+        
+            <div class="main_page container">
+                <div v-if="activeSponsor && activeSponsor.length" id="carouselExampleControls" class="carousel slide my-4" data-bs-ride="carousel">
+                    <span class="advice">BoolBnB ti consiglia:</span>
+                    <div class="carousel-inner">
+                        <div v-for="(location,index) in activeSponsor" :key="index" class="carousel-item" :class="index == activeLocation ? 'active' : 'none' ">
+                            <img class="d-block img_carousel" :src="location.photo.includes(`https:`) ?  location.photo : `http://127.0.0.1:8000/storage/` + location.photo" :alt="location.name">
+                            <div class="centered">
+                                <router-link class="text" :to="{ name: 'location-details', params: { slug: location.slug }}">Vedi nel dettaglio: {{location.name}} a {{location.city}}</router-link>  
+                            </div>   
+                        </div>
+                    </div>
+                    <button @click="back()" class="back carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button  @click="next()" class=" next carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="visually-hidden">Next</span>
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    </button>
+                </div>
+
+                <div class="map_container">
+                    <span class="map_text">Esplora tutte le nostre Locations:</span>
+                    <div id="map" class="map"></div>
+                </div>
+            </div>
+            
+        </div>
     </div>
 
 </template>
@@ -39,6 +54,7 @@ export default {
             searchText: '',
             activeSponsor: [],
             activeLocation: 0,
+            locations: [],
         }
     },
     methods: {
@@ -47,16 +63,16 @@ export default {
                 })
                 .then((response) => {
                     this.activeSponsor = response.data.results.activeSponsor;
-                    this.location = response.data.results.locations;
+                    this.locations = response.data.results.locations;
+                    this.initializeMap();
             });
         },
-        initializeMap: function(cen_lat,cen_long) {
-            this.search = 1;
+        initializeMap: function() {
             const map = tt.map({
             key: 'IEix9iHTEHOJolKXAoByVdl4reKermIB',
             container: 'map',
-            zoom: 6,
-            center: [cen_lat, cen_long],
+            zoom: 4,
+            center: [12.495673, 42.001585],
             });
              // aggiunta controlli mappa
             map.addControl(new tt.FullscreenControl());
@@ -97,43 +113,108 @@ export default {
         },
     },
     created: function(){
-        this.getLocationsAndCategories();     
-        this.initializeMap(12.495673,42.001585);
-        this.initializeMap(12.495673,42.001585);
+    },
+    mounted: function(){
+        this.getLocationsAndCategories();
     }
 }
 </script>
 
 <style lang="scss" scoped>
-#carouselExampleControls{
+
+.advice{
+    font-size: 30px;
+}
+
+.all_page{
+    height: 80vh;
+    overflow-y: auto;
+}
+
+.research{
     width: 60%;
+    margin: auto;
+    display:flex;
+    justify-content: center;
+    position: relative;
+    bottom: 50px;
+
+    input{
+        border-top-left-radius: 25px;
+        border-bottom-left-radius: 25px;
+        border: 1px solid #add8e6;
+        border-right: none;
+        width: 300px;
+        padding-left: 20px;
+        outline: none;
+    }
+
+    .search_button{
+        border-radius: 50px;
+        height: 50px; 
+        position: relative;
+        right: 50px;
+        border: 3px solid #add8e6;
+        background-color: #add8e6;
+
+        .color_link{
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+.centered{
+    display: flex;
+    justify-content: center;
+}
+
+.map_text{
+    display: block;
+    font-size: 25px;
+}
+
+#carouselExampleControls{
+    width: 100%;
     margin: auto;
 
     .text{
-        display: block;
+        display: inline-block;
         text-align: center;
         font-size: 25px;
         text-decoration: none;
+        position: relative;
+        bottom: 35px;
+        background-color: #F8FAFC;
+        padding: 5px 20px;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+
     }
 
     img{
         width: 100%;
-        height: 60vh;
+        height: 50vh;
         object-fit: cover;
+        border-radius: 20px;
     }
 }
 
 #map{
-        width: 500px !important;
-        margin-right: 20px ;
+        width: 100% !important;
     }
-    .map{
-        overflow: hidden;
-        position: relative;
+.map{
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    border-radius: 20px;
         
-        canvas .mapboxgl-canvas{
-            width: 100%;
-            height: auto;
-        };
-    }
+    canvas .mapboxgl-canvas{
+        width: 100%;
+        height: auto;
+    };
+}
+.back,.next{
+    color: white;
+}
 </style>
