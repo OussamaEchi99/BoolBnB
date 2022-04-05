@@ -19,10 +19,34 @@
                 @forelse ($location->features as $feature)
                     
                     @if ($feature->name)
-                        @if ($feature->name == 'Wifi' )
+                        {{-- @if ($feature->name == 'Wifi' )
                             {{ $feature->name }} <i class="fas fa-wifi"></i> {{ $loop->last ? '' : ', ' }}   
                         @else
                             {{ $feature->name }}{{ $loop->last ? '' : ', ' }}
+                        @endif --}}
+                        @if ($feature->name == 'Wifi')
+                            {{ $feature->name }} <i class="fas fa-wifi"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Piscina')
+                            {{ $feature->name }} <i class="fas fa-swimming-pool"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Cucina')
+                            {{ $feature->name }} <i class="fas fa-oven"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Garage')
+                            {{ $feature->name }} <i class="fas fa-garage-car"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Veranda')
+                            {{ $feature->name }} <i class="fab fa-accusoft"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Aria condizionata')
+                            {{ $feature->name }} <i class="fas fa-air-conditioner"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Barbecue')
+                            {{ $feature->name }} <i class="fas fa-chimney"></i> {{ $loop->last ? '' : ', ' }}
+                        @endif
+                        @if ($feature->name == 'Ricarica per macchina elettrica')
+                            {{ $feature->name }} <i class="fas fa-charging-station"></i> {{ $loop->last ? '' : ', ' }}
                         @endif
                     @endif
                 @empty

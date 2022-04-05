@@ -2,11 +2,11 @@
 
 @section('content')
 <div class="container">
-    <h1 class="mb-3">Le mie location</h1>
+    <h1 class="mb-4">Le mie location</h1>
     <div class="row row-cols-10 row-cols-md-10 row-cols-xl-10">
         @if (!$locations->isEmpty())
             @foreach ($locations as $location)
-                    <a href="{{ route('host.locations.show', ['location' => $location->id]) }}" class="location">
+                    <a style="min-width: 70%;" href="{{ route('host.locations.show', ['location' => $location->id]) }}" class="location mb-3">
 
                         <div class="image">
                             @if (str_contains($location->photo, 'location_photos'))
