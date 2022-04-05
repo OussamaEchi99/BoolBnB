@@ -4,13 +4,13 @@
 
             <div class="inputs">
                 <!-- Select -->
-                <select class="form-select" aria-label="Default select example" v-model="tmpCategory" @change="locationFilter()">
+                <select class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpCategory" @change="locationFilter()">
                     <option :value="0" selected="0">Tutte</option>
                     <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
                 </select>
 
                 <!-- Featurs Select -->
-                <button data-toggle="dropdown" class="dropdown-toggle">Features<b class="caret"></b></button>
+                <button data-toggle="dropdown" class="dropdown-toggle mx-1 mb-3 index-input">Features<b class="caret"></b></button>
                 <ul class="dropdown-menu">
                     <li class="dropdown-item" v-for="feature in features" :key="feature.id">
                         <input @change="locationFilter()" :id="'check-' + feature.name.toLowerCase()" type="checkbox" :value="feature.id" v-model="chooseFeaturesArray">
@@ -21,7 +21,7 @@
                 <!-- stanze -->
                 <div>
                     Camere:
-                    <select id="rooms" @change="locationFilter()" class="form-select" aria-label="Default select example" v-model="tmpRooms">
+                    <select id="rooms" @change="locationFilter()" class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpRooms">
                         <option value="0">Qualsiasi</option>
                         <option  value="1">1</option>
                         <option  value="2">2</option>
@@ -33,7 +33,7 @@
                 <!-- posti letto -->
                 <div>
                     Posti letto:
-                    <select id="bed" @change="locationFilter()" class="form-select" aria-label="Default select example" v-model="tmpBeds">
+                    <select id="bed" @change="locationFilter()" class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpBeds">
                         <option value="0">Qualsiasi</option>
                         <option  value="1">1</option>
                         <option  value="2">2</option>
@@ -44,11 +44,12 @@
                 
 
                 <!-- Search -->
-                <input @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
+                <input class="mx-1 mb-3 index-input" @keyup.enter="getCoordinates()" v-model="searchText" type="text" placeholder="Cerca una città">
 
-                <div class="distance">
+                <!-- Distance -->
+                <div class="distance mx-1 mb-3 pt-2">
                     <label for="vol">Range ricerca</label>
-                    <input @change="getCoordinates()" value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
+                    <input style="vertical-align:sub;" @change="getCoordinates()" value="20" v-model="distance" type="range" id="range" name="range" min="10" max="50">
                     {{distance}}Km
                 </div>
             </div>
@@ -83,6 +84,7 @@
                                     </div>
                                     
                                 </div>
+                                <span class="star-icon"><i class="fas fa-star"></i></span>
                             </div>
                         </router-link>
 
@@ -316,6 +318,17 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-around;
+    flex-wrap: wrap;
+
+    .index-input {
+        padding: 5px;
+        border-radius: 50px;
+        border: 1px solid lightblue;
+
+        &:focus-visible {
+            border-color: lightblue;
+        }
+    }
 }
 
     button.dropdown-toggle {
@@ -331,7 +344,7 @@ export default {
     .sponsorized{
 
         .card-header{
-            background-color: #ffed4a;
+            background-color: rgb(224, 247, 255);
         }
     }
 
@@ -358,6 +371,14 @@ export default {
     .searched{
         height: 70vh;
         overflow-y: auto ;
+
+        .star-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            color: orange;
+            font-size: 23px;
+        }
     }
 
     .top{
