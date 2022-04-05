@@ -1,6 +1,9 @@
 <template>
     <section>
-        <h1>Pagina di ricerca</h1>
+        <div class="container">
+            <h1>Pagina di ricerca</h1>
+        </div>
+        
         <Index :searchText="homeSearch"/>
     </section>
 </template>

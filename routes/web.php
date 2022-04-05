@@ -27,6 +27,8 @@ Route::middleware('auth')
         Route::get('/statistics/{location}', 'StatisticController@show')->name('apartment_statistics');
         Route::get('/emails', 'LeadController@index') -> name('emails');
         Route::get('/emails/{location}', 'LeadController@show')->name('location_emails');
+        Route::get('checkout','CheckoutController@checkout');
+        Route::post('checkout','CheckoutController@afterpayment')->name('credit-card');
     });
 
 
@@ -40,7 +42,7 @@ Route::options('/{path}', function(){
     return '';
 })->where('path', '.*');
 
-<<<<<<< HEAD
-Route::get('/payment/process', 'PaymentsController@process')->name('payment.process');
-=======
->>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b
+// Route::get('/payment/process', 'PaymentsController@process')->name('payment.process');
+// Route::get('/payment/process', 'PaymentsController@process')->name('payment.process');
+// Route::get('addmoney/stripe', array('as' => 'addmoney.paystripe','uses' => 'MoneySetupController@PaymentStripe'));
+// Route::post('addmoney/stripe', array('as' => 'addmoney.stripe','uses' => 'MoneySetupController@postPaymentStripe'));

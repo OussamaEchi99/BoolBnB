@@ -30,16 +30,14 @@ const files = require.context('./', true, /\.vue$/i)
 files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+Vue.component('checkout-message', require('./components/CheckoutMessage.vue').default);
 Vue.component('Navbar', Navbar);
 Vue.component('Index', Index);
 Vue.component('Location', Location);
 Vue.component('Hostapp', Hostapp);
-<<<<<<< HEAD
-Vue.component('payament-section', require('./components/Payament.vue').default);
-=======
+// Vue.component('payament-section', require('./components/Payament.vue').default);
 
 Vue.component('map-component', require('./components/Map.vue').default);
->>>>>>> fa24b6682b34fed45499c80229b27fe84b7e0e9b
 // Vue.component('Navbar', require('./components/Navbar.vue'));
 
 
@@ -58,5 +56,5 @@ const app = new Vue({
     // }
 });
 
-const checkout = require('./routes/checkout');
-app.use('/checkout', checkout);
+// const checkout = require('./routes/checkout');
+// app.use('/checkout', checkout);
