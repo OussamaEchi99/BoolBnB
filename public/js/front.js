@@ -2025,6 +2025,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Index',
   data: function data() {
@@ -2843,7 +2845,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, ".inputs[data-v-bb962f12] {\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n}\nbutton.dropdown-toggle[data-v-bb962f12] {\n  background-color: white;\n  border: 1px solid #767676;\n}\nbutton.dropdown-toggle ul.dropdown-menu[data-v-bb962f12] {\n  padding: 0 10px;\n}\n.sponsorized .card-header[data-v-bb962f12] {\n  background-color: #ffed4a;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 500px !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas .mapboxgl-canvas[data-v-bb962f12] {\n  width: 100%;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 50%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
+exports.push([module.i, ".inputs[data-v-bb962f12] {\n  display: flex;\n  align-items: center;\n  justify-content: space-around;\n  flex-wrap: wrap;\n}\n.inputs .index-input[data-v-bb962f12] {\n  padding: 5px;\n  border-radius: 50px;\n  border: 1px solid lightblue;\n}\n.inputs .index-input[data-v-bb962f12]:focus-visible {\n  border-color: lightblue;\n}\nbutton.dropdown-toggle[data-v-bb962f12] {\n  background-color: white;\n  border: 1px solid #767676;\n}\nbutton.dropdown-toggle ul.dropdown-menu[data-v-bb962f12] {\n  padding: 0 10px;\n}\n.sponsorized .card-header[data-v-bb962f12] {\n  background-color: #e0f7ff;\n}\n.found_elements[data-v-bb962f12] {\n  display: flex;\n  justify-content: space-between;\n  flex-wrap: wrap;\n}\n#map[data-v-bb962f12] {\n  width: 500px !important;\n  margin-right: 20px;\n}\n.map[data-v-bb962f12] {\n  overflow: hidden;\n  position: relative;\n}\n.map canvas .mapboxgl-canvas[data-v-bb962f12] {\n  width: 100%;\n  height: auto;\n}\n.searched[data-v-bb962f12] {\n  height: 70vh;\n  overflow-y: auto;\n}\n.searched .star-icon[data-v-bb962f12] {\n  position: absolute;\n  top: 10px;\n  right: 10px;\n  color: orange;\n  font-size: 23px;\n}\n.top[data-v-bb962f12] {\n  display: flex;\n}\n.top .main_img[data-v-bb962f12] {\n  width: 200px;\n  height: auto;\n  border-radius: 20px;\n  -o-object-fit: cover;\n     object-fit: cover;\n  margin-right: 20px;\n}\n.no-style[data-v-bb962f12] {\n  color: black;\n  cursor: pointer;\n  text-decoration: none;\n}\n.entire[data-v-bb962f12] {\n  width: 100%;\n}\n.half[data-v-bb962f12] {\n  width: 50%;\n}\n.hide[data-v-bb962f12] {\n  display: none;\n}", ""]);
 
 // exports
 
@@ -4169,7 +4171,7 @@ var render = function () {
                 expression: "tmpCategory",
               },
             ],
-            staticClass: "form-select",
+            staticClass: "form-select mx-1 mb-3 index-input",
             attrs: { "aria-label": "Default select example" },
             on: {
               change: [
@@ -4289,7 +4291,7 @@ var render = function () {
                   expression: "tmpRooms",
                 },
               ],
-              staticClass: "form-select",
+              staticClass: "form-select mx-1 mb-3 index-input",
               attrs: { id: "rooms", "aria-label": "Default select example" },
               on: {
                 change: [
@@ -4337,7 +4339,7 @@ var render = function () {
                   expression: "tmpBeds",
                 },
               ],
-              staticClass: "form-select",
+              staticClass: "form-select mx-1 mb-3 index-input",
               attrs: { id: "bed", "aria-label": "Default select example" },
               on: {
                 change: [
@@ -4383,6 +4385,7 @@ var render = function () {
               expression: "searchText",
             },
           ],
+          staticClass: "mx-1 mb-3 index-input",
           attrs: { type: "text", placeholder: "Cerca una città" },
           domProps: { value: _vm.searchText },
           on: {
@@ -4404,7 +4407,7 @@ var render = function () {
           },
         }),
         _vm._v(" "),
-        _c("div", { staticClass: "distance" }, [
+        _c("div", { staticClass: "distance mx-1 mb-3 pt-2" }, [
           _c("label", { attrs: { for: "vol" } }, [_vm._v("Range ricerca")]),
           _vm._v(" "),
           _c("input", {
@@ -4416,6 +4419,7 @@ var render = function () {
                 expression: "distance",
               },
             ],
+            staticStyle: { "vertical-align": "sub" },
             attrs: {
               value: "20",
               type: "range",
@@ -4523,6 +4527,10 @@ var render = function () {
                               _vm._v(_vm._s(location.price) + "€ a notte"),
                             ]),
                           ]),
+                        ]),
+                        _vm._v(" "),
+                        _c("span", { staticClass: "star-icon" }, [
+                          _c("i", { staticClass: "fas fa-star" }),
                         ]),
                       ]),
                     ]
@@ -4634,7 +4642,10 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c(
       "button",
-      { staticClass: "dropdown-toggle", attrs: { "data-toggle": "dropdown" } },
+      {
+        staticClass: "dropdown-toggle mx-1 mb-3 index-input",
+        attrs: { "data-toggle": "dropdown" },
+      },
       [_vm._v("Features"), _c("b", { staticClass: "caret" })]
     )
   },
