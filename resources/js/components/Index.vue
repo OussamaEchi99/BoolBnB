@@ -275,7 +275,7 @@ export default {
                     sponsorClasses.classList.add('hide');
                     apartmentClasses.classList.add('hide');
                 } else if(this.tmpCategory == 0){
-                    apartmentsponsorClassesClasses.classList.remove('hide');
+                    sponsorClasses.classList.remove('hide');
                     apartmentClasses.classList.remove('hide');
                 } else {
                     sponsorClasses.classList.remove('hide');

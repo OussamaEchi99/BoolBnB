@@ -2211,7 +2211,7 @@ __webpack_require__.r(__webpack_exports__);
           sponsorClasses.classList.add('hide');
           apartmentClasses.classList.add('hide');
         } else if (_this3.tmpCategory == 0) {
-          apartmentsponsorClassesClasses.classList.remove('hide');
+          sponsorClasses.classList.remove('hide');
           apartmentClasses.classList.remove('hide');
         } else {
           sponsorClasses.classList.remove('hide');
