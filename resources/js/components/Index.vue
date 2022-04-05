@@ -1,14 +1,15 @@
 <template>
     <section>
-        <div class="container">
-
+        <div>
             <div class="inputs">
                 <!-- Select -->
-                <select class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpCategory" @change="locationFilter()">
-                    <option :value="0" selected="0">Tutte</option>
-                    <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
-                </select>
-
+                <div>
+                    Tipo di alloggio:
+                    <select class="form-select mx-1 mb-3 index-input" aria-label="Default select example" v-model="tmpCategory" @change="locationFilter()">
+                        <option :value="0" selected="0">Tutte</option>
+                        <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.name }}</option>
+                    </select>
+                </div>
                 <!-- Featurs Select -->
                 <button data-toggle="dropdown" class="dropdown-toggle mx-1 mb-3 index-input">Features<b class="caret"></b></button>
                 <ul class="dropdown-menu">
@@ -54,10 +55,12 @@
                 </div>
             </div>
 
+        </div>
+        <div class="container">
+
+            
             <!-- :class=" prova ? 'hide' : 'show'" -->
 
-           
-            
             <div class="found_elements my-3">
                 <div id="map" class="map" :class=" search == 0 ? 'd-none' : 'show' "></div>
 
@@ -270,13 +273,17 @@ export default {
             this.locations.forEach(location => {
                 
                 let apartmentClasses = document.getElementById( location.id);
-                apartmentClasses.classList.remove('hide');
+                if(this.searchText == ''){
+                    apartmentClasses.classList.remove('hide');
+                }
 
                 if((location.category_id != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
                     apartmentClasses.classList.add('hide');
-                } else if(this.tmpCategory == 0){
+                } 
+                else if(this.tmpCategory == 0){
                     apartmentClasses.classList.remove('hide');
-                } else {
+                } 
+                else {
                     apartmentClasses.classList.remove('hide');
                 };
                 
@@ -302,13 +309,17 @@ export default {
             this.activeSponsor.forEach(location => {
                 
                 let sponsorClasses = document.getElementById('sponsor' + location.id);
-                sponsorClasses.classList.remove('hide');
+                if(this.searchText == ''){
+                    sponsorClasses.classList.remove('hide');
+                }
 
                 if((location.category_id != this.tmpCategory && this.tmpCategory != 0) || location.beds < this.tmpBeds || location.rooms < this.tmpRooms) {
                     sponsorClasses.classList.add('hide');
-                } else if(this.tmpCategory == 0){
+                } 
+                else if(this.tmpCategory == 0){
                     sponsorClasses.classList.remove('hide');
-                } else {
+                }
+                else {
                     sponsorClasses.classList.remove('hide');
                 };
                 
@@ -350,6 +361,7 @@ export default {
     .index-input {
         padding: 5px;
         border-radius: 50px;
+        background-color:#F0F0F0;
         border: 1px solid lightblue;
 
         &:focus-visible {
@@ -359,7 +371,7 @@ export default {
 }
 
     button.dropdown-toggle {
-        background-color: white;
+        background-color:#F0F0F0;
         border: 1px solid rgb(118, 118, 118);
 
         ul.dropdown-menu {
